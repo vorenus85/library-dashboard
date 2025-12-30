@@ -1,6 +1,11 @@
 <template>
-    <AppLayout> Authors list </AppLayout>
+    <AppLayout>
+        <div class="card pages-list-genres">
+            <PageTitle title="Authors" />
+        </div>
+    </AppLayout>
 </template>
 <script setup>
+import PageTitle from '../../components/PageTitle.vue'
 import AppLayout from '../../layout/AppLayout.vue'
 </script>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,9 +7,7 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Lato', sans-serif;
 }
 
 :root {
@@ -17,6 +16,12 @@
     --surface-hover: var(--p-content-hover-background);
     --layout-section-transition-duration: 0.2s;
     --content-border-radius: 5px;
+    --text-color: var(--p-text-color);
+}
+
+html {
+    font-size: 14px;
+    color: var(--text-color);
 }
 
 .layout-topbar {
@@ -88,4 +93,11 @@
 .sidebar-menuitem a:hover,
 .sidebar-menuitem .router-link-active {
     background: var(--surface-hover);
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: var(--content-border-radius);
 }

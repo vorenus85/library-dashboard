@@ -1,7 +1,7 @@
 <template>
     <div class="layout-sidebar">
         <ul class="sidebar-menu">
-            <template v-for="menu in menus">
+            <template v-for="menu in menus" :key="menu.title">
                 <SidebarMenuitem :icon="menu.icon" :path="menu.path" :title="menu.title" />
             </template>
         </ul>

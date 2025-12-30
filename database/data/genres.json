@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Science Fiction",
+        "description": "A műfaj tudományos elméletekre épít, futurisztikus technológiákat és alternatív világokat mutat be. Gyakran foglalkozik társadalmi, filozófiai vagy tudományos kérdésekkel."
+    },
+    {
+        "name": "Hard Science Fiction",
+        "description": "A sci-fi azon ága, amely szigorúan követi a fizika és természettudományok valós szabályait. A technológiák, űrutazások és tudományos részletek hitelessége kiemelt szerepet kap."
+    },
+    {
+        "name": "Space Opera",
+        "description": "Monumentális, űrben játszódó történetek, nagy léptékű konfliktusokkal, galaktikus birodalmakkal és epikus kalandokkal. A cselekmény dinamikus, sokszor akcióközpontú."
+    },
+    {
+        "name": "Fantasy",
+        "description": "A műfaj mágikus világokat, mitológiai lényeket és természetfeletti erőket vonultat fel. Középpontjában gyakran hősök, küldetések és epikus történetívek állnak."
+    },
+    {
+        "name": "Urban Fantasy",
+        "description": "A fantasy modern környezetben játszódó változata, ahol a természetfeletti világ szorosan összefonódik a mindennapokkal. Gyakran sötétebb, misztikus hangulatú."
+    },
+    {
+        "name": "Detective / Mystery",
+        "description": "Bűntények felderítése, nyomozások és rejtélyek megoldása áll a középpontban. A történetek logikus következtetésekre és karaktervezérelt nyomozásra épülnek."
+    },
+    {
+        "name": "Crime Thriller",
+        "description": "Feszültséggel teli, gyors tempójú történetek bűncselekmények, üldözések és veszélyhelyzetek köré épülve. A hangsúly a drámai fordulatokon és a suspense-en van."
+    },
+    {
+        "name": "Nordic Noir",
+        "description": "Sötét hangulatú, gyakran társadalomkritikus krimik, skandináv környezetben. A pszichológiai mélység és valósághű bűntényábrázolás jellemzi."
+    },
+    {
+        "name": "Historical Fiction",
+        "description": "Valós történelmi korszakokba helyezett regények, amelyek beleolvasztják a fikció elemeit. Gyakran hiteles leírásokkal mutatják be a múlt társadalmait és eseményeit."
+    },
+    {
+        "name": "Science / Popular Science",
+        "description": "Valós tudományos témák közérthető bemutatása. A műfaj célja a tudomány népszerűsítése és könnyen emészthető formában való átadása."
+    },
+    {
+        "name": "Economics / Politics",
+        "description": "Közgazdasági és társadalmi elemzéseket bemutató művek. A műfaj gyakran foglalkozik államok, rendszerek és gazdasági folyamatok működésével."
+    },
+    {
+        "name": "Mythology / Ancient History",
+        "description": "Ősi civilizációk történelmét, mitológiáját és kultúráját bemutató művek. A műfaj gyakran ötvözi a történeti kutatást narratív vagy elemző megközelítésekkel."
+    }
+]

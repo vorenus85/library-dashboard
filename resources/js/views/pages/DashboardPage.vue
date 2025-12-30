@@ -12,7 +12,7 @@
 
 <script setup>
 import Button from 'primevue/button'
-import AppLayout from '@/Layouts/AppLayout.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 
 import { ref, onMounted } from 'vue'
 import axios from 'axios'

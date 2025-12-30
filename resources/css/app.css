@@ -6,6 +6,86 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+:root {
+    --surface-card: #fff;
+    --surface-overlay: #fff;
+    --surface-hover: var(--p-content-hover-background);
+    --layout-section-transition-duration: 0.2s;
+    --content-border-radius: 5px;
+}
+
+.layout-topbar {
+    position: fixed;
+    height: 4rem;
+    z-index: 997;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 2rem;
+    background-color: var(--surface-card);
+    transition: left var(--layout-section-transition-duration);
+    display: flex;
+    align-items: center;
+}
+
+.layout-sidebar {
+    position: fixed;
+    width: 20rem;
+    height: calc(100vh - 8rem);
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    top: 6rem;
+    left: 2rem;
+    transition:
+        transform var(--layout-section-transition-duration),
+        left var(--layout-section-transition-duration);
+    background-color: var(--surface-overlay);
+    border-radius: var(--content-border-radius);
+    padding: 1rem 1.5rem;
+}
+
+.layout-main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+    padding: 6rem 2rem 0;
+    transition: margin-left var(--layout-section-transition-duration);
+}
+
+@media (min-width: 992px) {
+    .layout-main-container {
+        margin-left: 22rem;
+    }
+}
+
+.sidebar-menuitem {
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-menuitem i {
+    font-size: 14px;
+}
+
+.sidebar-menuitem a {
+    font-size: 14px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: var(--content-border-radius);
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.sidebar-menuitem a:hover,
+.sidebar-menuitem .router-link-active {
+    background: var(--surface-hover);
 }

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
-import tailwindcss from '@tailwindcss/vite'
+import tailwind from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
@@ -11,8 +11,17 @@ export default defineConfig({
             refresh: true,
         }),
         vue(),
-        tailwindcss(),
+        tailwind(),
     ],
+    /*
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "resources/css/_variables.scss";`,
+            },
+        },
+    },
+    */
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),

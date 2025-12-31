@@ -1,11 +1,14 @@
 <template>
     <li class="sidebar-menuitem">
-        <RouterLink :to="path"
-            ><i :class="`pi pi-fw pi-${icon} sidebar-menuitem-icon`"></i> {{ title }}</RouterLink
+        <RouterLink :to="path">
+            <UiIcon :icon="icon" class="sidebar-menuitem-icon" />
+            {{ title }}</RouterLink
         >
     </li>
 </template>
 <script setup>
+import UiIcon from './UiIcon.vue'
+
 defineProps({
     icon: { type: String, required: true },
     path: { type: String, required: true },

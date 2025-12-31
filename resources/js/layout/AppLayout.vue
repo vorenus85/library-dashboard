@@ -1,7 +1,6 @@
 <template>
     <div class="min-h-screen bg-gray-100 app-layout">
         <AppTopBar />
-
         <AppSideBar />
 
         <div class="layout-main-container">

@@ -12,7 +12,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::select('id', 'name', 'description')->get();
+
+        return response()->json($authors)->setStatusCode(200);
     }
 
     /**

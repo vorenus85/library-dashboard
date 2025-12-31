@@ -12,7 +12,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        $genre = Genre::all()->makeHidden(['created_at', 'updated_at']);
+
+        return response()->json($genre);
     }
 
     /**

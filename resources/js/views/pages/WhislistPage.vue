@@ -1,8 +1,7 @@
 <template>
     <AppLayout>
-        <div class="card pages-list-genres">
-            <PageTitle title="Wishlist" />
-        </div>
+        <PageTitle title="Wishlist" />
+        <div class="card pages-list-genres"></div>
     </AppLayout>
 </template>
 <script setup>

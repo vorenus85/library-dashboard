@@ -12,7 +12,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genre = Genre::all()->makeHidden(['created_at', 'updated_at']);
+        $genre = Genre::select('id', 'name', 'description')->orderBy('name', 'asc')->get();
 
         return response()->json($genre);
     }
@@ -62,6 +62,12 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        try {
+            $genre->delete();
+            return response()->json([ 'status' => 'ok' ], 200);
+        } catch (\Throwable $th) {
+            // todo log error
+            return response()->json([ 'status' => 'ok', 'message' => 'Error during delete' ], 500);
+        }
     }
 }

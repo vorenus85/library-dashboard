@@ -12,7 +12,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::select('id', 'name', 'description')->get();
+        $authors = Author::select('id', 'name', 'description')->orderBy('name', 'asc')->get();
 
         return response()->json($authors)->setStatusCode(200);
     }
@@ -62,6 +62,12 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        try {
+            $author->delete();
+            return response()->json([ 'status' => 'ok' ], 200);
+        } catch (\Throwable $th) {
+            // todo log error
+            return response()->json([ 'status' => 'ok', 'message' => 'Error during delete' ], 500);
+        }
     }
 }

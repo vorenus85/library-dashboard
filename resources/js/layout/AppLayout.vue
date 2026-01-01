@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-100 app-layout">
+    <div class="min-h-screen app-layout">
         <AppTopBar />
         <AppSideBar />
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-sidebar">
+    <div class="layout-sidebar shadow">
         <ul class="sidebar-menu">
             <template v-for="menu in menus" :key="menu.title">
                 <SidebarMenuitem :icon="menu.icon" :path="menu.path" :title="menu.title" />

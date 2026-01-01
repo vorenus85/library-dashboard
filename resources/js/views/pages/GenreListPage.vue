@@ -41,7 +41,9 @@ import PageTitle from '../../components/PageTitle.vue'
 import AppLayout from '../../layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, ToggleSwitch } from 'primevue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'primevue/usetoast'
 
+const toast = useToast()
 const genres = ref([])
 const loading = ref(false)
 const router = useRouter()
@@ -78,6 +80,11 @@ const deleteGenre = async id => {
                 return el.id === id
             })
             genres.value.splice(idIndex, 1)
+            toast.add({
+                severity: 'success',
+                summary: 'Genre deleted successfully!',
+                life: 3000,
+            })
         })
 }
 

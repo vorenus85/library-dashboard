@@ -38,8 +38,9 @@
                     >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label for="authorName">Author description</label>
+                    <label for="authorDescription">Author description</label>
                     <Textarea
+                        id="authorDescription"
                         name="description"
                         rows="5"
                         cols="30"

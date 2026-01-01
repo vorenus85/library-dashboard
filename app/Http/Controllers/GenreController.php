@@ -30,7 +30,18 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                //
+        $validated = $request->validate([
+            'name' => 'required|unique:genres,name|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $genre = Genre::create([
+            'name' => $validated['name'],
+            'description' => $request['description']
+        ]);
+
+        return response()->json($genre, 201);
     }
 
     /**

@@ -41,7 +41,9 @@ import PageTitle from '../../components/PageTitle.vue'
 import AppLayout from '../../layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable } from 'primevue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'primevue/usetoast'
 
+const toast = useToast()
 const authors = ref([])
 const loading = ref(false)
 const router = useRouter()
@@ -78,6 +80,12 @@ const deleteAuthor = async id => {
                 return el.id === id
             })
             authors.value.splice(idIndex, 1)
+
+            toast.add({
+                severity: 'success',
+                summary: 'Author deleted successfully!',
+                life: 3000,
+            })
         })
 }
 

@@ -11,4 +11,5 @@ Route::post('/authors', [AuthorController::class, 'store']);
 Route::delete('/authors/{author}', [AuthorController::class, 'destroy']);
 
 Route::get('/genres', [GenreController::class, 'index']);
+Route::post('/genres', [GenreController::class, 'store']);
 Route::delete('/genres/{genre}', [GenreController::class, 'destroy']);

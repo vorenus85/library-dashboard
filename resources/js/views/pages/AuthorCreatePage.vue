@@ -66,6 +66,8 @@ import PageTitle from '../../components/PageTitle.vue'
 import AppLayout from '../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
 import { reactive } from 'vue'
+import { useToast } from 'primevue/usetoast'
+const toast = useToast()
 
 const router = useRouter()
 
@@ -94,11 +96,24 @@ const initialValues = reactive({
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            const response = await axios.post('/api/authors', values)
-            // Todo toast
-            console.log(response.data)
+            await axios.post('/api/authors', values)
+
+            toast.add({
+                severity: 'success',
+                summary: 'Author created successfully!',
+                life: 3000,
+            })
+
+            setTimeout(() => {
+                router.push({ name: 'authors' })
+            }, 300)
         } catch (error) {
-            console.log(error.response?.data || error)
+            console.log(error)
+            toast.add({
+                severity: 'error',
+                summary: error.response.data.message,
+                life: 3000,
+            })
         }
     }
 }

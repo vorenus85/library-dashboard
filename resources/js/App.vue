@@ -1,5 +1,11 @@
 <template>
     <RouterView />
+    <div>
+        <Toast />
+        <slot />
+    </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { Toast } from 'primevue'
+</script>

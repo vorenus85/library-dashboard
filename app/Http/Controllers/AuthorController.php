@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -31,6 +32,17 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required|unique:authors,name|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $author = Author::create([
+            'name' => $validated['name'],
+            'description' => $request['description']
+        ]);
+
+        return response()->json($author, 201);
     }
 
     /**

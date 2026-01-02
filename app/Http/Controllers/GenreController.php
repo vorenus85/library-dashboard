@@ -49,7 +49,7 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return response()->json($genre);
     }
 
     /**
@@ -65,7 +65,19 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:authors,name,' . $genre->id,
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try {
+            $genre->update($validated);
+            return response()->json($genre, 200);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during update' ], 500);
+        }
     }
 
     /**

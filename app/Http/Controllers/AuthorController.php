@@ -66,14 +66,14 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|max:255|unique:authors,name,' . $author->id,
             'description' => 'nullable|string|max:500',
         ]);
 
         try {
             $author->update($validated);
-            return response()->json($author, 201);
+            return response()->json($author, 200);
 
         } catch (\Throwable $th) {
             //throw $th;

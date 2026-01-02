@@ -3,7 +3,6 @@
         <PageTitle title="Genres">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toNewGenre" />
-                <Button icon="pi pi-file-export" label="Export" severity="info" />
             </template>
         </PageTitle>
         <div class="card pages-list-genres shadow list-page">
@@ -22,7 +21,19 @@
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">
                         <div class="flex items-center justify-list gap-3">
-                            <Button icon="pi pi-pen-to-square" label="Edit" primary />
+                            <Button primary asChild v-slot="buttonProps">
+                                <RouterLink
+                                    :to="{
+                                        name: 'genres.show',
+                                        params: {
+                                            genreId: slotProps.data?.id,
+                                        },
+                                    }"
+                                    :class="buttonProps.class"
+                                    >Edit</RouterLink
+                                >
+                            </Button>
+
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"

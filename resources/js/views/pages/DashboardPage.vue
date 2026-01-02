@@ -20,7 +20,7 @@ import axios from 'axios'
 const data = ref(null)
 
 onMounted(async () => {
-    const res = await axios.get('/api/home')
+    const res = await axios.get('/home')
     data.value = res.data
 })
 </script>

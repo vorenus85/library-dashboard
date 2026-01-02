@@ -97,7 +97,7 @@ const initialValues = reactive({
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            await axios.post('/api/authors', values)
+            await axios.post('/authors', values)
 
             toast.add({
                 severity: 'success',

@@ -96,7 +96,7 @@ const onFormSubmit = async ({ valid, values }) => {
 
     if (valid) {
         try {
-            await axios.put(`/api/genres/${genreId}`, values)
+            await axios.put(`/genres/${genreId}`, values)
 
             toast.add({
                 severity: 'success',
@@ -117,7 +117,7 @@ const getGenre = async () => {
     const genreId = route.params.genreId
 
     return await axios
-        .get(`/api/genres/${genreId}`)
+        .get(`/genres/${genreId}`)
         .then(response => {
             initialValues.name = response.data.name
             initialValues.description = response.data.description

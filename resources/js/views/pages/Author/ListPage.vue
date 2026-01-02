@@ -37,8 +37,8 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
-import PageTitle from '../../components/PageTitle.vue'
-import AppLayout from '../../layout/AppLayout.vue'
+import PageTitle from '../../../components/PageTitle.vue'
+import AppLayout from '../../../layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable } from 'primevue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'

@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import DashboardPage from '../views/pages/DashboardPage.vue'
 import WhislistPage from '../views/pages/WhislistPage.vue'
-import AuthorListPage from '../views/pages/AuthorListPage.vue'
-import AuthorCreatePage from '../views/pages/AuthorCreatePage.vue'
+import AuthorListPage from '../views/pages/Author/ListPage.vue'
+import AuthorCreatePage from '../views/pages/Author/CreatePage.vue'
 import BookListPage from '../views/pages/BookListPage.vue'
-import GenreListPage from '../views/pages/GenreListPage.vue'
-import GenreCreatePage from '../views/pages/GenreCreatePage.vue'
+import GenreListPage from '../views/pages/Genre/ListPage.vue'
+import GenreCreatePage from '../views/pages/Genre/CreatePage.vue'
 
 const router = createRouter({
     history: createWebHistory(),

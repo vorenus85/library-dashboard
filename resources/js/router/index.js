@@ -4,6 +4,7 @@ import DashboardPage from '../views/pages/DashboardPage.vue'
 import WhislistPage from '../views/pages/WhislistPage.vue'
 import AuthorListPage from '../views/pages/Author/ListPage.vue'
 import AuthorCreatePage from '../views/pages/Author/CreatePage.vue'
+import AuthorEditPage from '../views/pages/Author/EditPage.vue'
 import BookListPage from '../views/pages/BookListPage.vue'
 import GenreListPage from '../views/pages/Genre/ListPage.vue'
 import GenreCreatePage from '../views/pages/Genre/CreatePage.vue'
@@ -15,6 +16,7 @@ const router = createRouter({
         { path: '/books', name: 'books', component: BookListPage },
         { path: '/whislist', name: 'whislist', component: WhislistPage },
         { path: '/authors', name: 'authors', component: AuthorListPage },
+        { path: '/authors/:authorId', name: 'authors.show', component: AuthorEditPage },
         { path: '/authors/create', name: 'authors.create', component: AuthorCreatePage },
         { path: '/genres', name: 'genres', component: GenreListPage },
         { path: '/genres/create', name: 'genres.create', component: GenreCreatePage },

@@ -16,13 +16,24 @@
                 :loading="loading"
             >
                 <Column sortable field="name" header="Name" style="width: 25%">
-                    <template #body="slotProps"> <Chip :label="slotProps.data.name" /></template
+                    <template #body="slotProps"> <Chip :label="slotProps.data?.name" /></template
                 ></Column>
                 <Column field="description" header="Description" style="width: 25%"></Column>
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">
                         <div class="flex items-center justify-start gap-3">
-                            <Button icon="pi pi-pen-to-square" label="Edit" primary />
+                            <Button primary asChild v-slot="buttonProps">
+                                <RouterLink
+                                    :to="{
+                                        name: 'authors.show',
+                                        params: {
+                                            authorId: slotProps.data?.id,
+                                        },
+                                    }"
+                                    :class="buttonProps.class"
+                                    >Edit</RouterLink
+                                >
+                            </Button>
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"
@@ -40,7 +51,7 @@ import { onMounted, ref } from 'vue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable } from 'primevue'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 
 const toast = useToast()

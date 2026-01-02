@@ -50,7 +50,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return response()->json($author);
     }
 
     /**
@@ -66,7 +66,21 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+         $validated = $request->validate([
+            'name' => 'required|max:255|unique:authors,name,' . $author->id,
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try {
+            $author->update($validated);
+            return response()->json($author, 201);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during update' ], 500);
+        }
+
+
     }
 
     /**
@@ -79,7 +93,7 @@ class AuthorController extends Controller
             return response()->json([ 'status' => 'ok' ], 200);
         } catch (\Throwable $th) {
             // todo log error
-            return response()->json([ 'status' => 'ok', 'message' => 'Error during delete' ], 500);
+            return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
         }
     }
 }

@@ -8,6 +8,8 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::post('/authors', [AuthorController::class, 'store']);
+Route::get('/authors/{author}', [AuthorController::class, 'show']);
+Route::put('/authors/{author}', [AuthorController::class, 'update']);
 Route::delete('/authors/{author}', [AuthorController::class, 'destroy']);
 
 Route::get('/genres', [GenreController::class, 'index']);

@@ -8,6 +8,7 @@ import AuthorEditPage from '../views/pages/Author/EditPage.vue'
 import BookListPage from '../views/pages/BookListPage.vue'
 import GenreListPage from '../views/pages/Genre/ListPage.vue'
 import GenreCreatePage from '../views/pages/Genre/CreatePage.vue'
+import GenreEditPage from '../views/pages/Genre/EditPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +21,7 @@ const router = createRouter({
         { path: '/authors/create', name: 'authors.create', component: AuthorCreatePage },
         { path: '/genres', name: 'genres', component: GenreListPage },
         { path: '/genres/create', name: 'genres.create', component: GenreCreatePage },
+        { path: '/genres/:genreId', name: 'genres.show', component: GenreEditPage },
     ],
 })
 

@@ -1,12 +1,12 @@
 <template>
     <AppLayout>
-        <PageTitle title="Edit author">
+        <PageTitle title="Edit genre">
             <template v-slot:actions>
                 <Button
                     icon="pi pi-angle-left"
                     label="Back to list"
                     primary
-                    @click="backToAuthorsList"
+                    @click="backToGenreList"
                 />
             </template>
         </PageTitle>
@@ -23,14 +23,8 @@
                 :validateOnMount="true"
             >
                 <div class="flex flex-col gap-1">
-                    <label for="authorName">Author name</label>
-                    <InputText
-                        id="authorName"
-                        name="name"
-                        type="text"
-                        placeholder="J. K. Rowling"
-                        fluid
-                    />
+                    <label for="genreName">Genre name</label>
+                    <InputText id="genreName" name="name" type="text" placeholder="Sci-fi" fluid />
                     <Message
                         v-if="$form.name?.invalid"
                         severity="error"
@@ -40,14 +34,13 @@
                     >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label for="authorDescription">Author description</label>
+                    <label for="genreDescription">Genre description</label>
                     <Textarea
-                        id="authorDescription"
                         name="description"
                         rows="5"
                         cols="30"
                         style="resize: none"
-                        placeholder="J. K. Rowling write the worldwide famous Harry Potter series"
+                        placeholder="Sci-fi is worldwide famous genre"
                     />
                     <Message
                         v-if="$form.description?.invalid"
@@ -68,19 +61,19 @@ import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import { onMounted, reactive, ref } from 'vue'
 
 const toast = useToast()
 const router = useRouter()
-const route = useRoute()
 const formKey = ref(0)
+const route = useRoute()
 
 const resolver = ({ values }) => {
     const errors = {}
 
     if (!values.name) {
-        errors.name = [{ message: 'Author name is required.' }]
+        errors.name = [{ message: 'Genre name is required.' }]
     }
 
     return {
@@ -89,8 +82,8 @@ const resolver = ({ values }) => {
     }
 }
 
-const backToAuthorsList = () => {
-    router.push({ name: 'authors' })
+const backToGenreList = () => {
+    router.push({ name: 'genres' })
 }
 
 const initialValues = reactive({
@@ -99,18 +92,18 @@ const initialValues = reactive({
 })
 
 const onFormSubmit = async ({ valid, values }) => {
-    const authorId = route.params.authorId
+    const genreId = route.params.genreId
+
     if (valid) {
         try {
-            await axios.put(`/api/authors/${authorId}`, values)
+            await axios.put(`/api/genres/${genreId}`, values)
 
             toast.add({
                 severity: 'success',
-                summary: 'Author edited successfully!',
+                summary: 'Genre updated successfully!',
                 life: 3000,
             })
         } catch (error) {
-            console.log(error)
             toast.add({
                 severity: 'error',
                 summary: error.response.data.message,
@@ -120,21 +113,22 @@ const onFormSubmit = async ({ valid, values }) => {
     }
 }
 
-const getAuthor = async () => {
-    const authorId = route.params.authorId
+const getGenre = async () => {
+    const genreId = route.params.genreId
+
     return await axios
-        .get(`/api/authors/${authorId}`)
+        .get(`/api/genres/${genreId}`)
         .then(response => {
             initialValues.name = response.data.name
             initialValues.description = response.data.description
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
         })
         .catch(e => {
-            console.log(e)
+            console.error(e)
         })
 }
 
 onMounted(() => {
-    getAuthor()
+    getGenre()
 })
 </script>

@@ -3,7 +3,6 @@
         <PageTitle title="Authors">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateAuthor" />
-                <Button icon="pi pi-file-export" label="Export" severity="info" />
             </template>
         </PageTitle>
         <div class="card pages-list-genres shadow list-page">

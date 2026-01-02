@@ -37,7 +37,7 @@
                         </IconField>
                     </div>
                 </template>
-                <template #empty> No customers found. </template>
+                <template #empty> No results found. </template>
                 <Column sortable field="name" header="Name" style="width: 25%">
                     <template #body="slotProps"> <Chip :label="slotProps.data.name" /></template>
                 </Column>

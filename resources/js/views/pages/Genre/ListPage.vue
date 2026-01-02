@@ -112,7 +112,7 @@ const toNewGenre = () => {
 const getGenres = async () => {
     loading.value = true
     return await axios
-        .get('/api/genres')
+        .get('/genres')
         .catch(error => {
             loading.value = false
             console.error(error)
@@ -126,7 +126,7 @@ const getGenres = async () => {
 const deleteGenre = async id => {
     loading.value = true
     return await axios
-        .delete(`/api/genres/${id}`)
+        .delete(`/genres/${id}`)
         .catch(error => {
             loading.value = false
             console.error(error)

@@ -102,7 +102,7 @@ const onFormSubmit = async ({ valid, values }) => {
     const authorId = route.params.authorId
     if (valid) {
         try {
-            await axios.put(`/api/authors/${authorId}`, values)
+            await axios.put(`/authors/${authorId}`, values)
 
             toast.add({
                 severity: 'success',
@@ -123,7 +123,7 @@ const onFormSubmit = async ({ valid, values }) => {
 const getAuthor = async () => {
     const authorId = route.params.authorId
     return await axios
-        .get(`/api/authors/${authorId}`)
+        .get(`/authors/${authorId}`)
         .then(response => {
             initialValues.name = response.data.name
             initialValues.description = response.data.description

@@ -111,7 +111,7 @@ const toCreateAuthor = () => {
 const getAuthors = async () => {
     loading.value = true
     return await axios
-        .get('/api/authors')
+        .get('/authors')
         .catch(error => {
             loading.value = false
             console.error(error)
@@ -125,7 +125,7 @@ const getAuthors = async () => {
 const deleteAuthor = async id => {
     loading.value = true
     return await axios
-        .delete(`/api/authors/${id}`)
+        .delete(`/authors/${id}`)
         .catch(error => {
             loading.value = false
             console.error(error)

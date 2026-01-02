@@ -7,13 +7,37 @@
         </PageTitle>
         <div class="card pages-list-genres shadow list-page">
             <DataTable
+                v-model:filters="filters"
                 :value="genres"
                 paginator
                 :rows="10"
                 :rowsPerPageOptions="[5, 10, 20, 50]"
                 tableStyle="min-width: 50rem"
                 :loading="loading"
+                :globalFilterFields="['name', 'description']"
+                dataKey="id"
             >
+                <template #header>
+                    <div class="flex justify-between">
+                        <Button
+                            type="button"
+                            icon="pi pi-filter-slash"
+                            label="Clear"
+                            variant="outlined"
+                            @click="clearFilter()"
+                        />
+                        <IconField>
+                            <InputIcon>
+                                <i class="pi pi-search" />
+                            </InputIcon>
+                            <InputText
+                                v-model="filters['global'].value"
+                                placeholder="Keyword Search"
+                            />
+                        </IconField>
+                    </div>
+                </template>
+                <template #empty> No customers found. </template>
                 <Column sortable field="name" header="Name" style="width: 25%">
                     <template #body="slotProps"> <Chip :label="slotProps.data.name" /></template>
                 </Column>
@@ -50,14 +74,36 @@
 import { onMounted, ref } from 'vue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
-import { Button, Chip, Column, DataTable, ToggleSwitch } from 'primevue'
+import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 
+const filters = ref()
 const toast = useToast()
 const genres = ref([])
 const loading = ref(false)
 const router = useRouter()
+
+const initFilters = () => {
+    filters.value = {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        },
+        description: {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        },
+    }
+}
+
+initFilters()
+
+const clearFilter = () => {
+    initFilters()
+}
 
 const toNewGenre = () => {
     router.push({ name: 'genres.create' })

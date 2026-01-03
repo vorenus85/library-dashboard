@@ -1,325 +1,393 @@
 [
     {
         "title": "A sas",
-        "authorId": 1,
+        "author_id": 1,
         "publised_year": 2000,
         "pages": 352,
         "isbn": "9780743435428",
         "description": "Római katonák mindennapjai és harcai Britannia földjén.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "A sas hódítása",
-        "authorId": 1,
+        "author_id": 1,
         "publised_year": 2001,
         "pages": 384,
         "isbn": "9780743435435",
         "description": "A Római Birodalom terjeszkedése és véres csatái.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Vének háborúja",
-        "authorId": 2,
+        "author_id": 2,
         "publised_year": 2005,
         "pages": 320,
         "isbn": "9780765348272",
         "description": "Idős emberekből lett katonák harca a galaxisban.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "A Szellem Dandár",
-        "authorId": 2,
+        "author_id": 2,
         "publised_year": 2006,
         "pages": 336,
         "isbn": "9780765348289",
         "description": "Genetikailag módosított harcosok bevetése.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "A marsi",
-        "authorId": 3,
+        "author_id": 3,
         "publised_year": 2011,
         "pages": 384,
         "isbn": "9780553418026",
         "description": "Egy űrhajós túlélése a Marson tudományos pontossággal.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Hail Mary küldetés",
-        "authorId": 3,
+        "author_id": 3,
         "publised_year": 2021,
         "pages": 496,
         "isbn": "9780593135204",
         "description": "Az emberiség megmentésének utolsó esélye.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Maigret és a sárga kutya",
-        "authorId": 4,
+        "author_id": 4,
         "publised_year": 1931,
         "pages": 176,
         "isbn": "9780241303723",
         "description": "Klasszikus nyomozás egy francia kikötővárosban.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Maigret csapdában",
-        "authorId": 4,
+        "author_id": 4,
         "publised_year": 1934,
         "pages": 192,
         "isbn": "9789630798543",
         "description": "Pszichológiai krimi Georges Simenon tollából.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Alapítvány",
-        "authorId": 5,
+        "author_id": 5,
         "publised_year": 1951,
         "pages": 255,
         "isbn": "9780553293357",
         "description": "Egy galaktikus birodalom bukásának krónikája.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Én, a robot",
-        "authorId": 5,
+        "author_id": 5,
         "publised_year": 1950,
         "pages": 224,
         "isbn": "9780553382563",
         "description": "A robotika három törvényének klasszikus történetei.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Metahumán",
-        "authorId": 6,
+        "author_id": 6,
         "publised_year": 2014,
         "pages": 420,
         "isbn": "9789634068321",
         "description": "Az emberi evolúció következő lépcsőfoka.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Xeno",
-        "authorId": 6,
+        "author_id": 6,
         "publised_year": 2017,
         "pages": 448,
         "isbn": "9789634069809",
         "description": "Idegen intelligencia és emberi túlélés.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Az utolsó kívánság",
-        "authorId": 7,
+        "author_id": 7,
         "publised_year": 1993,
         "pages": 288,
         "isbn": "9780316029186",
         "description": "Geralt, a vaják első történetei.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Tündevér",
-        "authorId": 7,
+        "author_id": 7,
         "publised_year": 1994,
         "pages": 320,
         "isbn": "9780316029193",
         "description": "Ciri sorsának kibontakozása.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Ősi partok",
-        "authorId": 8,
+        "author_id": 8,
         "publised_year": 1996,
         "pages": 384,
         "isbn": "9780441004031",
         "description": "Idegen technológia felfedezése a Földön.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Chindi",
-        "authorId": 8,
+        "author_id": 8,
         "publised_year": 2002,
         "pages": 416,
         "isbn": "9780441009036",
         "description": "Űrbéli rejtély és elveszett civilizáció.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Hyperion",
-        "authorId": 9,
+        "author_id": 9,
         "publised_year": 1989,
         "pages": 482,
         "isbn": "9780553283686",
         "description": "Zarándokok egy titokzatos bolygón.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Hyperion bukása",
-        "authorId": 9,
+        "author_id": 9,
         "publised_year": 1990,
         "pages": 517,
         "isbn": "9780553288209",
         "description": "Egy galaktikus konfliktus beteljesedése.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "A nő a ketrecben",
-        "authorId": 10,
+        "author_id": 10,
         "publised_year": 2007,
         "pages": 352,
         "isbn": "9780143119051",
         "description": "A Q-ügyosztály első nyomozása.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Fácángyilkosok",
-        "authorId": 10,
+        "author_id": 10,
         "publised_year": 2008,
         "pages": 400,
         "isbn": "9780143119068",
         "description": "Sötét titkok a múltból.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Az utolsó királyság",
-        "authorId": 11,
+        "author_id": 11,
         "publised_year": 2004,
         "pages": 368,
         "isbn": "9780060887187",
         "description": "Anglia születése viking szemszögből.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "A sápadt lovas",
-        "authorId": 11,
+        "author_id": 11,
         "publised_year": 2005,
         "pages": 384,
         "isbn": "9780060887194",
         "description": "Uhtred újabb véres csatája.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Anjouk – Az örökség",
-        "authorId": 12,
+        "author_id": 12,
         "publised_year": 2016,
         "pages": 560,
         "isbn": "9789634065016",
         "description": "A középkori Magyarország hatalmi harcai.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Eragon",
-        "authorId": 13,
+        "author_id": 13,
         "publised_year": 2002,
         "pages": 544,
         "isbn": "9780375826696",
         "description": "Egy fiatal sárkánylovas felemelkedése.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Eldest",
-        "authorId": 13,
+        "author_id": 13,
         "publised_year": 2005,
         "pages": 720,
         "isbn": "9780375840401",
         "description": "A sárkánylovas útja folytatódik.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "A háromtest-probléma",
-        "authorId": 14,
+        "author_id": 14,
         "publised_year": 2008,
         "pages": 400,
         "isbn": "9780765382030",
         "description": "Az emberiség első kapcsolata idegen civilizációval.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "A sötét erdő",
-        "authorId": 14,
+        "author_id": 14,
         "publised_year": 2008,
         "pages": 512,
         "isbn": "9780765386694",
         "description": "Kozmikus túlélési stratégia.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "A civilizáció előtt",
-        "authorId": 15,
+        "author_id": 15,
         "publised_year": 1973,
         "pages": 320,
         "isbn": "9780140136426",
         "description": "Az európai őstörténet újraértelmezése.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Metro 2033",
-        "authorId": 16,
+        "author_id": 16,
         "publised_year": 2005,
         "pages": 430,
         "isbn": "9780575086258",
         "description": "Posztapokaliptikus túlélés Moszkva metrójában.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Metro 2034",
-        "authorId": 16,
+        "author_id": 16,
         "publised_year": 2009,
         "pages": 448,
         "isbn": "9780575099203",
         "description": "Az emberi remény halvány fénye.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Trónok harca",
-        "authorId": 17,
+        "author_id": 17,
         "publised_year": 1996,
         "pages": 694,
         "isbn": "9780553103540",
         "description": "Hatalmi játszmák Westeros földjén.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Királyok csatája",
-        "authorId": 17,
+        "author_id": 17,
         "publised_year": 1998,
         "pages": 768,
         "isbn": "9780553108033",
         "description": "A háború egész birodalmakat tép szét.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
 
     {
         "title": "Leviatán ébredése",
-        "authorId": 18,
+        "author_id": 18,
         "publised_year": 2011,
         "pages": 592,
         "isbn": "9780316129084",
         "description": "Az emberiség terjeszkedése a Naprendszerben.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     },
     {
         "title": "Caliban háborúja",
-        "authorId": 18,
+        "author_id": 18,
         "publised_year": 2012,
         "pages": 605,
         "isbn": "9780316129091",
         "description": "Politikai és katonai konfliktus az űrben.",
-        "image": ""
+        "image": "",
+        "is_read": false,
+        "is_wishlist": false
     }
 ]

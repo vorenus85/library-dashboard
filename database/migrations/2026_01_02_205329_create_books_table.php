@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
-            $table->string('authorId'); // todo foreign key
+            $table->string('author_id'); // todo foreign key
             $table->integer('publised_year')->nullable();
             $table->string('isbn')->nullable();
             $table->string('image')->nullable();
             $table->integer('pages')->nullable();
+            $table->boolean('is_read')->default(false);
+            $table->boolean('is_wishlist')->default(false);
             $table->text('description')->nullable();
         });
     }

@@ -26,4 +26,6 @@ Route::get('/books', [BookController::class, 'index']);
 Route::post('/books', [BookController::class, 'store']);
 Route::get('/books/{book}', [BookController::class, 'show']);
 Route::put('/books/{book}', [BookController::class, 'update']);
+Route::patch('/books/{book}/toggle-read', [BookController::class, 'toggleRead']);
+Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWishlist']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);

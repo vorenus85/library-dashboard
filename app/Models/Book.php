@@ -12,12 +12,19 @@ class Book extends Model
 
     protected $fillable = [
         'title',
-        'authorId',
+        'author_id',
         'publised_year',
         'isbn',
         'image',
         'pages',
         'description',
+        'is_read',
+        'is_wishlist'
+    ];
+
+    protected $casts = [
+        'is_read' => 'boolean',
+        'is_wishlist' => 'boolean',
     ];
 
 

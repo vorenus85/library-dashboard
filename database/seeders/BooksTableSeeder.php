@@ -20,11 +20,13 @@ class BooksTableSeeder extends Seeder
         foreach ($books as $book) {
             Book::create([
                 "title" => $book['title'],
-                "authorId" => $book['authorId'],
+                "author_id" => $book['author_id'],
                 "publised_year" => $book['publised_year'],
                 "isbn" => $book['isbn'],
                 "image" => $book['image'],
                 "pages" => $book['pages'],
+                "is_read" => $book['is_read'],
+                "is_whislist" => $book['is_whislist'],
                 "description" => $book['description'],
             ]);
         }

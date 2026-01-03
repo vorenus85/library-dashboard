@@ -3,7 +3,12 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <Button icon="pi pi-file-export" label="Export" severity="info" />
+                <Button
+                    icon="pi pi-file-export"
+                    label="Export"
+                    severity="info"
+                    @click="exportBooks()"
+                />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -16,6 +21,21 @@
                 :loading="loading"
             >
                 <Column sortable field="title" header="Title" style="width: 25%"></Column>
+                <Column sortable field="authorId" header="Author" style="width: 25%"></Column>
+                <Column field="is_read" header="Is readed" style="width: 10%">
+                    <template #body="slotProps">
+                        <ToggleSwitch
+                            :model-value="Boolean(slotProps.data.is_read)"
+                            @change="toggleRead(slotProps.data.id)"
+                        /> </template
+                ></Column>
+                <Column field="is_wishlist" header="Is wishlist" style="width: 10%">
+                    <template #body="slotProps">
+                        <ToggleSwitch
+                            :model-value="Boolean(slotProps.data.is_wishlist)"
+                            @change="toggleWishlist(slotProps.data.id)"
+                        /> </template
+                ></Column>
                 <Column field="description" header="Description" style="width: 25%"></Column>
                 <Column field="pages" header="Pages no." style="width: 25%"></Column>
                 <Column header="Actions" style="width: 10%">
@@ -46,7 +66,7 @@
     </AppLayout>
 </template>
 <script setup>
-import { Button, Column, DataTable, useToast } from 'primevue'
+import { Button, Column, DataTable, ToggleSwitch, useToast } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
@@ -59,6 +79,28 @@ const loading = ref(false)
 
 const toCreateBook = () => {
     router.push({ name: 'books.create' })
+}
+
+const toggleRead = async id => {
+    return await axios
+        .patch(`/books/${id}/toggle-read`)
+        .catch(e => {
+            console.log(e)
+        })
+        .then(response => {
+            console.log(response)
+        })
+}
+
+const toggleWishlist = async id => {
+    return await axios
+        .patch(`/books/${id}/toggle-wishlist`)
+        .catch(e => {
+            console.log(e)
+        })
+        .then(response => {
+            console.log(response)
+        })
 }
 
 const getBooks = async () => {
@@ -98,6 +140,10 @@ const deleteBook = async id => {
                 life: 3000,
             })
         })
+}
+
+const exportBooks = () => {
+    alert('Todo export books')
 }
 
 onMounted(() => {

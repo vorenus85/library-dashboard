@@ -12,10 +12,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
-
-        $books = Book::select('id', 'title', 'description', 'pages')->orderBy('title', 'asc')->get();
-
+        $books = Book::select('id', 'title', 'description', 'pages', 'is_read', 'is_wishlist')->orderBy('title', 'asc')->get();
         return response()->json($books, 200);
     }
 
@@ -71,6 +68,29 @@ class BookController extends Controller
         //
     }
 
+    public function toggleRead(Book $book) {
+
+        try {
+            $book->is_read = !$book->is_read;
+            $book->save();
+            return response()->json(["status" => "ok"], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during toggleRead' ], 500);
+        }
+    }
+
+    public function toggleWishlist(Book $book) {
+        try {
+            $book->is_wishlist = !$book->is_wishlist;
+            $book->save();
+            return response()->json(["status" => "ok"], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during toggleWishlist' ], 500);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -92,7 +112,6 @@ class BookController extends Controller
             //throw $th;
             // todo log error
             return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
-
         }
     }
 }

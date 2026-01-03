@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
+            $table->string('authorId'); // todo foreign key
             $table->integer('publised_year')->nullable();
             $table->string('isbn')->nullable();
             $table->string('image')->nullable();

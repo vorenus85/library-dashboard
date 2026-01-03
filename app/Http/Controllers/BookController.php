@@ -13,6 +13,10 @@ class BookController extends Controller
     public function index()
     {
         //
+
+        $books = Book::select('id', 'title', 'description', 'pages')->orderBy('title', 'asc')->get();
+
+        return response()->json($books, 200);
     }
 
     /**
@@ -56,6 +60,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         //
+        return response()->json($book);
     }
 
     /**
@@ -80,5 +85,14 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+        try {
+            $book->delete();
+            return response()->json(['status' => "ok"], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            // todo log error
+            return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
+
+        }
     }
 }

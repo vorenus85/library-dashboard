@@ -7,7 +7,7 @@
         "isbn": "9780743435428",
         "description": "Római katonák mindennapjai és harcai Britannia földjén.",
         "image": "",
-        "is_read": false,
+        "is_read": true,
         "is_wishlist": false
     },
     {
@@ -34,7 +34,7 @@
         "is_wishlist": false
     },
     {
-        "title": "A Szellem Dandár",
+        "title": "A Szellem hadtest",
         "author_id": 2,
         "publised_year": 2006,
         "pages": 336,
@@ -42,7 +42,7 @@
         "description": "Genetikailag módosított harcosok bevetése.",
         "image": "",
         "is_read": false,
-        "is_wishlist": false
+        "is_wishlist": true
     },
 
     {
@@ -202,7 +202,7 @@
         "isbn": "9780553288209",
         "description": "Egy galaktikus konfliktus beteljesedése.",
         "image": "",
-        "is_read": false,
+        "is_read": true,
         "is_wishlist": false
     },
 
@@ -318,8 +318,8 @@
         "isbn": "9780140136426",
         "description": "Az európai őstörténet újraértelmezése.",
         "image": "",
-        "is_read": false,
-        "is_wishlist": false
+        "is_read": true,
+        "is_wishlist": true
     },
 
     {

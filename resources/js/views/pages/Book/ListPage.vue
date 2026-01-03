@@ -21,7 +21,7 @@
                 :loading="loading"
             >
                 <Column sortable field="title" header="Title" style="width: 25%"></Column>
-                <Column sortable field="authorId" header="Author" style="width: 25%"></Column>
+                <Column sortable field="author.name" header="Author" style="width: 15%"></Column>
                 <Column field="is_read" header="Is readed" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
@@ -88,7 +88,7 @@ const toggleRead = async id => {
             console.log(e)
         })
         .then(response => {
-            console.log(response)
+            // console.log(response)
         })
 }
 
@@ -98,9 +98,7 @@ const toggleWishlist = async id => {
         .catch(e => {
             console.log(e)
         })
-        .then(response => {
-            console.log(response)
-        })
+        .then(response => {})
 }
 
 const getBooks = async () => {
@@ -114,6 +112,8 @@ const getBooks = async () => {
         .then(response => {
             loading.value = false
             books.value = response.data
+
+            console.log(response.data)
         })
 }
 

@@ -26,7 +26,7 @@ class BooksTableSeeder extends Seeder
                 "image" => $book['image'],
                 "pages" => $book['pages'],
                 "is_read" => $book['is_read'],
-                "is_whislist" => $book['is_whislist'],
+                "is_wishlist" => $book['is_wishlist'],
                 "description" => $book['description'],
             ]);
         }

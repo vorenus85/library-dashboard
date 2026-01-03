@@ -124,7 +124,7 @@ class BookController extends Controller
             'image' => 'nullable|string',
             'description' => 'nullable|string|max:500',
             'is_read' => 'nullable|boolean',
-            'is_read' => 'nullable|boolean',
+            'is_wishlist' => 'nullable|boolean',
         ]);
 
         $validated["author_id"] = $validated["author"]["id"];

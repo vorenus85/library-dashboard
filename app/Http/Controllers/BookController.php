@@ -42,8 +42,8 @@ class BookController extends Controller
                 'isbn' => 'nullable|string',
                 'image' => 'nullable|string',
                 'description' => 'nullable|string|max:500',
-                'is_read' => 'nullable|boolean' ?? false,
-                'is_wishlist' => 'nullable|boolean' ?? false,
+                'is_read' => 'nullable|boolean',
+                'is_wishlist' => 'nullable|boolean',
             ]);
 
             $book = Book::create([
@@ -123,8 +123,8 @@ class BookController extends Controller
             'isbn' => 'nullable|string',
             'image' => 'nullable|string',
             'description' => 'nullable|string|max:500',
-            'is_read' => 'nullable|boolean' ?? false,
-            'is_wishlist' => 'nullable|boolean' ?? false,
+            'is_read' => 'nullable|boolean',
+            'is_read' => 'nullable|boolean',
         ]);
 
         $validated["author_id"] = $validated["author"]["id"];

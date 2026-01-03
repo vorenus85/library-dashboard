@@ -13,13 +13,37 @@
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
             <DataTable
+                v-model:filters="filters"
                 :value="books"
                 paginator
                 :rows="10"
                 :rowsPerPageOptions="[5, 10, 20, 50]"
                 tableStyle="min-width: 50rem"
                 :loading="loading"
+                :globalFilterFields="['name', 'description', 'author.name']"
+                dataKey="id"
             >
+                <template #header>
+                    <div class="flex justify-between">
+                        <Button
+                            type="button"
+                            icon="pi pi-filter-slash"
+                            label="Clear"
+                            variant="outlined"
+                            @click="clearFilter()"
+                        />
+                        <IconField>
+                            <InputIcon>
+                                <i class="pi pi-search" />
+                            </InputIcon>
+                            <InputText
+                                v-model="filters['global'].value"
+                                placeholder="Keyword Search"
+                            />
+                        </IconField>
+                    </div>
+                </template>
+                <template #empty> No results found. </template>
                 <Column sortable field="title" header="Title" style="width: 25%"></Column>
                 <Column sortable field="author.name" header="Author" style="width: 15%"></Column>
                 <Column field="is_read" header="Is readed" style="width: 10%">
@@ -66,16 +90,51 @@
     </AppLayout>
 </template>
 <script setup>
-import { Button, Column, DataTable, ToggleSwitch, useToast } from 'primevue'
+import {
+    Button,
+    Column,
+    DataTable,
+    IconField,
+    InputIcon,
+    InputText,
+    ToggleSwitch,
+    useToast,
+} from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
-const toast = useToast()
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 
+const toast = useToast()
+const filters = ref()
 const router = useRouter()
 const books = ref([])
 const loading = ref(false)
+
+const initFilters = () => {
+    filters.value = {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        },
+        description: {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        },
+        'author.name': {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        },
+    }
+}
+
+initFilters()
+
+const clearFilter = () => {
+    initFilters()
+}
 
 const toCreateBook = () => {
     router.push({ name: 'books.create' })
@@ -112,8 +171,6 @@ const getBooks = async () => {
         .then(response => {
             loading.value = false
             books.value = response.data
-
-            console.log(response.data)
         })
 }
 

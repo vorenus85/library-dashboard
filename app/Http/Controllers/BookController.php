@@ -30,25 +30,41 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
-        $validated = $request->validate([
-            'title' => 'required|unique:books,title|max:255',
-            'publised_year' => 'nullable|numeric',
-            'pages' => 'nullable|numeric',
-            'isbn' => 'nullable|string',
-            'image' => 'nullable|string',
-            'description' => 'nullable|string|max:500',
-        ]);
 
-        $book = Book::create([
-            'title' => $validated['title'],
-            'publised_year' => $request['publised_year'],
-            'pages' => $request['pages'],
-            'isbn' => $request['isbn'],
-            'image' => $request['image'],
-            'description' => $request['description'],
-        ]);
 
-        return response()->json($book, 201);
+        try {
+            $validated = $request->validate([
+                'title' => 'required|unique:books,title|max:255',
+                'author' => 'required|array',
+                'author.id' => 'required|numeric',
+                'publised_year' => 'nullable|numeric',
+                'pages' => 'nullable|numeric',
+                'isbn' => 'nullable|string',
+                'image' => 'nullable|string',
+                'description' => 'nullable|string|max:500',
+                'is_read' => 'nullable|boolean' ?? false,
+                'is_wishlist' => 'nullable|boolean' ?? false,
+            ]);
+
+            $book = Book::create([
+                'title' => $validated['title'],
+                "author_id" => $validated['author']["id"],
+                'publised_year' => $request['publised_year'],
+                'pages' => $request['pages'],
+                'isbn' => $request['isbn'],
+                'image' => $request['image'],
+                'description' => $request['description'],
+                'is_read' => $request['is_read'] ?? false,
+                'is_wishlist' => $request['is_wishlist'] ?? false,
+            ]);
+
+            return response()->json($book, 201);
+        } catch (\Throwable $th) {
+            throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during create' ], 500);
+        }
+
+
     }
 
     /**

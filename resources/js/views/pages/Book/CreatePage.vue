@@ -33,6 +33,40 @@
                     >
                 </div>
                 <div class="flex flex-col gap-1">
+                    <label for="author">Book author</label>
+                    <Select
+                        filter
+                        v-model="selectedAuthor"
+                        :options="authors"
+                        optionLabel="name"
+                        placeholder="Select author"
+                        checkmark
+                        id="author"
+                        name="author"
+                        :highlightOnSelect="false"
+                        class="w-full md:w-56"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="bookDescription">Book description</label>
+                    <Textarea
+                        id="bookDescription"
+                        name="description"
+                        rows="5"
+                        cols="30"
+                        style="resize: none"
+                        placeholder="J. K. Rowling write the worldwide famous Harry Potter series"
+                    />
+                    <Message
+                        v-if="$form.description?.invalid"
+                        severity="error"
+                        size="small"
+                        variant="simple"
+                        >{{ $form.description.error?.message }}</Message
+                    >
+                </div>
+                <div class="flex flex-col gap-1">
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
                         id="bookPublisedYear"
@@ -78,22 +112,12 @@
                     >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label for="bookDescription">Book description</label>
-                    <Textarea
-                        id="bookDescription"
-                        name="description"
-                        rows="5"
-                        cols="30"
-                        style="resize: none"
-                        placeholder="J. K. Rowling write the worldwide famous Harry Potter series"
-                    />
-                    <Message
-                        v-if="$form.description?.invalid"
-                        severity="error"
-                        size="small"
-                        variant="simple"
-                        >{{ $form.description.error?.message }}</Message
-                    >
+                    <label for="bookPages">Is read</label>
+                    <ToggleSwitch name="is_read" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="bookPages">Is wishlist</label>
+                    <ToggleSwitch name="is_wishlist" />
                 </div>
                 <Button type="submit" severity="primary" label="Save" />
             </Form>
@@ -102,13 +126,16 @@
 </template>
 <script setup>
 import { Form } from '@primevue/forms'
-import { Button, InputText, Message, Textarea } from 'primevue'
+import { Button, InputText, Message, Select, Textarea, ToggleSwitch } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
+const selectedAuthor = ref({})
+const authors = ref([])
+const loading = ref(false)
 
 const router = useRouter()
 
@@ -125,6 +152,20 @@ const resolver = ({ values }) => {
     }
 }
 
+const getAuthors = async () => {
+    loading.value = true
+    return await axios
+        .get('/authors-simple')
+        .catch(error => {
+            loading.value = false
+            console.error(error)
+        })
+        .then(response => {
+            loading.value = false
+            authors.value = response.data
+        })
+}
+
 const initialValues = reactive({
     title: '',
     description: '',
@@ -135,9 +176,10 @@ const backToList = () => {
 }
 
 const onFormSubmit = async ({ valid, values }) => {
+    console.log(values)
     if (valid) {
         try {
-            await axios.post('/api/books', values)
+            await axios.post('/books', values)
 
             toast.add({
                 severity: 'success',
@@ -158,4 +200,8 @@ const onFormSubmit = async ({ valid, values }) => {
         }
     }
 }
+
+onMounted(() => {
+    getAuthors()
+})
 </script>

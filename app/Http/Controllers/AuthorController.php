@@ -13,7 +13,14 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::withCount(['books'])->orderBy('name', 'asc')->get();
+        $authors = Author::select('id', 'name', 'description')->withCount(['books'])->orderBy('name', 'asc')->get();
+
+        return response()->json($authors)->setStatusCode(200);
+    }
+
+    public function getAuthorsForDropdown()
+    {
+        $authors = Author::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return response()->json($authors)->setStatusCode(200);
     }

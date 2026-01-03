@@ -44,9 +44,26 @@
                     </div>
                 </template>
                 <template #empty> No results found. </template>
-                <Column sortable field="title" header="Title" style="width: 25%"></Column>
-                <Column sortable field="author.name" header="Author" style="width: 15%"></Column>
-                <Column field="is_read" header="Is readed" style="width: 10%">
+                <Column sortable field="title" header="Title" style="width: 25%">
+                    <template #body="slotProps"> <Chip :label="slotProps.data?.title" /></template>
+                </Column>
+                <Column sortable field="author.name" header="Author" style="width: 15%">
+                    <template #body="slotProps">
+                        <Button asChild variant="link" v-slot="buttonProps">
+                            <RouterLink
+                                :to="{
+                                    name: 'authors.show',
+                                    params: {
+                                        authorId: slotProps.data?.author?.id,
+                                    },
+                                }"
+                                :class="buttonProps.class + ' px-0'"
+                                >{{ slotProps.data?.author?.name }}</RouterLink
+                            >
+                        </Button>
+                    </template>
+                </Column>
+                <Column field="is_read" header="Is read" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_read)"
@@ -92,6 +109,7 @@
 <script setup>
 import {
     Button,
+    Chip,
     Column,
     DataTable,
     IconField,

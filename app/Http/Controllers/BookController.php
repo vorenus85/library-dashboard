@@ -60,7 +60,7 @@ class BookController extends Controller
 
             return response()->json($book, 201);
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             return response()->json([ 'status' => 'error', 'message' => 'Error during create' ], 500);
         }
 
@@ -72,7 +72,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $book->load(['author:id,name']);
         return response()->json($book);
     }
 
@@ -113,6 +113,30 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         //
+
+        $validated = $request->validate([
+            'title' => 'required|max:255|unique:books,title,' . $book->id,
+            'author' => 'required|array',
+            'author.id' => 'required|numeric',
+            'publised_year' => 'nullable|numeric',
+            'pages' => 'nullable|numeric',
+            'isbn' => 'nullable|string',
+            'image' => 'nullable|string',
+            'description' => 'nullable|string|max:500',
+            'is_read' => 'nullable|boolean' ?? false,
+            'is_wishlist' => 'nullable|boolean' ?? false,
+        ]);
+
+        $validated["author_id"] = $validated["author"]["id"];
+
+        try {
+            $book->update($validated);
+            return response()->json($book, 200);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during book update' ], 500);
+        }
     }
 
     /**

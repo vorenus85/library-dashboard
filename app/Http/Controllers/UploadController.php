@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UploadController extends Controller
 {
@@ -13,11 +14,16 @@ class UploadController extends Controller
             'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        $path = $request->file('file')->store('uploads', 'public');
+        $file = $request->file('file');
+
+        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+        $path = $file->storeAs('uploads', $filename, 'public');
 
         return response()->json([
             'path' => $path,
-            'url' => asset('storage/' . $path)
+            'filename' => $filename,
+            'url' => asset('storage/' . $path),
         ]);
     }
 }

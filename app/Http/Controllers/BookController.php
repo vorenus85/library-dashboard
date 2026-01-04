@@ -44,15 +44,8 @@ class BookController extends Controller
                 'description' => 'nullable|string|max:500',
                 'is_read' => 'nullable|boolean',
                 'is_wishlist' => 'nullable|boolean',
-                'image' => 'nullable|image:jpeg,png,jpg,gif|max:2048',
+                'image' => 'nullable|string',
             ]);
-
-            if ($image = $request->file('image')) {
-                $destinationPath = 'images/';
-                $bookImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                $image->move($destinationPath, $bookImage);
-                $validated['image'] = "$bookImage";
-            }
 
             $book = Book::create([
                 'title' => $validated['title'],

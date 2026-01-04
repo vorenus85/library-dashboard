@@ -261,7 +261,9 @@ const onImageUpload = async event => {
             },
         })
 
-        uploadedImage.value = data.path
+        uploadedImage.value = data.filename
+
+        console.log(uploadedImage.value)
     } catch (e) {
         isUploading.value = false
         console.error(e)

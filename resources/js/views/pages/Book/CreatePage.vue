@@ -47,6 +47,19 @@
                         class="w-full md:w-56"
                     />
                 </div>
+                <InputText name="image" type="hidden" />
+
+                <div class="flex flex-col gap-1">
+                    <label for="image">Book image</label>
+                    <FileUpload
+                        name="file"
+                        customUpload
+                        @uploader="onImageUpload"
+                        :multiple="false"
+                        accept="image/*"
+                        :maxFileSize="1000000"
+                    />
+                </div>
 
                 <div class="flex flex-col gap-1">
                     <label for="bookDescription">Book description</label>
@@ -126,7 +139,7 @@
 </template>
 <script setup>
 import { Form } from '@primevue/forms'
-import { Button, InputText, Message, Select, Textarea, ToggleSwitch } from 'primevue'
+import { Button, FileUpload, InputText, Message, Select, Textarea, ToggleSwitch } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
@@ -176,6 +189,7 @@ const backToList = () => {
 }
 
 const onFormSubmit = async ({ valid, values }) => {
+    values.image = uploadedImage.value
     console.log(values)
     if (valid) {
         try {
@@ -198,6 +212,25 @@ const onFormSubmit = async ({ valid, values }) => {
                 life: 3000,
             })
         }
+    }
+}
+
+const uploadedImage = ref(null)
+
+const onImageUpload = async event => {
+    try {
+        const file = event.files[0]
+
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const { data } = await axios.post('/upload', formData)
+
+        console.log(data)
+        // 🔑 EZ A LÉNYEG
+        uploadedImage.value = data.path
+    } catch (e) {
+        console.error(e)
     }
 }
 

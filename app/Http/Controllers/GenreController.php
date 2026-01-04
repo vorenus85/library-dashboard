@@ -38,7 +38,7 @@ class GenreController extends Controller
 
         $genre = Genre::create([
             'name' => $validated['name'],
-            'description' => $request['description']
+            'description' => $validated['description']
         ]);
 
         return response()->json($genre, 201);

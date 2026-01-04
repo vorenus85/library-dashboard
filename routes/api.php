@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UploadController;
 
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -30,3 +31,5 @@ Route::put('/books/{book}', [BookController::class, 'update']);
 Route::patch('/books/{book}/toggle-read', [BookController::class, 'toggleRead']);
 Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWishlist']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
+
+Route::post('/upload', [UploadController::class, 'store']);

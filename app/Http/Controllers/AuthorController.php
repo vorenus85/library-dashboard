@@ -46,7 +46,7 @@ class AuthorController extends Controller
 
         $author = Author::create([
             'name' => $validated['name'],
-            'description' => $request['description']
+            'description' => $validated['description']
         ]);
 
         return response()->json($author, 201);

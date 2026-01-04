@@ -47,6 +47,26 @@
                         class="w-full md:w-56"
                     />
                 </div>
+                <InputText name="image" type="hidden" />
+
+                <div class="flex flex-col gap-1">
+                    <label for="image">Book image</label>
+                    <div class="file-upload-clean">
+                        <FileUpload
+                            name="file"
+                            customUpload
+                            @uploader="onImageUpload"
+                            :multiple="false"
+                            accept="image/*"
+                            :maxFileSize="1000000"
+                            @remove="onRemove"
+                            @clear="onClear"
+                            :disabled="isUploading || !!uploadedImage"
+                        />
+                    </div>
+
+                    <ProgressBar v-if="isUploading" :value="uploadProgress" />
+                </div>
 
                 <div class="flex flex-col gap-1">
                     <label for="bookDescription">Book description</label>
@@ -126,7 +146,16 @@
 </template>
 <script setup>
 import { Form } from '@primevue/forms'
-import { Button, InputText, Message, Select, Textarea, ToggleSwitch } from 'primevue'
+import {
+    Button,
+    FileUpload,
+    InputText,
+    Message,
+    ProgressBar,
+    Select,
+    Textarea,
+    ToggleSwitch,
+} from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRouter } from 'vue-router'
@@ -176,6 +205,7 @@ const backToList = () => {
 }
 
 const onFormSubmit = async ({ valid, values }) => {
+    values.image = uploadedImage.value
     console.log(values)
     if (valid) {
         try {
@@ -198,6 +228,45 @@ const onFormSubmit = async ({ valid, values }) => {
                 life: 3000,
             })
         }
+    }
+}
+
+const isUploading = ref(false)
+const uploadProgress = ref(0)
+const uploadedImage = ref(null)
+
+const onRemove = () => {
+    isUploading.value = false
+    uploadProgress.value = 0
+}
+
+const onClear = () => {
+    isUploading.value = false
+    uploadProgress.value = 0
+}
+
+const onImageUpload = async event => {
+    try {
+        isUploading.value = true
+        const file = event.files[0]
+
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const { data } = await axios.post('/upload', formData, {
+            onUploadProgress: e => {
+                if (!e.total) return
+
+                uploadProgress.value = Math.round((e.loaded * 100) / e.total)
+            },
+        })
+
+        uploadedImage.value = data.filename
+
+        console.log(uploadedImage.value)
+    } catch (e) {
+        isUploading.value = false
+        console.error(e)
     }
 }
 

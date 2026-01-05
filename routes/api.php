@@ -2,11 +2,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UploadController;
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/bookCount', [DashboardController::class, 'bookCount']);
+Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
+Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
 
 // todo route group
 Route::get('/authors', [AuthorController::class, 'index']);

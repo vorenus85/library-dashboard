@@ -2,25 +2,25 @@
     <AppLayout>
         <PageTitle title="Dashboard"> </PageTitle>
         <div class="dashboard grid grid-cols-12 gap-8">
-            <DashboarKpi
+            <DashboardKpi
                 title="Book no."
                 :kpiValue="bookCount"
                 icon="book"
                 color="blue"
-            ></DashboarKpi>
-            <DashboarKpi
+            ></DashboardKpi>
+            <DashboardKpi
                 title="Is Read no."
                 :kpiValue="countIsRead"
                 :rate="countIsReadRate"
                 icon="book"
                 color="purple"
-            ></DashboarKpi>
-            <DashboarKpi
+            ></DashboardKpi>
+            <DashboardKpi
                 title="Is Wishlist no."
                 :kpiValue="countIsWishList"
                 icon="bookmark"
                 color="orange"
-            ></DashboarKpi>
+            ></DashboardKpi>
         </div>
     </AppLayout>
 </template>
@@ -30,7 +30,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 
 import { ref, onMounted } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import DashboarKpi from '../../components/DashboarKpi.vue'
+import DashboardKpi from '../../components/DashboardKpi.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

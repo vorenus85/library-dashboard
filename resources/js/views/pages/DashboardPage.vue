@@ -1,26 +1,61 @@
 <template>
     <AppLayout>
-        <h2 class="text-2xl font-bold">Welcome 👋</h2>
-        <p class="mt-2 text-gray-600">AppLayout works 🎉</p>
-        <div>
-            <h2 class="text-xl font-bold">API Response:</h2>
-            <pre>{{ data }}</pre>
+        <PageTitle title="Dashboard"> </PageTitle>
+        <div class="dashboard grid grid-cols-12 gap-8">
+            <DashboarKpi
+                title="Book no."
+                :kpiValue="bookCount"
+                icon="book"
+                color="blue"
+            ></DashboarKpi>
+            <DashboarKpi
+                title="Is Read no."
+                :kpiValue="countIsRead"
+                :rate="countIsReadRate"
+                icon="book"
+                color="purple"
+            ></DashboarKpi>
+            <DashboarKpi
+                title="Is Wishlist no."
+                :kpiValue="countIsWishList"
+                icon="bookmark"
+                color="orange"
+            ></DashboarKpi>
         </div>
-        <Button label="PrimeVue OK" icon="pi pi-check" />
     </AppLayout>
 </template>
 
 <script setup>
-import Button from 'primevue/button'
 import AppLayout from '@/layout/AppLayout.vue'
 
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import PageTitle from '../../components/PageTitle.vue'
+import DashboarKpi from '../../components/DashboarKpi.vue'
 
-const data = ref(null)
+const bookCount = ref(0)
+const countIsWishList = ref(0)
+const countIsRead = ref(0)
+const countIsReadRate = ref(0)
 
-onMounted(async () => {
-    const res = await axios.get('/home')
-    data.value = res.data
+const getBookCount = async () => {
+    const { data } = await axios.get('/bookCount')
+    bookCount.value = data.bookCount
+}
+
+const getIsReadRate = async () => {
+    const { data } = await axios.get('/isReadRate')
+    countIsRead.value = data.countIsRead
+    countIsReadRate.value = data.countIsReadRate
+}
+
+const getIsWishlistCount = async () => {
+    const { data } = await axios.get('/isWishlistCount')
+    countIsWishList.value = data.countIsWishList
+}
+
+onMounted(() => {
+    getBookCount()
+    getIsReadRate()
+    getIsWishlistCount()
 })
 </script>

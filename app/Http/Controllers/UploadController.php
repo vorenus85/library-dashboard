@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File as LaraFile;
 use Illuminate\Support\Str;
 
 class UploadController extends Controller
@@ -25,5 +27,20 @@ class UploadController extends Controller
             'filename' => $filename,
             'url' => asset('storage/' . $path),
         ]);
+    }
+
+    public function delete(Book $book){
+        try {
+            $image = $book->image;
+            $book->update(["image" => ""]);
+
+            LaraFile::delete("storage/uploads/{$image}");
+
+            return response()->json(["status" => 'ok']);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([ 'status' => 'error', 'message' => 'Error during delete book image' ], 500);
+        }
     }
 }

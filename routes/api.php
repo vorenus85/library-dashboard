@@ -35,3 +35,4 @@ Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWis
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
 
 Route::post('/upload', [UploadController::class, 'store']);
+Route::delete('/book-image/{book}', [UploadController::class, 'delete']);

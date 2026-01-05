@@ -206,7 +206,6 @@ const backToList = () => {
 
 const onFormSubmit = async ({ valid, values }) => {
     values.image = uploadedImage.value
-    console.log(values)
     if (valid) {
         try {
             await axios.post('/books', values)

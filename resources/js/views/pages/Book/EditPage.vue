@@ -50,6 +50,47 @@
                     />
                 </div>
 
+                <InputText name="image" type="hidden" />
+
+                <div class="flex flex-col gap-1">
+                    <label for="image">Book image</label>
+
+                    <template v-if="initialValues.image">
+                        <div class="flex items-center gap-5">
+                            <Image
+                                :src="`/storage/uploads/${initialValues.image}`"
+                                :alt="`${initialValues.title}`"
+                                preview
+                                width="90"
+                            />
+                            <Button
+                                icon="pi pi-trash"
+                                severity="danger"
+                                aria-label="Delete image"
+                                @click="deleteImage()"
+                            />
+                        </div>
+                    </template>
+
+                    <template v-if="!initialValues.image">
+                        <div class="file-upload-clean">
+                            <FileUpload
+                                name="file"
+                                customUpload
+                                @uploader="onImageUpload"
+                                :multiple="false"
+                                accept="image/*"
+                                :maxFileSize="1000000"
+                                @remove="onRemove"
+                                @clear="onClear"
+                                :disabled="isUploading || !!uploadedImage"
+                            />
+                        </div>
+
+                        <ProgressBar v-if="isUploading" :value="uploadProgress" />
+                    </template>
+                </div>
+
                 <div class="flex flex-col gap-1">
                     <label for="bookDescription">Book description</label>
                     <Textarea
@@ -128,7 +169,17 @@
 </template>
 <script setup>
 import { Form } from '@primevue/forms'
-import { Button, InputText, Message, Select, Textarea, ToggleSwitch } from 'primevue'
+import {
+    Button,
+    FileUpload,
+    Image,
+    InputText,
+    Message,
+    ProgressBar,
+    Select,
+    Textarea,
+    ToggleSwitch,
+} from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -141,6 +192,7 @@ const toast = useToast()
 const selectedAuthor = ref({})
 const authors = ref([])
 const loading = ref(false)
+const bookId = ref(0)
 
 const router = useRouter()
 
@@ -178,11 +230,11 @@ const backToList = () => {
 }
 
 const onFormSubmit = async ({ valid, values }) => {
-    const bookId = route.params.bookId
     values.author = selectedAuthor.value
+    values.image = uploadedImage.value
     if (valid) {
         await axios
-            .put(`/books/${bookId}`, values)
+            .put(`/books/${bookId.value}`, values)
             .catch(error => {
                 toast.add({
                     severity: 'error',
@@ -205,10 +257,10 @@ const onFormSubmit = async ({ valid, values }) => {
 }
 
 const getBook = async () => {
-    const bookId = route.params.bookId
+    bookId.value = route.params.bookId
 
     return await axios
-        .get(`/books/${bookId}`)
+        .get(`/books/${bookId.value}`)
         .then(response => {
             console.log(response.data)
             initialValues.title = response.data.title
@@ -216,6 +268,7 @@ const getBook = async () => {
             initialValues.description = response.data.description
             initialValues.publised_year = response.data.publised_year
             initialValues.isbn = response.data.isbn
+            initialValues.image = response.data.image
             initialValues.pages = response.data.pages
             initialValues.is_read = response.data.is_read
             initialValues.is_wishlist = response.data.is_wishlist
@@ -223,6 +276,57 @@ const getBook = async () => {
         })
         .catch(e => {
             console.error(e)
+        })
+}
+
+const isUploading = ref(false)
+const uploadProgress = ref(0)
+const uploadedImage = ref(null)
+
+const onRemove = () => {
+    isUploading.value = false
+    uploadProgress.value = 0
+}
+
+const onClear = () => {
+    isUploading.value = false
+    uploadProgress.value = 0
+}
+
+const onImageUpload = async event => {
+    try {
+        isUploading.value = true
+        const file = event.files[0]
+
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const { data } = await axios.post('/upload', formData, {
+            onUploadProgress: e => {
+                if (!e.total) return
+
+                uploadProgress.value = Math.round((e.loaded * 100) / e.total)
+            },
+        })
+
+        uploadedImage.value = data.filename
+
+        console.log(uploadedImage.value)
+    } catch (e) {
+        isUploading.value = false
+        console.error(e)
+    }
+}
+
+const deleteImage = async () => {
+    return await axios
+        .delete(`/book-image/${bookId.value}`)
+        .then(response => {
+            initialValues.image = ''
+            console.log(response)
+        })
+        .catch(e => {
+            console.log(e)
         })
 }
 

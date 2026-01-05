@@ -30,9 +30,6 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
-
-        var_dump($request);
-
         try {
             $validated = $request->validate([
                 'title' => 'required|unique:books,title|max:255',
@@ -61,7 +58,7 @@ class BookController extends Controller
 
             return response()->json($book, 201);
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             return response()->json([ 'status' => 'error', 'message' => 'Error during create' ], 500);
         }
 

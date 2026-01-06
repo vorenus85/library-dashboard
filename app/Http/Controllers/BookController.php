@@ -34,6 +34,8 @@ class BookController extends Controller
             $validated = $request->validate([
                 'title' => 'required|unique:books,title|max:255',
                 'author' => 'required|array',
+                'genres' => 'required|array',
+                'genres.*' => 'exists:genres,id',
                 'author.id' => 'required|numeric',
                 'publised_year' => 'nullable|numeric',
                 'pages' => 'nullable|numeric',
@@ -56,6 +58,11 @@ class BookController extends Controller
                 'is_wishlist' => $validated['is_wishlist'] ?? false,
             ]);
 
+            // save to pivot
+             if (!empty($validated['genres'])) {
+                $book->genres()->sync($validated['genres']);
+            }
+
             return response()->json($book, 201);
         } catch (\Throwable $th) {
             // throw $th;
@@ -70,7 +77,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $book->load(['author:id,name']);
+        $book->load(['author:id,name'])->load(['genres:id,name']);
         return response()->json($book);
     }
 
@@ -115,6 +122,8 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255|unique:books,title,' . $book->id,
             'author' => 'required|array',
+            'genres' => 'required|array',
+            'genres.*' => 'exists:genres,id',
             'author.id' => 'required|numeric',
             'publised_year' => 'nullable|numeric',
             'pages' => 'nullable|numeric',
@@ -129,6 +138,10 @@ class BookController extends Controller
 
         try {
             $book->update($validated);
+            // save to pivot
+             if (!empty($validated['genres'])) {
+                $book->genres()->sync($validated['genres']);
+            }
             return response()->json($book, 200);
 
         } catch (\Throwable $th) {

@@ -1,0 +1,86 @@
+[
+    {
+        "book_isbn": "9780743435428",
+        "genres": ["Historical Fiction", "Mythology / Ancient History"]
+    },
+    { "book_isbn": "9780743435435", "genres": ["Historical Fiction", "Crime Thriller"] },
+
+    { "book_isbn": "9780765348272", "genres": ["Science Fiction", "Space Opera"] },
+    { "book_isbn": "9780765348289", "genres": ["Science Fiction", "Hard Science Fiction"] },
+
+    {
+        "book_isbn": "9780553418026",
+        "genres": ["Hard Science Fiction", "Science / Popular Science"]
+    },
+    {
+        "book_isbn": "9780593135204",
+        "genres": ["Science Fiction", "Hard Science Fiction", "Space Opera"]
+    },
+
+    { "book_isbn": "9780241303723", "genres": ["Detective / Mystery", "Crime Thriller"] },
+    { "book_isbn": "9789630798543", "genres": ["Detective / Mystery", "Nordic Noir"] },
+
+    {
+        "book_isbn": "9780553293357",
+        "genres": ["Science Fiction", "Space Opera", "Economics / Politics"]
+    },
+    { "book_isbn": "9780553382563", "genres": ["Science Fiction", "Mythology / Ancient History"] },
+
+    {
+        "book_isbn": "9789634068321",
+        "genres": ["Science / Popular Science", "Economics / Politics"]
+    },
+    { "book_isbn": "9789634069809", "genres": ["Science Fiction", "Science / Popular Science"] },
+
+    { "book_isbn": "9780316029186", "genres": ["Fantasy", "Mythology / Ancient History"] },
+    { "book_isbn": "9780316029193", "genres": ["Fantasy", "Urban Fantasy"] },
+
+    { "book_isbn": "9780441004031", "genres": ["Science Fiction", "Hard Science Fiction"] },
+    { "book_isbn": "9780441009036", "genres": ["Science Fiction", "Space Opera"] },
+
+    {
+        "book_isbn": "9780553283686",
+        "genres": ["Science Fiction", "Space Opera", "Economics / Politics"]
+    },
+    { "book_isbn": "9780553288209", "genres": ["Science Fiction", "Space Opera"] },
+
+    { "book_isbn": "9780143119051", "genres": ["Crime Thriller", "Detective / Mystery"] },
+    { "book_isbn": "9780143119068", "genres": ["Crime Thriller", "Nordic Noir"] },
+
+    {
+        "book_isbn": "9780060887187",
+        "genres": ["Historical Fiction", "Mythology / Ancient History"]
+    },
+    { "book_isbn": "9780060887194", "genres": ["Historical Fiction", "Crime Thriller"] },
+
+    {
+        "book_isbn": "9789634065016",
+        "genres": ["Historical Fiction", "Mythology / Ancient History", "Economics / Politics"]
+    },
+
+    { "book_isbn": "9780375826696", "genres": ["Fantasy", "Mythology / Ancient History"] },
+    { "book_isbn": "9780375840401", "genres": ["Fantasy", "Urban Fantasy"] },
+
+    { "book_isbn": "9780765382030", "genres": ["Hard Science Fiction", "Science Fiction"] },
+    { "book_isbn": "9780765386694", "genres": ["Science Fiction", "Economics / Politics"] },
+
+    {
+        "book_isbn": "9780140136426",
+        "genres": ["Mythology / Ancient History", "Science / Popular Science"]
+    },
+
+    { "book_isbn": "9780575086258", "genres": ["Science Fiction", "Space Opera"] },
+    {
+        "book_isbn": "9780575099203",
+        "genres": ["Science Fiction", "Space Opera", "Crime Thriller"]
+    },
+
+    {
+        "book_isbn": "9780553103540",
+        "genres": ["Fantasy", "Mythology / Ancient History", "Economics / Politics"]
+    },
+    { "book_isbn": "9780553108033", "genres": ["Fantasy", "Historical Fiction"] },
+
+    { "book_isbn": "9780316129084", "genres": ["Science Fiction", "Space Opera"] },
+    { "book_isbn": "9780316129091", "genres": ["Science Fiction", "Economics / Politics"] }
+]

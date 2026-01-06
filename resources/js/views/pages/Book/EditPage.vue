@@ -109,6 +109,22 @@
                         >{{ $form.description.error?.message }}</Message
                     >
                 </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="genres">Genres</label>
+                    <MultiSelect
+                        v-model="selectedGenres"
+                        :options="genres"
+                        name="genres[]"
+                        optionLabel="name"
+                        filter
+                        placeholder="Select Genres"
+                        :maxSelectedLabels="3"
+                        class="w-full md:w-80"
+                        display="chip"
+                    />
+                </div>
+
                 <div class="flex flex-col gap-1">
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
@@ -175,6 +191,7 @@ import {
     Image,
     InputText,
     Message,
+    MultiSelect,
     ProgressBar,
     Select,
     Textarea,
@@ -190,11 +207,16 @@ const formKey = ref(0)
 const route = useRoute()
 const toast = useToast()
 const selectedAuthor = ref({})
+const selectedGenres = ref([])
 const authors = ref([])
+const genres = ref([])
 const loading = ref(false)
 const bookId = ref(0)
-
+const initialValues = reactive({})
 const router = useRouter()
+const isUploading = ref(false)
+const uploadProgress = ref(0)
+const uploadedImage = ref(null)
 
 const resolver = ({ values }) => {
     const errors = {}
@@ -223,8 +245,6 @@ const getAuthors = async () => {
         })
 }
 
-const initialValues = reactive({})
-
 const backToList = () => {
     router.push({ name: 'books' })
 }
@@ -232,6 +252,9 @@ const backToList = () => {
 const onFormSubmit = async ({ valid, values }) => {
     values.author = selectedAuthor.value
     values.image = uploadedImage.value
+    values.genres = values.genres.map(e => {
+        return e.id
+    })
     if (valid) {
         await axios
             .put(`/books/${bookId.value}`, values)
@@ -262,13 +285,18 @@ const getBook = async () => {
     return await axios
         .get(`/books/${bookId.value}`)
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             initialValues.title = response.data.title
             selectedAuthor.value = response.data.author
+            selectedGenres.value = response.data.genres.map(e => {
+                return { id: e.id, name: e.name }
+            })
+            initialValues.genres = selectedGenres.value
             initialValues.description = response.data.description
             initialValues.publised_year = response.data.publised_year
             initialValues.isbn = response.data.isbn
             initialValues.image = response.data.image
+            uploadedImage.value = initialValues.image
             initialValues.pages = response.data.pages
             initialValues.is_read = response.data.is_read
             initialValues.is_wishlist = response.data.is_wishlist
@@ -279,10 +307,6 @@ const getBook = async () => {
         })
 }
 
-const isUploading = ref(false)
-const uploadProgress = ref(0)
-const uploadedImage = ref(null)
-
 const onRemove = () => {
     isUploading.value = false
     uploadProgress.value = 0
@@ -291,6 +315,23 @@ const onRemove = () => {
 const onClear = () => {
     isUploading.value = false
     uploadProgress.value = 0
+}
+
+const getGenres = async () => {
+    loading.value = true
+    return await axios
+        .get('/genres')
+        .catch(error => {
+            loading.value = false
+            console.error(error)
+        })
+        .then(response => {
+            loading.value = false
+            const data = response.data.map(el => {
+                return { id: el.id, name: el.name }
+            })
+            genres.value = data
+        })
 }
 
 const onImageUpload = async event => {
@@ -310,8 +351,6 @@ const onImageUpload = async event => {
         })
 
         uploadedImage.value = data.filename
-
-        console.log(uploadedImage.value)
     } catch (e) {
         isUploading.value = false
         console.error(e)
@@ -333,5 +372,6 @@ const deleteImage = async () => {
 onMounted(() => {
     getAuthors()
     getBook()
+    getGenres()
 })
 </script>

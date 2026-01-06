@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             GenreTableSeeder::class,
             BooksTableSeeder::class,
+            BookGenreSeeder::class,
         ]);
 
         $this->command->info('All data seeded successfully!');

@@ -86,6 +86,22 @@
                         >{{ $form.description.error?.message }}</Message
                     >
                 </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="genres">Genres</label>
+                    <MultiSelect
+                        v-model="selectedGenres"
+                        :options="genres"
+                        name="genres[]"
+                        optionLabel="name"
+                        filter
+                        placeholder="Select Genres"
+                        :maxSelectedLabels="3"
+                        class="w-full md:w-80"
+                        display="chip"
+                    />
+                </div>
+
                 <div class="flex flex-col gap-1">
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
@@ -151,6 +167,7 @@ import {
     FileUpload,
     InputText,
     Message,
+    MultiSelect,
     ProgressBar,
     Select,
     Textarea,
@@ -163,10 +180,14 @@ import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
 const selectedAuthor = ref({})
+const selectedGenres = ref([])
 const authors = ref([])
+const genres = ref([])
 const loading = ref(false)
-
 const router = useRouter()
+const isUploading = ref(false)
+const uploadProgress = ref(0)
+const uploadedImage = ref(null)
 
 const resolver = ({ values }) => {
     const errors = {}
@@ -195,6 +216,23 @@ const getAuthors = async () => {
         })
 }
 
+const getGenres = async () => {
+    loading.value = true
+    return await axios
+        .get('/genres')
+        .catch(error => {
+            loading.value = false
+            console.error(error)
+        })
+        .then(response => {
+            loading.value = false
+            const data = response.data.map(el => {
+                return { id: el.id, name: el.name }
+            })
+            genres.value = data
+        })
+}
+
 const initialValues = reactive({
     title: '',
     description: '',
@@ -206,6 +244,10 @@ const backToList = () => {
 
 const onFormSubmit = async ({ valid, values }) => {
     values.image = uploadedImage.value
+    values.genres = values.genres.map(e => {
+        return e.id
+    })
+    console.log(values)
     if (valid) {
         try {
             await axios.post('/books', values)
@@ -229,10 +271,6 @@ const onFormSubmit = async ({ valid, values }) => {
         }
     }
 }
-
-const isUploading = ref(false)
-const uploadProgress = ref(0)
-const uploadedImage = ref(null)
 
 const onRemove = () => {
     isUploading.value = false
@@ -261,8 +299,6 @@ const onImageUpload = async event => {
         })
 
         uploadedImage.value = data.filename
-
-        console.log(uploadedImage.value)
     } catch (e) {
         isUploading.value = false
         console.error(e)
@@ -271,5 +307,6 @@ const onImageUpload = async event => {
 
 onMounted(() => {
     getAuthors()
+    getGenres()
 })
 </script>

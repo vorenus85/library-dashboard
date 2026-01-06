@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('book_genre', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->foreignId('book_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('genre_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('book_genre');
     }
 };

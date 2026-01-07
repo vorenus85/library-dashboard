@@ -76,15 +76,13 @@ import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
 import { RouterLink } from 'vue-router'
-import { useToast } from 'primevue/usetoast'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
+import { useAuthor } from '@/composables/useAuthor'
 
 const { toCreateAuthor } = useRedirects()
+const { authors, loading, getAuthors, deleteAuthor } = useAuthor()
 const filters = ref()
-const toast = useToast()
-const authors = ref([])
-const loading = ref(false)
 
 const initFilters = () => {
     filters.value = {
@@ -104,43 +102,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const getAuthors = async () => {
-    loading.value = true
-    return await axios
-        .get('/authors')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            authors.value = response.data
-        })
-}
-
-const deleteAuthor = async id => {
-    loading.value = true
-    return await axios
-        .delete(`/authors/${id}`)
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(() => {
-            loading.value = false
-            const idIndex = authors.value.findIndex(el => {
-                return el.id === id
-            })
-            authors.value.splice(idIndex, 1)
-
-            toast.add({
-                severity: 'success',
-                summary: 'Author deleted successfully!',
-                life: 3000,
-            })
-        })
 }
 
 onMounted(() => {

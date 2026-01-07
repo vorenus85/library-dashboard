@@ -65,9 +65,11 @@ import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { reactive } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
+import { useAuthor } from '@/composables/useAuthor'
+
+const { initialValues } = useAuthor()
 const { toAuthorList } = useRedirects()
 const toast = useToast()
 const resolver = ({ values }) => {
@@ -82,11 +84,6 @@ const resolver = ({ values }) => {
         errors,
     }
 }
-
-const initialValues = reactive({
-    name: '',
-    description: '',
-})
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

@@ -67,15 +67,14 @@ import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { useRoute } from 'vue-router'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
+import { useAuthor } from '@/composables/useAuthor'
 
+const { formKey, authorId, initialValues, getAuthor } = useAuthor()
 const { toAuthorList } = useRedirects()
 const toast = useToast()
-const route = useRoute()
-const formKey = ref(0)
 
 const resolver = ({ values }) => {
     const errors = {}
@@ -90,13 +89,7 @@ const resolver = ({ values }) => {
     }
 }
 
-const initialValues = reactive({
-    name: '',
-    description: '',
-})
-
 const onFormSubmit = async ({ valid, values }) => {
-    const authorId = route.params.authorId
     if (valid) {
         try {
             await axios.put(`/authors/${authorId}`, values)
@@ -115,20 +108,6 @@ const onFormSubmit = async ({ valid, values }) => {
             })
         }
     }
-}
-
-const getAuthor = async () => {
-    const authorId = route.params.authorId
-    return await axios
-        .get(`/authors/${authorId}`)
-        .then(response => {
-            initialValues.name = response.data.name
-            initialValues.description = response.data.description
-            formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
-        })
-        .catch(e => {
-            console.log(e)
-        })
 }
 
 onMounted(() => {

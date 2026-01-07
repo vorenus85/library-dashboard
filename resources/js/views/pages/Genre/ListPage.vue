@@ -78,12 +78,12 @@ import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from
 import { useToast } from 'primevue/usetoast'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects.js'
+import { useGenre } from '@/composables/useGenre'
 const { toCreateGenre } = useRedirects()
 
 const filters = ref()
 const toast = useToast()
-const genres = ref([])
-const loading = ref(false)
+const { loading, genres, getGenres } = useGenre()
 
 const initFilters = () => {
     filters.value = {
@@ -103,20 +103,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const getGenres = async () => {
-    loading.value = true
-    return await axios
-        .get('/genres')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            genres.value = response.data
-        })
 }
 
 const deleteGenre = async id => {

@@ -38,6 +38,7 @@ export function useGenre() {
                 console.error(error)
             })
             .then(response => {
+                console.log(response.data)
                 genres.value = response.data
             })
             .finally(() => {

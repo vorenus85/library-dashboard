@@ -18,7 +18,7 @@ class GenreController extends Controller
             return response()->json($genre);
         }
 
-        $genre = Genre::select('id', 'name', 'description')->orderBy('name', 'asc')->get();
+        $genre = Genre::select('id', 'name', 'description')->withCount('books')->orderBy('name', 'asc')->get();
 
         return response()->json($genre);
 

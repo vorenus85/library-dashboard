@@ -41,7 +41,7 @@
                 <Column sortable field="name" header="Name" style="width: 25%">
                     <template #body="slotProps"> <Chip :label="slotProps.data?.name" /></template
                 ></Column>
-                <Column field="books_count" header="Book No." style="width: 5%"></Column>
+                <Column field="books_count" header="Books" style="width: 5%"></Column>
                 <Column field="description" header="Description" style="width: 25%"></Column>
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">

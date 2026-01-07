@@ -75,15 +75,14 @@ import { onMounted, ref } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
-import { useToast } from 'primevue/usetoast'
+
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects.js'
+import { useGenre } from '@/composables/useGenre'
 const { toCreateGenre } = useRedirects()
 
 const filters = ref()
-const toast = useToast()
-const genres = ref([])
-const loading = ref(false)
+const { loading, genres, getGenres, deleteGenre } = useGenre()
 
 const initFilters = () => {
     filters.value = {
@@ -103,42 +102,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const getGenres = async () => {
-    loading.value = true
-    return await axios
-        .get('/genres')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            genres.value = response.data
-        })
-}
-
-const deleteGenre = async id => {
-    loading.value = true
-    return await axios
-        .delete(`/genres/${id}`)
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(() => {
-            loading.value = false
-            const idIndex = genres.value.findIndex(el => {
-                return el.id === id
-            })
-            genres.value.splice(idIndex, 1)
-            toast.add({
-                severity: 'success',
-                summary: 'Genre deleted successfully!',
-                life: 3000,
-            })
-        })
 }
 
 onMounted(() => {

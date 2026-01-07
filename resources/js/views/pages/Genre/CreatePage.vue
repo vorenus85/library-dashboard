@@ -8,7 +8,7 @@
         <div class="card">
             <Form
                 v-slot="$form"
-                :initialValues
+                :initialValues="genreInitialValues"
                 :resolver
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
@@ -54,11 +54,12 @@ import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { useToast } from 'primevue/usetoast'
-import { reactive } from 'vue'
 import { useRedirects } from '@/composables/useRedirects'
+import { useGenre } from '@/composables/useGenre'
 
-const { toGenreList } = useRedirects()
 const toast = useToast()
+const { toGenreList } = useRedirects()
+const { genreInitialValues } = useGenre()
 
 const resolver = ({ values }) => {
     const errors = {}
@@ -72,11 +73,6 @@ const resolver = ({ values }) => {
         errors,
     }
 }
-
-const initialValues = reactive({
-    name: '',
-    description: '',
-})
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

@@ -9,7 +9,7 @@
             <Form
                 :key="formKey"
                 v-slot="$form"
-                :initialValues
+                :initialValues="genreInitialValues"
                 :resolver
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
@@ -55,15 +55,14 @@ import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRedirects } from '@/composables/useRedirects'
+import { useGenre } from '@/composables/useGenre'
 
 const { toGenreList } = useRedirects()
+const { genreInitialValues, formKey, genreId, getGenre } = useGenre()
 const toast = useToast()
-const formKey = ref(0)
-const route = useRoute()
 
 const resolver = ({ values }) => {
     const errors = {}
@@ -78,14 +77,7 @@ const resolver = ({ values }) => {
     }
 }
 
-const initialValues = reactive({
-    name: '',
-    description: '',
-})
-
 const onFormSubmit = async ({ valid, values }) => {
-    const genreId = route.params.genreId
-
     if (valid) {
         try {
             await axios.put(`/genres/${genreId}`, values)
@@ -103,21 +95,6 @@ const onFormSubmit = async ({ valid, values }) => {
             })
         }
     }
-}
-
-const getGenre = async () => {
-    const genreId = route.params.genreId
-
-    return await axios
-        .get(`/genres/${genreId}`)
-        .then(response => {
-            initialValues.name = response.data.name
-            initialValues.description = response.data.description
-            formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
-        })
-        .catch(e => {
-            console.error(e)
-        })
 }
 
 onMounted(() => {

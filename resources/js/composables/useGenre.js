@@ -1,3 +1,4 @@
+import { useToast } from 'primevue/usetoast'
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -7,6 +8,7 @@ export function useGenre() {
     const genres = ref([])
     const genreId = route.params.genreId
     const formKey = ref(0)
+    const toast = useToast()
 
     const genreInitialValues = reactive({
         name: '',
@@ -44,10 +46,33 @@ export function useGenre() {
             })
     }
 
+    const deleteGenre = async id => {
+        loading.value = true
+        return await axios
+            .delete(`/genres/${id}`)
+            .catch(error => {
+                loading.value = false
+                console.error(error)
+            })
+            .then(() => {
+                loading.value = false
+                const idIndex = genres.value.findIndex(el => {
+                    return el.id === id
+                })
+                genres.value.splice(idIndex, 1)
+                toast.add({
+                    severity: 'success',
+                    summary: 'Genre deleted successfully!',
+                    life: 3000,
+                })
+            })
+    }
+
     return {
         genreInitialValues,
         getGenres,
         getGenre,
+        deleteGenre,
         genres,
         loading,
         genreId,

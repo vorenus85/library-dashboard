@@ -33,6 +33,21 @@ export function useGenre() {
             })
     }
 
+    const getGenresWithDescription = async () => {
+        loading.value = true
+        return await axios
+            .get('/genres')
+            .catch(error => {
+                console.error(error)
+            })
+            .then(response => {
+                genres.value = response.data
+            })
+            .finally(() => {
+                loading.value = false
+            })
+    }
+
     const getGenre = async () => {
         return await axios
             .get(`/genres/${genreId}`)
@@ -71,6 +86,7 @@ export function useGenre() {
     return {
         genreInitialValues,
         getGenres,
+        getGenresWithDescription,
         getGenre,
         deleteGenre,
         genres,

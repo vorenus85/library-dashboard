@@ -10,11 +10,18 @@ class GenreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->boolean('minimal')){
+            $genre = Genre::select('id', 'name')->orderBy('name', 'asc')->get();
+
+            return response()->json($genre);
+        }
+
         $genre = Genre::select('id', 'name', 'description')->orderBy('name', 'asc')->get();
 
         return response()->json($genre);
+
     }
 
     /**

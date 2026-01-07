@@ -15,25 +15,22 @@ export function useGenre() {
         description: '',
     })
 
-    const getGenres = async () => {
+    const getGenresMinimal = async () => {
         loading.value = true
         return await axios
-            .get('/genres')
+            .get('/genres/?minimal=1')
             .catch(error => {
                 console.error(error)
             })
             .then(response => {
-                const data = response.data.map(el => {
-                    return { id: el.id, name: el.name }
-                })
-                genres.value = data
+                genres.value = response.data
             })
             .finally(() => {
                 loading.value = false
             })
     }
 
-    const getGenresWithDescription = async () => {
+    const getGenres = async () => {
         loading.value = true
         return await axios
             .get('/genres')
@@ -86,7 +83,7 @@ export function useGenre() {
     return {
         genreInitialValues,
         getGenres,
-        getGenresWithDescription,
+        getGenresMinimal,
         getGenre,
         deleteGenre,
         genres,

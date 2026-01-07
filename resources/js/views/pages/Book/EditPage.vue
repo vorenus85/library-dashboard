@@ -2,7 +2,7 @@
     <AppLayout>
         <PageTitle title="Edit book">
             <template v-slot:actions>
-                <Button icon="pi pi-angle-left" label="Back to list" primary @click="backToList" />
+                <Button icon="pi pi-angle-left" label="Back to list" primary @click="toBookList" />
             </template>
         </PageTitle>
         <div class="card" v-if="formKey">
@@ -199,10 +199,12 @@ import {
 } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import { useRedirects } from '@/composables/useRedirects'
 
+const { toBookList } = useRedirects()
 const formKey = ref(0)
 const route = useRoute()
 const toast = useToast()
@@ -213,7 +215,6 @@ const genres = ref([])
 const loading = ref(false)
 const bookId = ref(0)
 const initialValues = reactive({})
-const router = useRouter()
 const isUploading = ref(false)
 const uploadProgress = ref(0)
 const uploadedImage = ref(null)
@@ -245,10 +246,6 @@ const getAuthors = async () => {
         })
 }
 
-const backToList = () => {
-    router.push({ name: 'books' })
-}
-
 const onFormSubmit = async ({ valid, values }) => {
     values.author = selectedAuthor.value
     values.image = uploadedImage.value
@@ -273,7 +270,7 @@ const onFormSubmit = async ({ valid, values }) => {
                 })
 
                 setTimeout(() => {
-                    router.push({ name: 'books' })
+                    toBookList()
                 }, 300)
             })
     }

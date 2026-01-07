@@ -8,7 +8,7 @@
         <div class="card">
             <Form
                 v-slot="$form"
-                :initialValues="genreInitialValues"
+                :initialValues
                 :resolver
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
@@ -59,7 +59,7 @@ import { useGenre } from '@/composables/useGenre'
 
 const toast = useToast()
 const { toGenreList } = useRedirects()
-const { genreInitialValues } = useGenre()
+const { initialValues } = useGenre()
 
 const resolver = ({ values }) => {
     const errors = {}

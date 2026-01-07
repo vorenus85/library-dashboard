@@ -178,13 +178,16 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
+import { useGenre } from '@/composables/useGenre'
+import { useAuthor } from '@/composables/useAuthor'
+
+const { genres, getGenresMinimal } = useGenre()
+const { authors, getAuthorsMinimal } = useAuthor()
+
 const { toBookList } = useRedirects()
 const toast = useToast()
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
-const authors = ref([])
-const genres = ref([])
-const loading = ref(false)
 const isUploading = ref(false)
 const uploadProgress = ref(0)
 const uploadedImage = ref(null)
@@ -200,34 +203,6 @@ const resolver = ({ values }) => {
         values, // (Optional) Used to pass current form values to submit event.
         errors,
     }
-}
-
-const getAuthors = async () => {
-    loading.value = true
-    return await axios
-        .get('/authors/?minimal=1')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            authors.value = response.data
-        })
-}
-
-const getGenres = async () => {
-    loading.value = true
-    return await axios
-        .get('/genres/?minimal=1')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            genres.value = response.data
-        })
 }
 
 const initialValues = reactive({
@@ -299,7 +274,7 @@ const onImageUpload = async event => {
 }
 
 onMounted(() => {
-    getAuthors()
-    getGenres()
+    getAuthorsMinimal()
+    getGenresMinimal()
 })
 </script>

@@ -1,82 +1,83 @@
-import { useToast } from 'primevue/usetoast'
 import { reactive, ref } from 'vue'
+import { useToast } from 'primevue'
 import { useRoute } from 'vue-router'
 
-export function useGenre() {
-    const route = useRoute()
+export function useAuthor() {
     const loading = ref(false)
-    const genres = ref([])
-    const genreId = route.params.genreId
-    const formKey = ref(0)
+    const authors = ref([])
     const toast = useToast()
+    const formKey = ref(0)
+    const route = useRoute()
+    const authorId = route.params.authorId
 
     const initialValues = reactive({
         name: '',
         description: '',
     })
 
-    const getGenresMinimal = async () => {
+    const getAuthorsMinimal = async () => {
         loading.value = true
         return await axios
-            .get('/genres/?minimal=1')
+            .get('/authors/?minimal=1')
             .catch(error => {
                 console.error(error)
             })
             .then(response => {
-                genres.value = response.data
+                authors.value = response.data
             })
             .finally(() => {
                 loading.value = false
             })
     }
 
-    const getGenres = async () => {
+    const getAuthors = async () => {
         loading.value = true
         return await axios
-            .get('/genres')
+            .get('/authors')
             .catch(error => {
                 console.error(error)
             })
             .then(response => {
-                genres.value = response.data
+                authors.value = response.data
             })
             .finally(() => {
                 loading.value = false
             })
     }
 
-    const getGenre = async () => {
+    const getAuthor = async () => {
         loading.value = true
         return await axios
-            .get(`/genres/${genreId}`)
+            .get(`/authors/${authorId}`)
             .then(response => {
                 initialValues.name = response.data.name
                 initialValues.description = response.data.description
                 formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
             })
             .catch(e => {
-                console.error(e)
+                console.log(e)
             })
             .finally(() => {
                 loading.value = false
             })
     }
 
-    const deleteGenre = async id => {
+    const deleteAuthor = async id => {
         loading.value = true
         return await axios
-            .delete(`/genres/${id}`)
+            .delete(`/authors/${id}`)
             .catch(error => {
                 console.error(error)
             })
             .then(() => {
-                const idIndex = genres.value.findIndex(el => {
+                const idIndex = authors.value.findIndex(el => {
                     return el.id === id
                 })
-                genres.value.splice(idIndex, 1)
+                authors.value.splice(idIndex, 1)
+
                 toast.add({
                     severity: 'success',
-                    summary: 'Genre deleted successfully!',
+                    summary: 'Author deleted successfully!',
                     life: 3000,
                 })
             })
@@ -86,14 +87,14 @@ export function useGenre() {
     }
 
     return {
-        initialValues,
-        getGenres,
-        getGenresMinimal,
-        getGenre,
-        deleteGenre,
-        genres,
+        deleteAuthor,
+        getAuthors,
+        getAuthorsMinimal,
         loading,
-        genreId,
+        authors,
+        initialValues,
         formKey,
+        authorId,
+        getAuthor,
     }
 }

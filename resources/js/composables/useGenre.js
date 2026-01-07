@@ -21,7 +21,10 @@ export function useGenre() {
                 console.error(error)
             })
             .then(response => {
-                genres.value = response.data
+                const data = response.data.map(el => {
+                    return { id: el.id, name: el.name }
+                })
+                genres.value = data
             })
             .finally(() => {
                 loading.value = false

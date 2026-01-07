@@ -11,8 +11,18 @@ export function useRedirects() {
         router.push({ name: 'books' })
     }
 
+    const toAuthorList = () => {
+        router.push({ name: 'authors' })
+    }
+
+    const toCreateAuthor = () => {
+        router.push({ name: 'authors.create' })
+    }
+
     return {
         toCreateBook,
         toBookList,
+        toAuthorList,
+        toCreateAuthor,
     }
 }

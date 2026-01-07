@@ -10,6 +10,6 @@
 </template>
 
 <script setup>
-import AppTopBar from './AppTopBar.vue'
-import AppSideBar from './AppSideBar.vue'
+import AppTopBar from '@/layout/AppTopBar.vue'
+import AppSideBar from '@/layout/AppSideBar.vue'
 </script>

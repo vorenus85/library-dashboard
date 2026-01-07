@@ -2,7 +2,7 @@
     <AppLayout>
         <PageTitle title="Add new book">
             <template v-slot:actions>
-                <Button icon="pi pi-angle-left" label="Back to list" primary @click="backToList" />
+                <Button icon="pi pi-angle-left" label="Back to list" primary @click="toBookList" />
             </template>
         </PageTitle>
         <div class="card">
@@ -175,16 +175,16 @@ import {
 } from 'primevue'
 import PageTitle from '../../../components/PageTitle.vue'
 import AppLayout from '../../../layout/AppLayout.vue'
-import { useRouter } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import { useRedirects } from '@/composables/useRedirects.js'
+const { toBookList } = useRedirects()
 const toast = useToast()
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
 const authors = ref([])
 const genres = ref([])
 const loading = ref(false)
-const router = useRouter()
 const isUploading = ref(false)
 const uploadProgress = ref(0)
 const uploadedImage = ref(null)
@@ -238,10 +238,6 @@ const initialValues = reactive({
     description: '',
 })
 
-const backToList = () => {
-    router.push({ name: 'books' })
-}
-
 const onFormSubmit = async ({ valid, values }) => {
     values.image = uploadedImage.value
     values.genres = values.genres.map(e => {
@@ -259,7 +255,7 @@ const onFormSubmit = async ({ valid, values }) => {
             })
 
             setTimeout(() => {
-                router.push({ name: 'books' })
+                toBookList()
             }, 300)
         } catch (error) {
             console.log(error)

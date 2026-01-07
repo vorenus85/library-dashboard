@@ -20,7 +20,7 @@
     </header>
 </template>
 <script setup>
-import UiIcon from '../components/UiIcon.vue'
+import UiIcon from '@/components/UiIcon.vue'
 
 const toggleSiderbar = () => {
     alert('Todo toggle sidebar logic')

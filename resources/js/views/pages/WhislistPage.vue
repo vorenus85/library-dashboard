@@ -5,6 +5,6 @@
     </AppLayout>
 </template>
 <script setup>
-import PageTitle from '../../components/PageTitle.vue'
-import AppLayout from '../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 </script>

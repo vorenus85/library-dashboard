@@ -72,18 +72,19 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
+import { useRedirects } from '@/composables/useRedirects'
 
+const { toCreateAuthor } = useRedirects()
 const filters = ref()
 const toast = useToast()
 const authors = ref([])
 const loading = ref(false)
-const router = useRouter()
 
 const initFilters = () => {
     filters.value = {
@@ -103,10 +104,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const toCreateAuthor = () => {
-    router.push({ name: 'authors.create' })
 }
 
 const getAuthors = async () => {

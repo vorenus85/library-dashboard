@@ -6,7 +6,7 @@
                     icon="pi pi-angle-left"
                     label="Back to list"
                     primary
-                    @click="backToAuthorsList"
+                    @click="toAuthorList"
                 />
             </template>
         </PageTitle>
@@ -63,15 +63,13 @@
 <script setup>
 import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
-import { useRouter } from 'vue-router'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { reactive } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import { useRedirects } from '@/composables/useRedirects.js'
+const { toAuthorList } = useRedirects()
 const toast = useToast()
-
-const router = useRouter()
-
 const resolver = ({ values }) => {
     const errors = {}
 
@@ -83,10 +81,6 @@ const resolver = ({ values }) => {
         values, // (Optional) Used to pass current form values to submit event.
         errors,
     }
-}
-
-const backToAuthorsList = () => {
-    router.push({ name: 'authors' })
 }
 
 const initialValues = reactive({
@@ -106,7 +100,7 @@ const onFormSubmit = async ({ valid, values }) => {
             })
 
             setTimeout(() => {
-                router.push({ name: 'authors' })
+                toAuthorList()
             }, 300)
         } catch (error) {
             console.log(error)

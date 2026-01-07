@@ -66,7 +66,7 @@ class GenreController extends Controller
     public function update(Request $request, Genre $genre)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:authors,name,' . $genre->id,
+            'name' => 'required|max:255|unique:genres,name,' . $genre->id,
             'description' => 'nullable|string|max:500',
         ]);
 

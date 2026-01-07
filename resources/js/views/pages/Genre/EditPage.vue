@@ -2,12 +2,7 @@
     <AppLayout>
         <PageTitle title="Edit genre">
             <template v-slot:actions>
-                <Button
-                    icon="pi pi-angle-left"
-                    label="Back to list"
-                    primary
-                    @click="backToGenreList"
-                />
+                <Button icon="pi pi-angle-left" label="Back to list" primary @click="toGenreList" />
             </template>
         </PageTitle>
         <div class="card" v-if="formKey">
@@ -58,14 +53,15 @@
 <script setup>
 import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
-import { useRoute, useRouter } from 'vue-router'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
+import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import { onMounted, reactive, ref } from 'vue'
+import { useRedirects } from '@/composables/useRedirects'
 
+const { toGenreList } = useRedirects()
 const toast = useToast()
-const router = useRouter()
 const formKey = ref(0)
 const route = useRoute()
 
@@ -77,13 +73,9 @@ const resolver = ({ values }) => {
     }
 
     return {
-        values, // (Optional) Used to pass current form values to submit event.
+        values,
         errors,
     }
-}
-
-const backToGenreList = () => {
-    router.push({ name: 'genres' })
 }
 
 const initialValues = reactive({

@@ -2,7 +2,7 @@
     <AppLayout>
         <PageTitle title="Genres">
             <template v-slot:actions>
-                <Button icon="pi pi-plus" label="New" primary @click="toNewGenre" />
+                <Button icon="pi pi-plus" label="New" primary @click="toCreateGenre" />
             </template>
         </PageTitle>
         <div class="card pages-list-genres shadow list-page">
@@ -72,18 +72,18 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
-import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
+import { useRedirects } from '@/composables/useRedirects.js'
+const { toCreateGenre } = useRedirects()
 
 const filters = ref()
 const toast = useToast()
 const genres = ref([])
 const loading = ref(false)
-const router = useRouter()
 
 const initFilters = () => {
     filters.value = {
@@ -103,10 +103,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const toNewGenre = () => {
-    router.push({ name: 'genres.create' })
 }
 
 const getGenres = async () => {

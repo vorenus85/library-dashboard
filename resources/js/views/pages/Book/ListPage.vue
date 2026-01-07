@@ -140,15 +140,15 @@ import {
     ToggleSwitch,
     useToast,
 } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
-import { useRouter } from 'vue-router'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
+import { useRedirects } from '@/composables/useRedirects'
 
 const toast = useToast()
 const filters = ref()
-const router = useRouter()
+const { toCreateBook } = useRedirects()
 const books = ref([])
 const loading = ref(false)
 
@@ -174,10 +174,6 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
-}
-
-const toCreateBook = () => {
-    router.push({ name: 'books.create' })
 }
 
 const toggleRead = async id => {

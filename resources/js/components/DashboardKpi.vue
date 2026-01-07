@@ -26,7 +26,7 @@
 </template>
 <script setup>
 import { Tag } from 'primevue'
-import UiIcon from './UiIcon.vue'
+import UiIcon from '@/components/UiIcon.vue'
 defineProps({
     title: {
         type: String,

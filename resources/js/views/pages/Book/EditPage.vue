@@ -235,7 +235,7 @@ const resolver = ({ values }) => {
 const getAuthors = async () => {
     loading.value = true
     return await axios
-        .get('/authors-simple')
+        .get('/authors/?minimal=1')
         .catch(error => {
             loading.value = false
             console.error(error)

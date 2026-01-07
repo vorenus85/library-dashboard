@@ -12,7 +12,6 @@ Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
 
 // todo route group
 Route::get('/authors', [AuthorController::class, 'index']);
-Route::get('/authors-simple', [AuthorController::class, 'getAuthorsForDropdown']);
 Route::post('/authors', [AuthorController::class, 'store']);
 Route::get('/authors/{author}', [AuthorController::class, 'show']);
 Route::put('/authors/{author}', [AuthorController::class, 'update']);

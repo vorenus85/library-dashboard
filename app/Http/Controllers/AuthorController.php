@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -11,18 +10,18 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->boolean('minimal')){
+            $authors = Author::select('id', 'name')->orderBy('name', 'asc')->get();
+
+            return response()->json($authors)->setStatusCode(200);
+        }
+
         $authors = Author::select('id', 'name', 'description')->withCount(['books'])->orderBy('name', 'asc')->get();
 
         return response()->json($authors)->setStatusCode(200);
-    }
 
-    public function getAuthorsForDropdown()
-    {
-        $authors = Author::select('id', 'name')->orderBy('name', 'asc')->get();
-
-        return response()->json($authors)->setStatusCode(200);
     }
 
     /**

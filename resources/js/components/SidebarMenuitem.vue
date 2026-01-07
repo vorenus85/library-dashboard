@@ -7,7 +7,7 @@
     </li>
 </template>
 <script setup>
-import UiIcon from './UiIcon.vue'
+import UiIcon from '@/components/UiIcon.vue'
 
 defineProps({
     icon: { type: String, required: true },

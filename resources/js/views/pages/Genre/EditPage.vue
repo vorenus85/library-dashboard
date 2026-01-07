@@ -53,8 +53,8 @@
 <script setup>
 import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import { onMounted, reactive, ref } from 'vue'

@@ -8,7 +8,7 @@
     </div>
 </template>
 <script setup>
-import SidebarMenuitem from '../components/SidebarMenuitem.vue'
+import SidebarMenuitem from '@/components/SidebarMenuitem.vue'
 
 const menus = [
     {

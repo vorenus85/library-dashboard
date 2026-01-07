@@ -29,8 +29,8 @@
 import AppLayout from '@/layout/AppLayout.vue'
 
 import { ref, onMounted } from 'vue'
-import PageTitle from '../../components/PageTitle.vue'
-import DashboardKpi from '../../components/DashboardKpi.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import DashboardKpi from '@/components/DashboardKpi.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

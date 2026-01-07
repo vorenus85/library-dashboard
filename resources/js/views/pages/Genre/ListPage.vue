@@ -72,8 +72,8 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
 import { useToast } from 'primevue/usetoast'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'

@@ -197,8 +197,8 @@ import {
     Textarea,
     ToggleSwitch,
 } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { useRoute } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
@@ -317,17 +317,14 @@ const onClear = () => {
 const getGenres = async () => {
     loading.value = true
     return await axios
-        .get('/genres')
+        .get('/genres/?minimal=1')
         .catch(error => {
             loading.value = false
             console.error(error)
         })
         .then(response => {
             loading.value = false
-            const data = response.data.map(el => {
-                return { id: el.id, name: el.name }
-            })
-            genres.value = data
+            genres.value = response.data
         })
 }
 

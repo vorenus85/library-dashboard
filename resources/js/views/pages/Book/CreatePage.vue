@@ -173,8 +173,8 @@ import {
     Textarea,
     ToggleSwitch,
 } from 'primevue'
-import PageTitle from '../../../components/PageTitle.vue'
-import AppLayout from '../../../layout/AppLayout.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
@@ -219,17 +219,14 @@ const getAuthors = async () => {
 const getGenres = async () => {
     loading.value = true
     return await axios
-        .get('/genres')
+        .get('/genres/?minimal=1')
         .catch(error => {
             loading.value = false
             console.error(error)
         })
         .then(response => {
             loading.value = false
-            const data = response.data.map(el => {
-                return { id: el.id, name: el.name }
-            })
-            genres.value = data
+            genres.value = response.data
         })
 }
 
@@ -243,7 +240,7 @@ const onFormSubmit = async ({ valid, values }) => {
     values.genres = values.genres.map(e => {
         return e.id
     })
-    console.log(values)
+
     if (valid) {
         try {
             await axios.post('/books', values)

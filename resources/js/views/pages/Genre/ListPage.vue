@@ -82,7 +82,7 @@ import { useGenre } from '@/composables/useGenre'
 const { toCreateGenre } = useRedirects()
 
 const filters = ref()
-const { loading, genres, getGenresWithDescription, deleteGenre } = useGenre()
+const { loading, genres, getGenres, deleteGenre } = useGenre()
 
 const initFilters = () => {
     filters.value = {
@@ -105,6 +105,6 @@ const clearFilter = () => {
 }
 
 onMounted(() => {
-    getGenresWithDescription()
+    getGenres()
 })
 </script>

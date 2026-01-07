@@ -203,6 +203,11 @@ import { useRoute } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects'
+import { useGenre } from '@/composables/useGenre'
+import { useAuthor } from '@/composables/useAuthor'
+
+const { genres, getGenresMinimal } = useGenre()
+const { authors, getAuthorsMinimal } = useAuthor()
 
 const { toBookList } = useRedirects()
 const formKey = ref(0)
@@ -210,9 +215,6 @@ const route = useRoute()
 const toast = useToast()
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
-const authors = ref([])
-const genres = ref([])
-const loading = ref(false)
 const bookId = ref(0)
 const initialValues = reactive({})
 const isUploading = ref(false)
@@ -230,20 +232,6 @@ const resolver = ({ values }) => {
         values, // (Optional) Used to pass current form values to submit event.
         errors,
     }
-}
-
-const getAuthors = async () => {
-    loading.value = true
-    return await axios
-        .get('/authors/?minimal=1')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            authors.value = response.data
-        })
 }
 
 const onFormSubmit = async ({ valid, values }) => {
@@ -278,7 +266,6 @@ const onFormSubmit = async ({ valid, values }) => {
 
 const getBook = async () => {
     bookId.value = route.params.bookId
-
     return await axios
         .get(`/books/${bookId.value}`)
         .then(response => {
@@ -288,6 +275,7 @@ const getBook = async () => {
             selectedGenres.value = response.data.genres.map(e => {
                 return { id: e.id, name: e.name }
             })
+            initialValues.author = selectedAuthor.value
             initialValues.genres = selectedGenres.value
             initialValues.description = response.data.description
             initialValues.publised_year = response.data.publised_year
@@ -312,20 +300,6 @@ const onRemove = () => {
 const onClear = () => {
     isUploading.value = false
     uploadProgress.value = 0
-}
-
-const getGenres = async () => {
-    loading.value = true
-    return await axios
-        .get('/genres/?minimal=1')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            genres.value = response.data
-        })
 }
 
 const onImageUpload = async event => {
@@ -364,8 +338,8 @@ const deleteImage = async () => {
 }
 
 onMounted(() => {
-    getAuthors()
     getBook()
-    getGenres()
+    getAuthorsMinimal()
+    getGenresMinimal()
 })
 </script>

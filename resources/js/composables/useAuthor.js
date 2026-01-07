@@ -15,6 +15,21 @@ export function useAuthor() {
         description: '',
     })
 
+    const getAuthorsMinimal = async () => {
+        loading.value = true
+        return await axios
+            .get('/authors/?minimal=1')
+            .catch(error => {
+                console.error(error)
+            })
+            .then(response => {
+                authors.value = response.data
+            })
+            .finally(() => {
+                loading.value = false
+            })
+    }
+
     const getAuthors = async () => {
         loading.value = true
         return await axios
@@ -74,6 +89,7 @@ export function useAuthor() {
     return {
         deleteAuthor,
         getAuthors,
+        getAuthorsMinimal,
         loading,
         authors,
         initialValues,

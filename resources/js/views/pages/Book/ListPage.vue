@@ -44,26 +44,19 @@
                     </div>
                 </template>
                 <template #empty> No results found. </template>
-                <Column sortable field="[title, image]" header="Title" style="width: 25%">
+                <Column sortable field="title" header="Title" style="width: 25%">
                     <template #body="slotProps">
                         <div class="flex gap-5 items-center">
-                            <template v-if="slotProps.data?.image">
-                                <Image
-                                    :src="`/storage/uploads/${slotProps.data?.image}`"
-                                    :alt="`${slotProps.data?.title}`"
-                                    preview
-                                    width="45"
-                                />
-                            </template>
-                            <template v-else>
-                                <Image
-                                    src="/no-image.jpg"
-                                    :alt="`${slotProps.data?.title}`"
-                                    preview
-                                    width="45"
-                                />
-                            </template>
-
+                            <Image
+                                :src="
+                                    slotProps.data?.image
+                                        ? `/storage/uploads/${slotProps.data.image}`
+                                        : '/no-image.jpg'
+                                "
+                                :alt="slotProps.data?.title"
+                                preview
+                                width="45"
+                            />
                             <Chip :label="slotProps.data?.title" />
                         </div>
                     </template>

@@ -170,28 +170,32 @@ const clearFilter = () => {
 }
 
 const toggleRead = async id => {
-    return await axios
-        .patch(`/books/${id}/toggle-read`)
-        .catch(e => {
-            console.log(e)
-        })
-        .then(response => {
-            // console.log(response)
-        })
+    try {
+        await axios.patch(`/books/${id}/toggle-read`)
+
+        books.value = books.value.map(book =>
+            book.id === id ? { ...book, is_read: !book.is_read } : book
+        )
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 const toggleWishlist = async id => {
-    return await axios
-        .patch(`/books/${id}/toggle-wishlist`)
-        .catch(e => {
-            console.log(e)
-        })
-        .then(response => {})
+    try {
+        await axios.patch(`/books/${id}/toggle-wishlist`)
+
+        books.value = books.value.map(book =>
+            book.id === id ? { ...book, is_wishlist: !book.is_wishlist } : book
+        )
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-const getBooks = async () => {
+const getBooks = () => {
     loading.value = true
-    return await axios
+    return axios
         .get('/books')
         .catch(error => {
             loading.value = false
@@ -203,10 +207,10 @@ const getBooks = async () => {
         })
 }
 
-const deleteBook = async id => {
+const deleteBook = id => {
     loading.value = true
 
-    return await axios
+    return axios
         .delete(`/books/${id}`)
         .catch(e => {
             loading.value = false

@@ -40,7 +40,7 @@ class BooksExport implements FromCollection, WithHeadings, WithMapping
             $book->pages,
             $book->is_read ? 'Yes' : 'No',
             $book->is_wishlist ? 'Yes' : 'No',
-            $book->author?->name ?? '',
+            $book->author->name ?? '',
         ];
     }
 }

@@ -3,12 +3,7 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <Button
-                    icon="pi pi-file-export"
-                    label="Export"
-                    severity="info"
-                    @click="exportBooks()"
-                />
+                <SplitButton icon="pi pi-export" label="Export" :model="exportTypes" />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -130,6 +125,7 @@ import {
     Image,
     InputIcon,
     InputText,
+    SplitButton,
     ToggleSwitch,
     useToast,
 } from 'primevue'
@@ -138,12 +134,30 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
+import { useBooksExport } from '@/composables/useBooksExport'
 
-const toast = useToast()
-const filters = ref()
+const { exportBooksCsv, exportBooksExcel } = useBooksExport()
 const { toCreateBook } = useRedirects()
+const toast = useToast()
+
+const filters = ref()
 const books = ref([])
 const loading = ref(false)
+
+const exportTypes = [
+    {
+        label: 'Export CSV',
+        command: () => {
+            exportBooksCsv()
+        },
+    },
+    {
+        label: 'Export Excel',
+        command: () => {
+            exportBooksExcel()
+        },
+    },
+]
 
 const initFilters = () => {
     filters.value = {
@@ -230,10 +244,6 @@ const deleteBook = id => {
                 life: 3000,
             })
         })
-}
-
-const exportBooks = () => {
-    alert('Todo export books')
 }
 
 onMounted(() => {

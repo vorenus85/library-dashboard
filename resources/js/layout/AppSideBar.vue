@@ -22,11 +22,6 @@ const menus = [
         title: 'Books',
     },
     {
-        icon: 'bookmark',
-        path: '/wishlist',
-        title: 'Wishlist',
-    },
-    {
         icon: 'user',
         path: '/authors',
         title: 'Authors',

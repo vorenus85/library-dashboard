@@ -1,28 +1,43 @@
 <template>
     <AppLayout>
         <PageTitle title="Dashboard"> </PageTitle>
-        <div class="dashboard grid grid-cols-12 gap-8">
-            <DashboardKpi
-                title="Book no."
-                :kpiValue="bookCount"
-                icon="book"
-                color="blue"
-            ></DashboardKpi>
-            <DashboardKpi
-                title="Is Read no."
-                :kpiValue="countIsRead"
-                :rate="countIsReadRate"
-                icon="book"
-                color="purple"
-            ></DashboardKpi>
-            <DashboardKpi
-                title="Is Wishlist no."
-                :kpiValue="countIsWishList"
-                icon="bookmark"
-                color="orange"
-            ></DashboardKpi>
-            <GenreDistribution></GenreDistribution>
-            <TopAuthors></TopAuthors>
+        <div class="dashboard grid grid-cols-12 gap-5">
+            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+                <DashboardKpi
+                    title="Book no."
+                    :kpiValue="bookCount"
+                    icon="book"
+                    color="blue"
+                ></DashboardKpi>
+            </div>
+            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+                <DashboardKpi
+                    title="Is Read no."
+                    :kpiValue="countIsRead"
+                    :rate="countIsReadRate"
+                    icon="book"
+                    color="purple"
+                ></DashboardKpi>
+            </div>
+            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+                <DashboardKpi
+                    title="Is Wishlist no."
+                    :kpiValue="countIsWishList"
+                    icon="bookmark"
+                    color="orange"
+                ></DashboardKpi>
+            </div>
+
+            <div class="col-span-12 xl:col-span-6">
+                <GenreDistribution></GenreDistribution>
+            </div>
+
+            <div class="col-span-12 xl:col-span-6">
+                <TopAuthors></TopAuthors>
+            </div>
+            <div class="col-span-12">
+                <Wishlist></Wishlist>
+            </div>
         </div>
     </AppLayout>
 </template>
@@ -35,6 +50,7 @@ import PageTitle from '@/components/PageTitle.vue'
 import DashboardKpi from '@/components/DashboardKpi.vue'
 import GenreDistribution from '@/components/GenreDistribution.vue'
 import TopAuthors from '@/components/TopAuthors.vue'
+import Wishlist from '@/components/Wishlist.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

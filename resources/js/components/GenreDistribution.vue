@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-6 card">
+    <div class="card">
         <span class="block text-muted-color font-medium">Genre distribution</span>
         <div class="flex justify-center">
             <Chart

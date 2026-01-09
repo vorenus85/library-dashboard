@@ -1,26 +1,22 @@
 <template>
-    <div class="col-span-12 lg:col-span-6 xl:col-span-4 dashboard-kpi">
-        <div class="card mb-0 shadow">
-            <div class="mb-4">
-                <div class="dashboard-kpi-header flex justify-between mb-4">
-                    <span class="block text-muted-color font-medium">{{ title }}</span>
-                    <template v-if="icon">
-                        <div
-                            :class="`dashboard-kpi-icon flex items-center justify-center bg-${color}-100 dark:bg-${color}-400/10 rounded-border`"
-                        >
-                            <UiIcon :icon="icon" />
-                        </div>
-                    </template>
+    <div class="card mb-0 shadow">
+        <div class="dashboard-kpi-header flex justify-between mb-4">
+            <span class="block text-muted-color font-medium">{{ title }}</span>
+            <template v-if="icon">
+                <div
+                    :class="`dashboard-kpi-icon flex items-center justify-center bg-${color}-100 dark:bg-${color}-400/10 rounded-border`"
+                >
+                    <UiIcon :icon="icon" />
                 </div>
-                <div class="dashboard-kpi-footer flex justify-between">
-                    <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{
-                        kpiValue
-                    }}</span>
-                    <template v-if="rate">
-                        <Tag severity="success">{{ rate }} %</Tag>
-                    </template>
-                </div>
-            </div>
+            </template>
+        </div>
+        <div class="dashboard-kpi-footer flex justify-between">
+            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{
+                kpiValue
+            }}</span>
+            <template v-if="rate">
+                <Tag severity="success">{{ rate }} %</Tag>
+            </template>
         </div>
     </div>
 </template>

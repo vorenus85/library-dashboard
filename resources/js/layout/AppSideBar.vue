@@ -23,8 +23,8 @@ const menus = [
     },
     {
         icon: 'bookmark',
-        path: '/whislist',
-        title: 'Whislist',
+        path: '/wishlist',
+        title: 'Wishlist',
     },
     {
         icon: 'user',

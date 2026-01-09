@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import DashboardPage from '../views/pages/DashboardPage.vue'
-import WhislistPage from '../views/pages/WhislistPage.vue'
+import WishlistPage from '../views/pages/WishlistPage.vue'
 
 import AuthorListPage from '../views/pages/Author/ListPage.vue'
 import AuthorCreatePage from '../views/pages/Author/CreatePage.vue'
@@ -19,7 +19,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', name: 'home', component: DashboardPage },
-        { path: '/whislist', name: 'whislist', component: WhislistPage },
+        { path: '/wishlist', name: 'wishlist', component: WishlistPage },
 
         { path: '/books', name: 'books', component: BookListPage },
         { path: '/books/create', name: 'books.create', component: BookCreatePage },

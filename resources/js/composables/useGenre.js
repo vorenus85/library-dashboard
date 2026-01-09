@@ -50,7 +50,6 @@ export function useGenre() {
         return await axios
             .get(`/genres/${genreId}`)
             .then(response => {
-                console.log(response)
                 initialValues.name = response.data.name
                 initialValues.description = response.data.description
                 formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792

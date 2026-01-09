@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -26,6 +27,11 @@ class DashboardController extends Controller
         $countIsWishList = Book::where('is_wishlist', true)->count();
 
         return response()->json(['countIsWishList' => $countIsWishList]);
+    }
+
+    public function genreDistribution(){
+        $result = Genre::select('id', 'name')->withCount("books")->having('books_count', '>', 0)->orderBy("books_count", "desc")->get();
+        return response()->json(["genreDistribution" => $result], 200);
     }
 
     protected function getBookCount(){

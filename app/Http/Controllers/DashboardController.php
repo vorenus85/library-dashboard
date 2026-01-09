@@ -30,9 +30,9 @@ class DashboardController extends Controller
         return response()->json(['countIsWishList' => $countIsWishList]);
     }
 
-    public function genreDistribution(){
-        $result = Genre::select('id', 'name')->withCount("books")->having('books_count', '>', 0)->orderBy("books_count", "desc")->get();
-        return response()->json(["genreDistribution" => $result], 200);
+    public function topGenres(){
+        $result = Genre::select('id', 'name')->withCount("books")->having('books_count', '>', 5)->orderBy("books_count", "desc")->get();
+        return response()->json(["topGenres" => $result], 200);
     }
 
     public function topAuthors(){

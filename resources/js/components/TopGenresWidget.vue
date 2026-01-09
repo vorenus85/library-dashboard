@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <span class="block text-muted-color font-medium">Genre distribution</span>
+        <span class="block text-muted-color font-medium">Top genres</span>
         <div class="flex justify-center">
             <Chart
                 type="doughnut"
@@ -36,28 +36,28 @@ const chartData = computed(() => ({
     ],
 }))
 
-const getGenreDistributution = async () => {
+const getTopGenres = async () => {
     try {
-        const { data } = await axios.get('/genreDistribution')
-        const genreDistribution = data.genreDistribution
+        const { data } = await axios.get('/topGenres')
+        const topGenres = data.topGenres
 
-        genreLabels.value = genreDistribution.map(e => {
+        genreLabels.value = topGenres.map(e => {
             return e.name
         })
 
-        genreData.value = genreDistribution.map(e => {
+        genreData.value = topGenres.map(e => {
             return e.books_count
         })
 
-        backgroundColors.value = allBackgroundColors.slice(0, genreDistribution.length)
-        hoverBackgroundColors.value = allHoverBackgroundColors.slice(0, genreDistribution.length)
+        backgroundColors.value = allBackgroundColors.slice(0, topGenres.length)
+        hoverBackgroundColors.value = allHoverBackgroundColors.slice(0, topGenres.length)
     } catch (error) {
         console.log(error)
     }
 }
 
 onMounted(() => {
-    getGenreDistributution()
+    getTopGenres()
     chartOptions.value = setDoughnutChartOptions()
 })
 </script>

@@ -3,7 +3,12 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <SplitButton icon="pi pi-export" label="Export" :model="exportTypes" />
+                <Button
+                    icon="pi pi-file-export"
+                    label="Export"
+                    severity="info"
+                    @click="exportBooks()"
+                />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -15,17 +20,18 @@
                 :rowsPerPageOptions="[5, 10, 20, 50]"
                 tableStyle="min-width: 50rem"
                 :loading="loading"
-                :globalFilterFields="['name', 'description', 'author.name']"
+                :globalFilterFields="['title', 'description', 'author.name']"
                 dataKey="id"
             >
                 <template #header>
-                    <div class="flex justify-between">
+                    <div class="flex justify-start gap-5">
                         <Button
                             type="button"
                             icon="pi pi-filter-slash"
                             label="Clear"
                             variant="outlined"
                             @click="clearFilter()"
+                            class="mr-auto"
                         />
                         <IconField>
                             <InputIcon>
@@ -36,6 +42,18 @@
                                 placeholder="Keyword Search"
                             />
                         </IconField>
+                        <Select
+                            filter
+                            :options="genres"
+                            :value="selectedGenre"
+                            optionLabel="name"
+                            placeholder="Select a Genre"
+                            class="w-full md:w-56"
+                            @change="changeGenreFilter"
+                            showClear
+                            :key="genreSelectKey"
+                        >
+                        </Select>
                     </div>
                 </template>
                 <template #empty> No results found. </template>
@@ -125,63 +143,47 @@ import {
     Image,
     InputIcon,
     InputText,
-    SplitButton,
+    Select,
     ToggleSwitch,
     useToast,
 } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
-import { useBooksExport } from '@/composables/useBooksExport'
+import { useGenre } from '@/composables/useGenre'
 
-const { exportBooksCsv, exportBooksExcel } = useBooksExport()
-const { toCreateBook } = useRedirects()
 const toast = useToast()
+const { genres, getGenresMinimal } = useGenre()
+const { toCreateBook } = useRedirects()
 
 const filters = ref()
+const allBooks = ref([])
 const books = ref([])
 const loading = ref(false)
-
-const exportTypes = [
-    {
-        label: 'Export CSV',
-        command: () => {
-            exportBooksCsv()
-        },
-    },
-    {
-        label: 'Export Excel',
-        command: () => {
-            exportBooksExcel()
-        },
-    },
-]
+const selectedGenre = ref(null)
+const genreSelectKey = ref(1)
 
 const initFilters = () => {
     filters.value = {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        name: {
-            operator: FilterOperator.AND,
-            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+        title: {
+            operator: FilterOperator.OR,
+            constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }],
         },
         description: {
-            operator: FilterOperator.AND,
-            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+            operator: FilterOperator.OR,
+            constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }],
         },
         'author.name': {
-            operator: FilterOperator.AND,
-            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+            operator: FilterOperator.OR,
+            constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }],
         },
     }
 }
 
 initFilters()
-
-const clearFilter = () => {
-    initFilters()
-}
 
 const toggleRead = async id => {
     try {
@@ -217,7 +219,8 @@ const getBooks = () => {
         })
         .then(response => {
             loading.value = false
-            books.value = response.data
+            allBooks.value = response.data
+            books.value = response.data // for actual list
         })
 }
 
@@ -246,7 +249,31 @@ const deleteBook = id => {
         })
 }
 
+const clearFilter = () => {
+    initFilters()
+    selectedGenre.value = null
+    genreSelectKey.value++
+}
+
+const exportBooks = () => {
+    alert('Todo export books')
+}
+
+const changeGenreFilter = event => {
+    selectedGenre.value = event.value
+}
+
+watch(selectedGenre, async (newGenre, oldGenre) => {
+    if (!newGenre?.id) {
+        books.value = allBooks.value
+        return
+    }
+
+    books.value = allBooks.value.filter(book => book.genres.some(genre => genre.id === newGenre.id))
+})
+
 onMounted(() => {
     getBooks()
+    getGenresMinimal()
 })
 </script>

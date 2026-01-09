@@ -114,7 +114,6 @@ const getWishlistedBooks = async () => {
         const response = await axios.get('/wishlist')
 
         wishListedBooks.value = response.data
-        console.log(wishListedBooks)
         loading.value = false
     } catch (error) {
         console.log(error)

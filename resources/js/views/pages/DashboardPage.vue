@@ -29,14 +29,14 @@
             </div>
 
             <div class="col-span-12 xl:col-span-6">
-                <GenreDistribution></GenreDistribution>
+                <GenreDistributionWidget></GenreDistributionWidget>
             </div>
 
             <div class="col-span-12 xl:col-span-6">
-                <TopAuthors></TopAuthors>
+                <TopAuthorsWidget></TopAuthorsWidget>
             </div>
             <div class="col-span-12">
-                <Wishlist></Wishlist>
+                <WishlistWidget></WishlistWidget>
             </div>
         </div>
     </AppLayout>
@@ -48,9 +48,9 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { ref, onMounted } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import DashboardKpi from '@/components/DashboardKpi.vue'
-import GenreDistribution from '@/components/GenreDistribution.vue'
-import TopAuthors from '@/components/TopAuthors.vue'
-import Wishlist from '@/components/Wishlist.vue'
+import GenreDistributionWidget from '@/components/GenreDistributionWidget.vue'
+import TopAuthorsWidget from '@/components/TopAuthorsWidget.vue'
+import WishlistWidget from '@/components/WishlistWidget.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

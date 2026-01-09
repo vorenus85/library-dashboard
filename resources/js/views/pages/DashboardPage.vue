@@ -22,6 +22,7 @@
                 color="orange"
             ></DashboardKpi>
             <GenreDistribution></GenreDistribution>
+            <TopAuthors></TopAuthors>
         </div>
     </AppLayout>
 </template>
@@ -33,6 +34,7 @@ import { ref, onMounted } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import DashboardKpi from '@/components/DashboardKpi.vue'
 import GenreDistribution from '@/components/GenreDistribution.vue'
+import TopAuthors from '@/components/TopAuthors.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

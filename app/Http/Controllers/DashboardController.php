@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -32,6 +33,11 @@ class DashboardController extends Controller
     public function genreDistribution(){
         $result = Genre::select('id', 'name')->withCount("books")->having('books_count', '>', 0)->orderBy("books_count", "desc")->get();
         return response()->json(["genreDistribution" => $result], 200);
+    }
+
+    public function topAuthors(){
+        $result = Author::select('id', 'name')->withCount("books")->having('books_count', '>', 1)->orderBy("books_count", "desc")->get();
+        return response()->json(["topAuthors" => $result], 200);
     }
 
     protected function getBookCount(){

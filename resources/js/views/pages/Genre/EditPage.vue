@@ -9,7 +9,7 @@
             <Form
                 :key="formKey"
                 v-slot="$form"
-                :initialValues="genreInitialValues"
+                :initialValues="initialValues"
                 :resolver
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
@@ -61,7 +61,7 @@ import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 
 const { toGenreList } = useRedirects()
-const { genreInitialValues, formKey, genreId, getGenre } = useGenre()
+const { initialValues, formKey, genreId, getGenre } = useGenre()
 const toast = useToast()
 
 const resolver = ({ values }) => {

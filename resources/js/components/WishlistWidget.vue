@@ -5,7 +5,7 @@
             v-model:filters="filters"
             :value="wishListedBooks"
             paginator
-            :rows="10"
+            :rows="5"
             :rowsPerPageOptions="[5, 10, 20, 50]"
             tableStyle="min-width: 50rem"
             :loading="loading"

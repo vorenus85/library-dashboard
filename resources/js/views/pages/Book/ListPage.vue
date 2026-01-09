@@ -3,12 +3,7 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <Button
-                    icon="pi pi-file-export"
-                    label="Export"
-                    severity="info"
-                    @click="exportBooks()"
-                />
+                <SplitButton icon="pi pi-export" label="Export" :model="exportTypes" />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -144,6 +139,7 @@ import {
     InputIcon,
     InputText,
     Select,
+    SplitButton,
     ToggleSwitch,
     useToast,
 } from 'primevue'
@@ -153,7 +149,8 @@ import { onMounted, ref, watch } from 'vue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
-
+import { useBooksExport } from '@/composables/useBooksExport'
+const { exportBooksCsv, exportBooksExcel } = useBooksExport()
 const toast = useToast()
 const { genres, getGenresMinimal } = useGenre()
 const { toCreateBook } = useRedirects()
@@ -164,6 +161,21 @@ const books = ref([])
 const loading = ref(false)
 const selectedGenre = ref(null)
 const genreSelectKey = ref(1)
+
+const exportTypes = [
+    {
+        label: 'Export CSV',
+        command: () => {
+            exportBooksCsv()
+        },
+    },
+    {
+        label: 'Export Excel',
+        command: () => {
+            exportBooksExcel()
+        },
+    },
+]
 
 const initFilters = () => {
     filters.value = {
@@ -253,10 +265,6 @@ const clearFilter = () => {
     initFilters()
     selectedGenre.value = null
     genreSelectKey.value++
-}
-
-const exportBooks = () => {
-    alert('Todo export books')
 }
 
 const changeGenreFilter = event => {

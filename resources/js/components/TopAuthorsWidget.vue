@@ -42,9 +42,6 @@ const getTopAuthors = async () => {
         })
 
         backgroundColors.value = allBackgroundColors.slice(0, topAuthors.length)
-
-        console.log(authorLabels.value)
-        console.log(authorData.value)
     } catch (error) {
         console.log(error)
     }

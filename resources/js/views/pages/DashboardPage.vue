@@ -27,16 +27,15 @@
                     color="orange"
                 ></DashboardKpi>
             </div>
-
-            <div class="col-span-12 xl:col-span-6">
-                <GenreDistributionWidget></GenreDistributionWidget>
-            </div>
-
-            <div class="col-span-12 xl:col-span-6">
-                <TopAuthorsWidget></TopAuthorsWidget>
-            </div>
             <div class="col-span-12">
                 <WishlistWidget></WishlistWidget>
+            </div>
+            <div class="col-span-12 xl:col-span-4">
+                <TopGenresWidget></TopGenresWidget>
+            </div>
+
+            <div class="col-span-12 xl:col-span-8">
+                <TopAuthorsWidget></TopAuthorsWidget>
             </div>
         </div>
     </AppLayout>
@@ -48,7 +47,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { ref, onMounted } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import DashboardKpi from '@/components/DashboardKpi.vue'
-import GenreDistributionWidget from '@/components/GenreDistributionWidget.vue'
+import TopGenresWidget from '@/components/TopGenresWidget.vue'
 import TopAuthorsWidget from '@/components/TopAuthorsWidget.vue'
 import WishlistWidget from '@/components/WishlistWidget.vue'
 

@@ -2,7 +2,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\BookExportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\UploadController;
@@ -27,7 +26,6 @@ Route::delete('/genres/{genre}', [GenreController::class, 'destroy']);
 
 // todo route group
 Route::get('/books', [BookController::class, 'index']);
-Route::get('/books/export', [BookExportController::class, 'export']);
 Route::post('/books', [BookController::class, 'store']);
 Route::get('/books/{book}', [BookController::class, 'show']);
 Route::put('/books/{book}', [BookController::class, 'update']);
@@ -35,9 +33,5 @@ Route::patch('/books/{book}/toggle-read', [BookController::class, 'toggleRead'])
 Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWishlist']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
 
-
-
 Route::post('/upload', [UploadController::class, 'store']);
 Route::delete('/book-image/{book}', [UploadController::class, 'delete']);
-
-

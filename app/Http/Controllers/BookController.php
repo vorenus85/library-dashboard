@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -13,7 +12,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with(['author:id,name'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->orderBy('title', 'asc')->get();
+        $books = Book::with(['author:id,name'])->with(['genres:id'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->orderBy('title', 'asc')->get();
         return response()->json($books, 200);
     }
 
@@ -113,49 +112,6 @@ class BookController extends Controller
         }
     }
 
-    public function export(Request $request){
-        try {
-
-            $books = Book::with('author:id,name')->select('id', 'title', 'description','pages', 'is_read', 'is_wishlist','author_id')->get();
-
-            if($request->boolean('csv')){
-                $filename = 'books.csv';
-
-                // CSV fejlécek
-                $headers = ['ID', 'Title', 'Description', 'Pages', 'Is Read', 'Is Wishlist', 'Author'];
-
-                // CSV tartalom generálása
-                $callback = function () use ($books, $headers) {
-                    $file = fopen('php://output', 'w');
-                    fputcsv($file, $headers);
-
-                    foreach ($books as $book) {
-                        fputcsv($file, [
-                            $book->id,
-                            $book->title,
-                            $book->description,
-                            $book->pages,
-                            $book->is_read ? 'Yes' : 'No',
-                            $book->is_wishlist ? 'Yes' : 'No',
-                            $book->author->name ?? '',
-                        ]);
-                    }
-
-                    fclose($file);
-                };
-
-                return response()->stream($callback, 200, [
-                    "Content-Type" => "text/csv",
-                    "Content-Disposition" => "attachment; filename={$filename}",
-                ]);
-            }
-
-        } catch (\Throwable $th) {
-            // throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during book export' ], 500);
-        }
-    }
-
     /**
      * Update the specified resource in storage.
      */
@@ -209,6 +165,4 @@ class BookController extends Controller
             return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
         }
     }
-
-
 }

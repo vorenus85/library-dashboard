@@ -12,6 +12,7 @@ Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
 Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
 Route::get('/genreDistribution', [DashboardController::class, 'genreDistribution']);
 Route::get('/topAuthors', [DashboardController::class, 'topAuthors']);
+Route::get('/wishlist', [DashboardController::class, 'wishlist']);
 
 // todo route group
 Route::get('/authors', [AuthorController::class, 'index']);
@@ -35,8 +36,6 @@ Route::put('/books/{book}', [BookController::class, 'update']);
 Route::patch('/books/{book}/toggle-read', [BookController::class, 'toggleRead']);
 Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWishlist']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
-
-Route::get('/wishlist', [WishlistController::class, 'index']);
 
 Route::post('/upload', [UploadController::class, 'store']);
 Route::delete('/book-image/{book}', [UploadController::class, 'delete']);

@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-6 card">
+    <div class="card">
         <span class="block text-muted-color font-medium">Top authors</span>
         <Chart type="bar" :data="chartData" :options="chartOptions" />
     </div>

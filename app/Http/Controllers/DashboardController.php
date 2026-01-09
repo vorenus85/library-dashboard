@@ -40,6 +40,11 @@ class DashboardController extends Controller
         return response()->json(["topAuthors" => $result], 200);
     }
 
+    public function wishlist(){
+        $wishlistedBooks = Book::with(['author:id,name'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->where('is_wishlist', true)->orderBy('title', 'asc')->get();
+        return response()->json($wishlistedBooks, 200);
+    }
+
     protected function getBookCount(){
         return Book::count();
     }

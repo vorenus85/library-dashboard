@@ -11,6 +11,7 @@ Route::get('/bookCount', [DashboardController::class, 'bookCount']);
 Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
 Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
 Route::get('/genreDistribution', [DashboardController::class, 'genreDistribution']);
+Route::get('/topAuthors', [DashboardController::class, 'topAuthors']);
 
 // todo route group
 Route::get('/authors', [AuthorController::class, 'index']);

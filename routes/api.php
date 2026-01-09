@@ -6,6 +6,7 @@ use App\Http\Controllers\BookExportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\WishlistController;
 
 Route::get('/bookCount', [DashboardController::class, 'bookCount']);
 Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
@@ -35,7 +36,7 @@ Route::patch('/books/{book}/toggle-read', [BookController::class, 'toggleRead'])
 Route::patch('/books/{book}/toggle-wishlist', [BookController::class, 'toggleWishlist']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
 
-
+Route::get('/wishlist', [WishlistController::class, 'index']);
 
 Route::post('/upload', [UploadController::class, 'store']);
 Route::delete('/book-image/{book}', [UploadController::class, 'delete']);

@@ -124,8 +124,6 @@ const getGenreDistributution = async () => {
             paletteColors,
             genreDistribution.length
         ).hoverBackgroundColors
-
-        console.log(genreData.value)
     } catch (error) {
         console.log(error)
     }

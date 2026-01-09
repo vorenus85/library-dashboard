@@ -3,7 +3,12 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <SplitButton icon="pi pi-export" label="Export" :model="exportTypes" />
+                <Button
+                    icon="pi pi-file-export"
+                    label="Export"
+                    severity="info"
+                    @click="exportBooks()"
+                />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -138,7 +143,7 @@ import {
     Image,
     InputIcon,
     InputText,
-    SplitButton,
+    Select,
     ToggleSwitch,
     useToast,
 } from 'primevue'
@@ -147,14 +152,18 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, ref, watch } from 'vue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
+import { useGenre } from '@/composables/useGenre'
 
-const { exportBooksCsv, exportBooksExcel } = useBooksExport()
-const { toCreateBook } = useRedirects()
 const toast = useToast()
-const filters = ref()
+const { genres, getGenresMinimal } = useGenre()
 const { toCreateBook } = useRedirects()
+
+const filters = ref()
+const allBooks = ref([])
 const books = ref([])
 const loading = ref(false)
+const selectedGenre = ref(null)
+const genreSelectKey = ref(1)
 
 const initFilters = () => {
     filters.value = {
@@ -240,9 +249,28 @@ const deleteBook = id => {
         })
 }
 
+const clearFilter = () => {
+    initFilters()
+    selectedGenre.value = null
+    genreSelectKey.value++
+}
+
 const exportBooks = () => {
     alert('Todo export books')
 }
+
+const changeGenreFilter = event => {
+    selectedGenre.value = event.value
+}
+
+watch(selectedGenre, async (newGenre, oldGenre) => {
+    if (!newGenre?.id) {
+        books.value = allBooks.value
+        return
+    }
+
+    books.value = allBooks.value.filter(book => book.genres.some(genre => genre.id === newGenre.id))
+})
 
 onMounted(() => {
     getBooks()

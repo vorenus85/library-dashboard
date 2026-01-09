@@ -10,6 +10,7 @@ use App\Http\Controllers\WishlistController;
 Route::get('/bookCount', [DashboardController::class, 'bookCount']);
 Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
 Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
+Route::get('/genreDistribution', [DashboardController::class, 'genreDistribution']);
 
 // todo route group
 Route::get('/authors', [AuthorController::class, 'index']);

@@ -21,6 +21,7 @@
                 icon="bookmark"
                 color="orange"
             ></DashboardKpi>
+            <GenreDistribution></GenreDistribution>
         </div>
     </AppLayout>
 </template>
@@ -31,6 +32,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { ref, onMounted } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import DashboardKpi from '@/components/DashboardKpi.vue'
+import GenreDistribution from '@/components/GenreDistribution.vue'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)

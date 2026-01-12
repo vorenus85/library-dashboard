@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BookController extends Controller
 {
@@ -157,6 +158,9 @@ class BookController extends Controller
     {
         //
         try {
+            $image = $book->image;
+            File::delete("storage/uploads/{$image}");
+
             $book->delete();
             return response()->json(['status' => "ok"], 200);
         } catch (\Throwable $th) {

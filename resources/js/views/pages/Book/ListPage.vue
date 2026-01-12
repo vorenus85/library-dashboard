@@ -3,7 +3,12 @@
         <PageTitle title="Books">
             <template v-slot:actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
-                <SplitButton icon="pi pi-export" label="Export" :model="exportTypes" />
+                <SplitButton
+                    icon="pi pi-export"
+                    label="Export"
+                    :model="exportTypes"
+                    severity="secondary"
+                />
             </template>
         </PageTitle>
         <div class="card pages-list-books shadow list-page">
@@ -104,7 +109,7 @@
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">
                         <div class="flex items-center justify-start gap-3">
-                            <Button primary asChild v-slot="buttonProps">
+                            <Button severity="info" asChild v-slot="buttonProps">
                                 <RouterLink
                                     :to="{
                                         name: 'books.show',

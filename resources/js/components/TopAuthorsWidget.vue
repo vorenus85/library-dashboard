@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <span class="block text-muted-color font-medium">Top authors</span>
+        <WidgetTitle title="Top Authors" />
         <Chart type="bar" :data="chartData" :options="chartOptions" />
     </div>
 </template>
@@ -9,6 +9,7 @@
 import Chart from 'primevue/chart'
 import { ref, onMounted, computed } from 'vue'
 import { useChart } from '@/composables/useChart.js'
+import WidgetTitle from '@/components/WidgetTitle.vue'
 
 const { setBarChartOptions, allBackgroundColors } = useChart()
 

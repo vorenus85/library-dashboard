@@ -46,7 +46,7 @@
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">
                         <div class="flex items-center justify-list gap-3">
-                            <Button primary asChild v-slot="buttonProps">
+                            <Button severity="info" asChild v-slot="buttonProps">
                                 <RouterLink
                                     :to="{
                                         name: 'genres.show',

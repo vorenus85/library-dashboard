@@ -12,15 +12,13 @@ class BookExportController extends Controller
     public function export(Request $request)
     {
         try {
-            $format = $request->query('format', 'csv'); // alapértelmezett csv
+            $format = $request->query('format', 'csv');
 
-            // Lekérjük az adatokat eager load author
             $books = Book::with('author:id,name')
                 ->select('id','title','description','pages','is_read','is_wishlist','author_id')
                 ->get();
 
             if ($format === 'excel') {
-                // Excel export a maatwebsite/excel segítségével
                 return Excel::download(new BooksExport(), 'books.xlsx');
             }
 
@@ -35,7 +33,7 @@ class BookExportController extends Controller
             $callback = function () use ($books) {
                 $file = fopen('php://output', 'w');
 
-                // Fejlécek
+                // Headers
                 fputcsv($file, ['ID','Title','Description','Pages','Is Read','Is Wishlist','Author']);
 
                 foreach ($books as $book) {

@@ -17,73 +17,66 @@ export function useAuthor() {
 
     const getAuthorsMinimal = async () => {
         loading.value = true
-        return await axios
-            .get('/authors/?minimal=1')
-            .catch(error => {
-                console.error(error)
-            })
-            .then(response => {
-                authors.value = response.data
-            })
-            .finally(() => {
-                loading.value = false
-            })
+
+        try {
+            const { data } = await axios.get('/authors/?minimal=1')
+            authors.value = data
+            loading.value = false
+        } catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
 
     const getAuthors = async () => {
         loading.value = true
-        return await axios
-            .get('/authors')
-            .catch(error => {
-                console.error(error)
-            })
-            .then(response => {
-                authors.value = response.data
-            })
-            .finally(() => {
-                loading.value = false
-            })
+
+        try {
+            const { data } = await axios.get('/authors')
+            authors.value = data
+            loading.value = false
+        } catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
 
     const getAuthor = async () => {
         loading.value = true
-        return await axios
-            .get(`/authors/${authorId}`)
-            .then(response => {
-                initialValues.name = response.data.name
-                initialValues.description = response.data.description
-                formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
-            })
-            .catch(e => {
-                console.log(e)
-            })
-            .finally(() => {
-                loading.value = false
-            })
+
+        try {
+            const { data } = await axios.get(`/authors/${authorId}`)
+            initialValues.name = data.name
+            initialValues.description = data.description
+            formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
+            loading.value = false
+        } catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
 
     const deleteAuthor = async id => {
         loading.value = true
-        return await axios
-            .delete(`/authors/${id}`)
-            .catch(error => {
-                console.error(error)
-            })
-            .then(() => {
-                const idIndex = authors.value.findIndex(el => {
-                    return el.id === id
-                })
-                authors.value.splice(idIndex, 1)
 
-                toast.add({
-                    severity: 'success',
-                    summary: 'Author deleted successfully!',
-                    life: 3000,
-                })
+        try {
+            await axios.delete(`/authors/${id}`)
+            const idIndex = authors.value.findIndex(el => {
+                return el.id === id
             })
-            .finally(() => {
-                loading.value = false
+            authors.value.splice(idIndex, 1)
+
+            toast.add({
+                severity: 'success',
+                summary: 'Author deleted successfully!',
+                life: 3000,
             })
+
+            loading.value = false
+        } catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
 
     return {

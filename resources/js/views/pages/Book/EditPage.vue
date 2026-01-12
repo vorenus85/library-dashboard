@@ -265,31 +265,27 @@ const onFormSubmit = async ({ valid, values }) => {
 }
 
 const getBook = async () => {
-    bookId.value = route.params.bookId
-    return await axios
-        .get(`/books/${bookId.value}`)
-        .then(response => {
-            // console.log(response.data)
-            initialValues.title = response.data.title
-            selectedAuthor.value = response.data.author
-            selectedGenres.value = response.data.genres.map(e => {
-                return { id: e.id, name: e.name }
-            })
-            initialValues.author = selectedAuthor.value
-            initialValues.genres = selectedGenres.value
-            initialValues.description = response.data.description
-            initialValues.publised_year = response.data.publised_year
-            initialValues.isbn = response.data.isbn
-            initialValues.image = response.data.image
-            uploadedImage.value = initialValues.image
-            initialValues.pages = response.data.pages
-            initialValues.is_read = response.data.is_read
-            initialValues.is_wishlist = response.data.is_wishlist
-            formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
+    try {
+        const { data } = await axios.get(`/books/${bookId.value}`)
+        initialValues.title = data.title
+        selectedAuthor.value = data.author
+        selectedGenres.value = data.genres.map(e => {
+            return { id: e.id, name: e.name }
         })
-        .catch(e => {
-            console.error(e)
-        })
+        initialValues.author = selectedAuthor.value
+        initialValues.genres = selectedGenres.value
+        initialValues.description = data.description
+        initialValues.publised_year = data.publised_year
+        initialValues.isbn = data.isbn
+        initialValues.image = data.image
+        uploadedImage.value = initialValues.image
+        initialValues.pages = data.pages
+        initialValues.is_read = data.is_read
+        initialValues.is_wishlist = data.is_wishlist
+        formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 const onRemove = () => {
@@ -326,18 +322,16 @@ const onImageUpload = async event => {
 }
 
 const deleteImage = async () => {
-    return await axios
-        .delete(`/books/image/delete/${bookId.value}`)
-        .then(response => {
-            initialValues.image = ''
-            console.log(response)
-        })
-        .catch(e => {
-            console.log(e)
-        })
+    try {
+        await axios.delete(`/books/image/delete/${bookId.value}`)
+        initialValues.image = ''
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 onMounted(() => {
+    bookId.value = route.params.bookId
     getBook()
     getAuthorsMinimal()
     getGenresMinimal()

@@ -235,49 +235,50 @@ const toggleWishlist = async id => {
         books.value = books.value.map(book =>
             book.id === id ? { ...book, is_wishlist: !book.is_wishlist } : book
         )
-    } catch (error) {
-        console.error(error)
+    } catch (e) {
+        console.error(e)
     }
 }
 
-const getBooks = () => {
+const getBooks = async () => {
     loading.value = true
-    return axios
-        .get('/books')
-        .catch(error => {
-            loading.value = false
-            console.error(error)
-        })
-        .then(response => {
-            loading.value = false
-            allBooks.value = response.data
-            books.value = response.data
-        })
+
+    try {
+        const { data } = await axios.get('/books')
+
+        allBooks.value = data
+        books.value = data
+
+        loading.value = false
+    } catch (e) {
+        console.error(e)
+        loading.value = false
+    }
 }
 
-const deleteBook = id => {
+const deleteBook = async id => {
     loading.value = true
 
-    return axios
-        .delete(`/books/${id}`)
-        .catch(e => {
-            loading.value = false
-            console.log(e)
-        })
-        .then(response => {
-            loading.value = false
-            const indexId = books.value.findIndex(el => {
-                return el.id === id
-            })
+    try {
+        await axios.delete(`/books/${id}`)
 
-            books.value.splice(indexId, 1)
-
-            toast.add({
-                severity: 'success',
-                summary: 'Book deleted successfully',
-                life: 3000,
-            })
+        const indexId = books.value.findIndex(el => {
+            return el.id === id
         })
+
+        books.value.splice(indexId, 1)
+
+        toast.add({
+            severity: 'success',
+            summary: 'Book deleted successfully',
+            life: 3000,
+        })
+
+        loading.value = false
+    } catch (e) {
+        console.error(e)
+        loading.value = false
+    }
 }
 
 const clearFilter = () => {

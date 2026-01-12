@@ -61,7 +61,7 @@
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"
-                                @click="deleteAuthor(slotProps.data.id)"
+                                @click="deleteConfirm(slotProps.data.id)"
                             />
                         </div>
                     </template>
@@ -74,13 +74,25 @@
 import { onMounted, ref } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
+import {
+    Button,
+    Chip,
+    Column,
+    DataTable,
+    IconField,
+    InputIcon,
+    InputText,
+    useConfirm,
+} from 'primevue'
 import { RouterLink } from 'vue-router'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useAuthor } from '@/composables/useAuthor'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
 
+const confirm = useConfirm()
 const { toCreateAuthor } = useRedirects()
+const { confirmAction } = useCustomConfirm()
 const { authors, loading, getAuthors, deleteAuthor } = useAuthor()
 const filters = ref()
 
@@ -102,6 +114,15 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
+}
+
+const deleteConfirm = id => {
+    confirmAction(confirm, {
+        action: () => {
+            deleteAuthor(id)
+        },
+        acceptLabel: 'Delete',
+    })
 }
 
 onMounted(() => {

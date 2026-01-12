@@ -62,7 +62,7 @@
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"
-                                @click="deleteGenre(slotProps.data.id)"
+                                @click="deleteConfirm(slotProps.data.id)"
                             />
                         </div>
                     </template>
@@ -75,15 +75,28 @@
 import { onMounted, ref } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
+import {
+    Button,
+    Chip,
+    Column,
+    DataTable,
+    IconField,
+    InputIcon,
+    InputText,
+    useConfirm,
+} from 'primevue'
 
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useGenre } from '@/composables/useGenre'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
+
+const confirm = useConfirm()
+const { loading, genres, getGenres, deleteGenre } = useGenre()
 const { toCreateGenre } = useRedirects()
+const { confirmAction } = useCustomConfirm()
 
 const filters = ref()
-const { loading, genres, getGenres, deleteGenre } = useGenre()
 
 const initFilters = () => {
     filters.value = {
@@ -103,6 +116,15 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
+}
+
+const deleteConfirm = id => {
+    confirmAction(confirm, {
+        action: () => {
+            deleteGenre(id)
+        },
+        acceptLabel: 'Delete',
+    })
 }
 
 onMounted(() => {

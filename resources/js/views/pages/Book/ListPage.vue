@@ -124,7 +124,7 @@
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"
-                                @click="deleteBook(slotProps.data.id)"
+                                @click="deleteConfirm(slotProps.data.id)"
                             />
                         </div>
                     </template>
@@ -147,6 +147,7 @@ import {
     SplitButton,
     ToggleSwitch,
     useToast,
+    useConfirm,
 } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
@@ -155,7 +156,11 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useBooksExport } from '@/composables/useBooksExport'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
+
+const { confirmAction } = useCustomConfirm()
 const { exportBooksCsv, exportBooksExcel } = useBooksExport()
+const confirm = useConfirm()
 const toast = useToast()
 const { genres, getGenresMinimal } = useGenre()
 const { toCreateBook } = useRedirects()
@@ -201,6 +206,15 @@ const initFilters = () => {
 }
 
 initFilters()
+
+const deleteConfirm = id => {
+    confirmAction(confirm, {
+        action: () => {
+            deleteBook(id)
+        },
+        acceptLabel: 'Delete',
+    })
+}
 
 const toggleRead = async id => {
     try {

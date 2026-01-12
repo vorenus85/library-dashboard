@@ -61,7 +61,7 @@
                             <Button
                                 icon="pi pi-trash"
                                 severity="danger"
-                                @click="deleteAuthor(slotProps.data.id)"
+                                @click="deleteConfirm(slotProps.data.id)"
                             />
                         </div>
                     </template>
@@ -74,12 +74,22 @@
 import { onMounted, ref } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { Button, Chip, Column, DataTable, IconField, InputIcon, InputText } from 'primevue'
+import {
+    Button,
+    Chip,
+    Column,
+    DataTable,
+    IconField,
+    InputIcon,
+    InputText,
+    useConfirm,
+} from 'primevue'
 import { RouterLink } from 'vue-router'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useAuthor } from '@/composables/useAuthor'
 
+const confirm = useConfirm()
 const { toCreateAuthor } = useRedirects()
 const { authors, loading, getAuthors, deleteAuthor } = useAuthor()
 const filters = ref()
@@ -102,6 +112,28 @@ initFilters()
 
 const clearFilter = () => {
     initFilters()
+}
+
+const deleteConfirm = id => {
+    confirm.require({
+        message: 'Do you want to delete this record?',
+        header: 'Danger Zone',
+        icon: 'pi pi-info-circle',
+        rejectLabel: 'Cancel',
+        rejectProps: {
+            label: 'Cancel',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptProps: {
+            label: 'Delete',
+            severity: 'danger',
+        },
+        accept: () => {
+            deleteAuthor(id)
+        },
+        reject: () => {},
+    })
 }
 
 onMounted(() => {

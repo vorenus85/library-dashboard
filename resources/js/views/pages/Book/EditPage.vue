@@ -310,7 +310,7 @@ const onImageUpload = async event => {
         const formData = new FormData()
         formData.append('file', file)
 
-        const { data } = await axios.post('/upload', formData, {
+        const { data } = await axios.post('/books/image/upload', formData, {
             onUploadProgress: e => {
                 if (!e.total) return
 
@@ -327,7 +327,7 @@ const onImageUpload = async event => {
 
 const deleteImage = async () => {
     return await axios
-        .delete(`/book-image/${bookId.value}`)
+        .delete(`/books/image/delete/${bookId.value}`)
         .then(response => {
             initialValues.image = ''
             console.log(response)

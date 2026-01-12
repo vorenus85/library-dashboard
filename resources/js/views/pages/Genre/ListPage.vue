@@ -89,10 +89,12 @@ import {
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useGenre } from '@/composables/useGenre'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
 
-const { loading, genres, getGenres, deleteGenre } = useGenre()
 const confirm = useConfirm()
+const { loading, genres, getGenres, deleteGenre } = useGenre()
 const { toCreateGenre } = useRedirects()
+const { confirmAction } = useCustomConfirm()
 
 const filters = ref()
 
@@ -117,24 +119,11 @@ const clearFilter = () => {
 }
 
 const deleteConfirm = id => {
-    confirm.require({
-        message: 'Do you want to delete this record?',
-        header: 'Danger Zone',
-        icon: 'pi pi-info-circle',
-        rejectLabel: 'Cancel',
-        rejectProps: {
-            label: 'Cancel',
-            severity: 'secondary',
-            outlined: true,
-        },
-        acceptProps: {
-            label: 'Delete',
-            severity: 'danger',
-        },
-        accept: () => {
+    confirmAction(confirm, {
+        action: () => {
             deleteGenre(id)
         },
-        reject: () => {},
+        acceptLabel: 'Delete',
     })
 }
 

@@ -88,9 +88,11 @@ import { RouterLink } from 'vue-router'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useAuthor } from '@/composables/useAuthor'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
 
 const confirm = useConfirm()
 const { toCreateAuthor } = useRedirects()
+const { confirmAction } = useCustomConfirm()
 const { authors, loading, getAuthors, deleteAuthor } = useAuthor()
 const filters = ref()
 
@@ -115,24 +117,11 @@ const clearFilter = () => {
 }
 
 const deleteConfirm = id => {
-    confirm.require({
-        message: 'Do you want to delete this record?',
-        header: 'Danger Zone',
-        icon: 'pi pi-info-circle',
-        rejectLabel: 'Cancel',
-        rejectProps: {
-            label: 'Cancel',
-            severity: 'secondary',
-            outlined: true,
-        },
-        acceptProps: {
-            label: 'Delete',
-            severity: 'danger',
-        },
-        accept: () => {
+    confirmAction(confirm, {
+        action: () => {
             deleteAuthor(id)
         },
-        reject: () => {},
+        acceptLabel: 'Delete',
     })
 }
 

@@ -156,7 +156,9 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useBooksExport } from '@/composables/useBooksExport'
+import { useCustomConfirm } from '@/composables/useCustomConfirm'
 
+const { confirmAction } = useCustomConfirm()
 const { exportBooksCsv, exportBooksExcel } = useBooksExport()
 const confirm = useConfirm()
 const toast = useToast()
@@ -206,24 +208,11 @@ const initFilters = () => {
 initFilters()
 
 const deleteConfirm = id => {
-    confirm.require({
-        message: 'Do you want to delete this record?',
-        header: 'Danger Zone',
-        icon: 'pi pi-info-circle',
-        rejectLabel: 'Cancel',
-        rejectProps: {
-            label: 'Cancel',
-            severity: 'secondary',
-            outlined: true,
-        },
-        acceptProps: {
-            label: 'Delete',
-            severity: 'danger',
-        },
-        accept: () => {
+    confirmAction(confirm, {
+        action: () => {
             deleteBook(id)
         },
-        reject: () => {},
+        acceptLabel: 'Delete',
     })
 }
 

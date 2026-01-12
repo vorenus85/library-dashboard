@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <span class="block text-muted-color font-medium">Top genres</span>
+        <WidgetTitle title="Top Genres" />
         <div class="flex justify-center">
             <Chart
                 type="doughnut"
@@ -16,6 +16,7 @@
 import Chart from 'primevue/chart'
 import { ref, onMounted, computed } from 'vue'
 import { useChart } from '@/composables/useChart.js'
+import WidgetTitle from '@/components/WidgetTitle.vue'
 
 const { setDoughnutChartOptions, allBackgroundColors, allHoverBackgroundColors } = useChart()
 

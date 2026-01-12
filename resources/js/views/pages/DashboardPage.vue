@@ -1,10 +1,10 @@
 <template>
     <AppLayout>
         <PageTitle title="Dashboard"> </PageTitle>
-        <div class="dashboard grid grid-cols-12 gap-5">
+        <div class="dashboard grid grid-cols-12 gap-8">
             <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
                 <DashboardKpi
-                    title="Book no."
+                    title="Total Books"
                     :kpiValue="bookCount"
                     icon="book"
                     color="blue"
@@ -12,29 +12,30 @@
             </div>
             <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
                 <DashboardKpi
-                    title="Is Read no."
+                    title="Wishlist Books"
+                    :kpiValue="countIsWishList"
+                    icon="bookmark"
+                    color="orange"
+                ></DashboardKpi>
+            </div>
+            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+                <DashboardKpi
+                    title="Books Read"
                     :kpiValue="countIsRead"
                     :rate="countIsReadRate"
                     icon="book"
                     color="purple"
                 ></DashboardKpi>
             </div>
-            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
-                <DashboardKpi
-                    title="Is Wishlist no."
-                    :kpiValue="countIsWishList"
-                    icon="bookmark"
-                    color="orange"
-                ></DashboardKpi>
-            </div>
-            <div class="col-span-12">
+
+            <div class="col-span-12 widget-wishlist">
                 <WishlistWidget></WishlistWidget>
             </div>
-            <div class="col-span-12 xl:col-span-4">
+            <div class="col-span-12 xl:col-span-4 widget-top-genres">
                 <TopGenresWidget></TopGenresWidget>
             </div>
 
-            <div class="col-span-12 xl:col-span-8">
+            <div class="col-span-12 xl:col-span-8 widget-top-authors">
                 <TopAuthorsWidget></TopAuthorsWidget>
             </div>
         </div>

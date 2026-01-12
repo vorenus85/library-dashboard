@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <span class="block text-muted-color font-medium">Wishlisted books</span>
+        <WidgetTitle title="Wishlist Books" />
         <DataTable
             v-model:filters="filters"
             :value="wishListedBooks"
@@ -72,6 +72,7 @@
 import { Button, Chip, Column, DataTable, IconField, Image, InputIcon, InputText } from 'primevue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { onMounted, ref } from 'vue'
+import WidgetTitle from '@/components/WidgetTitle.vue'
 
 const wishListedBooks = ref([])
 const filters = ref()

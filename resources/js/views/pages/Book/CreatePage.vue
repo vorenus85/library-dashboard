@@ -258,7 +258,7 @@ const onImageUpload = async event => {
         const formData = new FormData()
         formData.append('file', file)
 
-        const { data } = await axios.post('/upload', formData, {
+        const { data } = await axios.post('/books/image/upload', formData, {
             onUploadProgress: e => {
                 if (!e.total) return
 

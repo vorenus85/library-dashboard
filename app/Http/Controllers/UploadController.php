@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File as LaraFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class UploadController extends Controller
@@ -34,7 +34,7 @@ class UploadController extends Controller
             $image = $book->image;
             $book->update(["image" => ""]);
 
-            LaraFile::delete("storage/uploads/{$image}");
+            File::delete("storage/uploads/{$image}");
 
             return response()->json(["status" => 'ok']);
 

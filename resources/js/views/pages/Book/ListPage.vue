@@ -251,7 +251,7 @@ const getBooks = () => {
         .then(response => {
             loading.value = false
             allBooks.value = response.data
-            books.value = response.data // for actual list
+            books.value = response.data
         })
 }
 

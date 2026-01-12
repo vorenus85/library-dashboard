@@ -80,7 +80,7 @@ const resolver = ({ values }) => {
     }
 
     return {
-        values, // (Optional) Used to pass current form values to submit event.
+        values,
         errors,
     }
 }

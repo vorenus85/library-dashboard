@@ -180,6 +180,7 @@ import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useGenre } from '@/composables/useGenre'
 import { useAuthor } from '@/composables/useAuthor'
+import { createBook, uploadBookImage } from '@/services/bookService'
 
 const { genres, getGenresMinimal } = useGenre()
 const { authors, getAuthorsMinimal } = useAuthor()
@@ -218,7 +219,7 @@ const onFormSubmit = async ({ valid, values }) => {
 
     if (valid) {
         try {
-            await axios.post('/books', values)
+            await createBook(values)
 
             toast.add({
                 severity: 'success',
@@ -258,12 +259,8 @@ const onImageUpload = async event => {
         const formData = new FormData()
         formData.append('file', file)
 
-        const { data } = await axios.post('/books/image/upload', formData, {
-            onUploadProgress: e => {
-                if (!e.total) return
-
-                uploadProgress.value = Math.round((e.loaded * 100) / e.total)
-            },
+        const { data } = await uploadBookImage(file, progress => {
+            uploadProgress.value = progress
         })
 
         uploadedImage.value = data.filename

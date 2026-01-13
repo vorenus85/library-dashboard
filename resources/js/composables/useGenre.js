@@ -1,7 +1,12 @@
 import { useToast } from 'primevue/usetoast'
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { fetchMinimalGenres, fetchGenres } from '@/services/genreService'
+import {
+    fetchMinimalGenres,
+    fetchGenres,
+    fetchGenre,
+    deleteGenreById,
+} from '@/services/genreService'
 
 export const useGenre = () => {
     const route = useRoute()

@@ -100,6 +100,10 @@ const onFormSubmit = async ({ valid, values }) => {
                 summary: 'Author edited successfully!',
                 life: 3000,
             })
+
+            setTimeout(() => {
+                toAuthorList()
+            }, 300)
         } catch (error) {
             console.log(error)
             toast.add({

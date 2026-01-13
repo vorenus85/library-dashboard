@@ -205,6 +205,7 @@ import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useAuthor } from '@/composables/useAuthor'
+import { updateBookById, uploadBookImage, fetchBook, deleteBookImage } from '@/services/bookService'
 
 const { genres, getGenresMinimal } = useGenre()
 const { authors, getAuthorsMinimal } = useAuthor()
@@ -241,32 +242,27 @@ const onFormSubmit = async ({ valid, values }) => {
         return e.id
     })
     if (valid) {
-        await axios
-            .put(`/books/${bookId.value}`, values)
-            .catch(error => {
-                toast.add({
-                    severity: 'error',
-                    summary: error.response.data.message,
-                    life: 3000,
-                })
-            })
-            .then(response => {
-                toast.add({
-                    severity: 'success',
-                    summary: 'Book updated successfully!',
-                    life: 3000,
-                })
+        try {
+            await updateBookById(bookId.value, values)
 
-                setTimeout(() => {
-                    toBookList()
-                }, 300)
+            toast.add({
+                severity: 'success',
+                summary: 'Book updated successfully!',
+                life: 3000,
             })
+
+            setTimeout(() => {
+                toBookList()
+            }, 300)
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
 
 const getBook = async () => {
     try {
-        const { data } = await axios.get(`/books/${bookId.value}`)
+        const { data } = await fetchBook(bookId.value)
         initialValues.title = data.title
         selectedAuthor.value = data.author
         selectedGenres.value = data.genres.map(e => {
@@ -306,12 +302,8 @@ const onImageUpload = async event => {
         const formData = new FormData()
         formData.append('file', file)
 
-        const { data } = await axios.post('/books/image/upload', formData, {
-            onUploadProgress: e => {
-                if (!e.total) return
-
-                uploadProgress.value = Math.round((e.loaded * 100) / e.total)
-            },
+        const { data } = await uploadBookImage(file, progress => {
+            uploadProgress.value = progress
         })
 
         uploadedImage.value = data.filename
@@ -323,7 +315,7 @@ const onImageUpload = async event => {
 
 const deleteImage = async () => {
     try {
-        await axios.delete(`/books/image/delete/${bookId.value}`)
+        await deleteBookImage(bookId.value)
         initialValues.image = ''
     } catch (e) {
         console.log(e)

@@ -88,6 +88,10 @@ const onFormSubmit = async ({ valid, values }) => {
                 summary: 'Genre updated successfully!',
                 life: 3000,
             })
+
+            setTimeout(() => {
+                toGenreList()
+            }, 300)
         } catch (error) {
             toast.add({
                 severity: 'error',

@@ -41,3 +41,33 @@ export const uploadBookImage = (file, onProgress) => {
 export const deleteBookImage = id => {
     return axios.delete(`/books/image/delete/${id}`)
 }
+
+export const fetchTopAuthors = () => {
+    return axios.get('/topAuthors')
+}
+
+export const fetchTopGenres = () => {
+    return axios.get('/topGenres')
+}
+
+export const fetchWishlistBooks = () => {
+    return axios.get('/wishlist')
+}
+
+export const fetchBookCount = () => {
+    return axios.get('/bookCount')
+}
+
+export const fetchIsReadRate = () => {
+    return axios.get('/isReadRate')
+}
+
+export const fetchIsWishlistCount = () => {
+    return axios.get('/isWishlistCount')
+}
+
+export const exportBooksByType = type => {
+    return axios.get(`/books/export?format=${type}`, {
+        responseType: 'blob',
+    })
+}

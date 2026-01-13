@@ -51,6 +51,7 @@ import DashboardKpi from '@/components/DashboardKpi.vue'
 import TopGenresWidget from '@/components/TopGenresWidget.vue'
 import TopAuthorsWidget from '@/components/TopAuthorsWidget.vue'
 import WishlistWidget from '@/components/WishlistWidget.vue'
+import { fetchBookCount, fetchIsReadRate, fetchIsWishlistCount } from '@/services/bookService'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)
@@ -58,18 +59,18 @@ const countIsRead = ref(0)
 const countIsReadRate = ref(0)
 
 const getBookCount = async () => {
-    const { data } = await axios.get('/bookCount')
+    const { data } = await fetchBookCount()
     bookCount.value = data.bookCount
 }
 
 const getIsReadRate = async () => {
-    const { data } = await axios.get('/isReadRate')
+    const { data } = await fetchIsReadRate()
     countIsRead.value = data.countIsRead
     countIsReadRate.value = data.countIsReadRate
 }
 
 const getIsWishlistCount = async () => {
-    const { data } = await axios.get('/isWishlistCount')
+    const { data } = await fetchIsWishlistCount()
     countIsWishList.value = data.countIsWishList
 }
 

@@ -10,6 +10,7 @@ import Chart from 'primevue/chart'
 import { ref, onMounted, computed } from 'vue'
 import { useChart } from '@/composables/useChart.js'
 import WidgetTitle from '@/components/WidgetTitle.vue'
+import { fetchTopAuthors } from '@/services/bookService'
 
 const { setBarChartOptions, allBackgroundColors } = useChart()
 
@@ -31,7 +32,7 @@ const chartData = computed(() => ({
 
 const getTopAuthors = async () => {
     try {
-        const { data } = await axios.get('/topAuthors')
+        const { data } = await fetchTopAuthors()
         const topAuthors = data.topAuthors
 
         authorLabels.value = topAuthors.map(e => {

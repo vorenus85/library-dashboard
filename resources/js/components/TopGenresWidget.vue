@@ -17,6 +17,7 @@ import Chart from 'primevue/chart'
 import { ref, onMounted, computed } from 'vue'
 import { useChart } from '@/composables/useChart.js'
 import WidgetTitle from '@/components/WidgetTitle.vue'
+import { fetchTopGenres } from '@/services/bookService'
 
 const { setDoughnutChartOptions, allBackgroundColors, allHoverBackgroundColors } = useChart()
 
@@ -39,7 +40,7 @@ const chartData = computed(() => ({
 
 const getTopGenres = async () => {
     try {
-        const { data } = await axios.get('/topGenres')
+        const { data } = await fetchTopGenres()
         const topGenres = data.topGenres
 
         genreLabels.value = topGenres.map(e => {

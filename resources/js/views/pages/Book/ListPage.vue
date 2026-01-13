@@ -90,14 +90,14 @@
                         </Button>
                     </template>
                 </Column>
-                <Column field="is_read" header="Is read" style="width: 10%">
+                <Column sortable field="is_read" header="Is read" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_read)"
                             @change="toggleRead(slotProps.data.id)"
                         /> </template
                 ></Column>
-                <Column field="is_wishlist" header="Is wishlist" style="width: 10%">
+                <Column sortable field="is_wishlist" header="Is wishlist" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_wishlist)"

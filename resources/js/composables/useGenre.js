@@ -1,6 +1,7 @@
 import { useToast } from 'primevue/usetoast'
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { fetchMinimalGenres, fetchGenres } from '@/services/genreService'
 
 export const useGenre = () => {
     const route = useRoute()
@@ -19,7 +20,7 @@ export const useGenre = () => {
         loading.value = true
 
         try {
-            const { data } = await axios.get('/genres/?minimal=1')
+            const { data } = await fetchMinimalGenres()
             genres.value = data
             loading.value = false
         } catch (e) {
@@ -32,7 +33,7 @@ export const useGenre = () => {
         loading.value = true
 
         try {
-            const { data } = await axios.get('/genres')
+            const { data } = await fetchGenres()
             genres.value = data
             loading.value = false
         } catch (e) {
@@ -45,7 +46,7 @@ export const useGenre = () => {
         loading.value = true
 
         try {
-            const { data } = await axios.get(`/genres/${genreId}`)
+            const { data } = await fetchGenre(genreId)
             initialValues.name = data.name
             initialValues.description = data.description
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
@@ -60,7 +61,7 @@ export const useGenre = () => {
         loading.value = true
 
         try {
-            await axios.delete(`/genres/${id}`)
+            await deleteGenreById(id)
 
             const idIndex = genres.value.findIndex(el => {
                 return el.id === id

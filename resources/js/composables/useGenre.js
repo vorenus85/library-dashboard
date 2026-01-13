@@ -2,7 +2,7 @@ import { useToast } from 'primevue/usetoast'
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-export function useGenre() {
+export const useGenre = () => {
     const route = useRoute()
     const loading = ref(false)
     const genres = ref([])

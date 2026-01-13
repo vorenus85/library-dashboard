@@ -68,6 +68,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useAuthor } from '@/composables/useAuthor'
+import { createAuthor } from '@/services/authorService'
 
 const { initialValues } = useAuthor()
 const { toAuthorList } = useRedirects()
@@ -88,7 +89,7 @@ const resolver = ({ values }) => {
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            await axios.post('/authors', values)
+            await createAuthor(values)
 
             toast.add({
                 severity: 'success',

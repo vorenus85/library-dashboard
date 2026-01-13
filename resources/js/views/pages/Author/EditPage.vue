@@ -71,6 +71,7 @@ import { onMounted } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useAuthor } from '@/composables/useAuthor'
+import { updateAuthorById } from '@/services/authorService'
 
 const { formKey, authorId, initialValues, getAuthor } = useAuthor()
 const { toAuthorList } = useRedirects()
@@ -92,7 +93,7 @@ const resolver = ({ values }) => {
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            await axios.put(`/authors/${authorId}`, values)
+            await updateAuthorById(authorId, values)
 
             toast.add({
                 severity: 'success',

@@ -1,6 +1,6 @@
 import { onMounted, ref } from 'vue'
 
-export function useChart() {
+export const useChart = () => {
     const paletteColors = [
         { base: 'primary-500', hover: 'primary-400' },
         { base: 'primary-700', hover: 'primary-600' },

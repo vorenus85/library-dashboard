@@ -1,7 +1,7 @@
 import { useDate } from '@/composables/useDate'
 const { getTimestampString } = useDate()
 
-export function useBooksExport() {
+export const useBooksExport = () => {
     const exportBooksCsv = async () => {
         try {
             const response = await axios.get('/books/export?format=csv', {

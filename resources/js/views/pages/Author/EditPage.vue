@@ -15,7 +15,7 @@
                 :key="formKey"
                 v-slot="$form"
                 :initialValues
-                :resolver
+                :resolver="authorValidator"
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
                 :validateOnValueUpdate="true"
@@ -73,22 +73,9 @@ import { useRedirects } from '@/composables/useRedirects.js'
 import { useAuthor } from '@/composables/useAuthor'
 import { updateAuthorById } from '@/services/authorService'
 
-const { formKey, authorId, initialValues, getAuthor } = useAuthor()
+const { formKey, authorId, initialValues, getAuthor, authorValidator } = useAuthor()
 const { toAuthorList } = useRedirects()
 const toast = useToast()
-
-const resolver = ({ values }) => {
-    const errors = {}
-
-    if (!values.name) {
-        errors.name = [{ message: 'Author name is required.' }]
-    }
-
-    return {
-        values,
-        errors,
-    }
-}
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

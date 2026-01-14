@@ -10,7 +10,7 @@
                 :key="formKey"
                 v-slot="$form"
                 :initialValues
-                :resolver
+                :resolver="bookValidator"
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
                 :validateOnValueUpdate="true"
@@ -48,6 +48,35 @@
                         :highlightOnSelect="false"
                         class="w-full md:w-56"
                     />
+                    <Message
+                        v-if="$form.author?.invalid"
+                        severity="error"
+                        size="small"
+                        variant="simple"
+                        >{{ $form.author.error?.message }}</Message
+                    >
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="genres">Genres</label>
+                    <MultiSelect
+                        v-model="selectedGenres"
+                        :options="genres"
+                        name="genres[]"
+                        optionLabel="name"
+                        filter
+                        placeholder="Select Genres"
+                        :maxSelectedLabels="3"
+                        class="w-full md:w-80"
+                        display="chip"
+                    />
+                    <Message
+                        v-if="$form.genres?.invalid"
+                        severity="error"
+                        size="small"
+                        variant="simple"
+                        >{{ $form.genres.error?.message }}</Message
+                    >
                 </div>
 
                 <InputText name="image" type="hidden" />
@@ -81,8 +110,8 @@
                                 :multiple="false"
                                 accept="image/*"
                                 :maxFileSize="1000000"
-                                @remove="onRemove"
-                                @clear="onClear"
+                                @remove="onRemoveBookImage"
+                                @clear="onClearUploaderStatus"
                                 :disabled="isUploading || !!uploadedImage"
                             />
                         </div>
@@ -108,21 +137,6 @@
                         variant="simple"
                         >{{ $form.description.error?.message }}</Message
                     >
-                </div>
-
-                <div class="flex flex-col gap-1">
-                    <label for="genres">Genres</label>
-                    <MultiSelect
-                        v-model="selectedGenres"
-                        :options="genres"
-                        name="genres[]"
-                        optionLabel="name"
-                        filter
-                        placeholder="Select Genres"
-                        :maxSelectedLabels="3"
-                        class="w-full md:w-80"
-                        display="chip"
-                    />
                 </div>
 
                 <div class="flex flex-col gap-1">
@@ -200,49 +214,45 @@ import {
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { useRoute } from 'vue-router'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useAuthor } from '@/composables/useAuthor'
-import { updateBookById, uploadBookImage, fetchBook, deleteBookImage } from '@/services/bookService'
+import { updateBookById, fetchBook } from '@/services/bookService'
+import { useBook } from '@/composables/useBook'
 
 const { genres, getGenresMinimal } = useGenre()
 const { authors, getAuthorsMinimal } = useAuthor()
-
 const { toBookList } = useRedirects()
+const {
+    initialValues,
+    bookValidator,
+    isUploading,
+    uploadProgress,
+    uploadedImage,
+    deleteImage,
+    onImageUpload,
+    onRemoveBookImage,
+    onClearUploaderStatus,
+    bookId,
+} = useBook()
+
 const formKey = ref(0)
 const route = useRoute()
 const toast = useToast()
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
-const bookId = ref(0)
-const initialValues = reactive({})
-const isUploading = ref(false)
-const uploadProgress = ref(0)
-const uploadedImage = ref(null)
-
-const resolver = ({ values }) => {
-    const errors = {}
-
-    if (!values.title) {
-        errors.title = [{ message: 'Book title is required.' }]
-    }
-
-    return {
-        values, // (Optional) Used to pass current form values to submit event.
-        errors,
-    }
-}
 
 const onFormSubmit = async ({ valid, values }) => {
-    values.author = selectedAuthor.value
-    values.image = uploadedImage.value
-    values.genres = values.genres.map(e => {
-        return e.id
-    })
     if (valid) {
         try {
+            values.author = selectedAuthor.value
+            values.image = uploadedImage.value
+            values.genres = values.genres.map(e => {
+                return e.id
+            })
+
             await updateBookById(bookId.value, values)
 
             toast.add({
@@ -279,44 +289,6 @@ const getBook = async () => {
         initialValues.is_read = data.is_read
         initialValues.is_wishlist = data.is_wishlist
         formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-const onRemove = () => {
-    isUploading.value = false
-    uploadProgress.value = 0
-}
-
-const onClear = () => {
-    isUploading.value = false
-    uploadProgress.value = 0
-}
-
-const onImageUpload = async event => {
-    try {
-        isUploading.value = true
-        const file = event.files[0]
-
-        const formData = new FormData()
-        formData.append('file', file)
-
-        const { data } = await uploadBookImage(file, progress => {
-            uploadProgress.value = progress
-        })
-
-        uploadedImage.value = data.filename
-    } catch (e) {
-        isUploading.value = false
-        console.error(e)
-    }
-}
-
-const deleteImage = async () => {
-    try {
-        await deleteBookImage(bookId.value)
-        initialValues.image = ''
     } catch (e) {
         console.log(e)
     }

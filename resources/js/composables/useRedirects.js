@@ -26,6 +26,10 @@ export function useRedirects() {
         router.push({ name: 'genres' })
     }
 
+    const toHome = () => {
+        router.push({ name: 'home' })
+    }
+
     return {
         toCreateBook,
         toBookList,
@@ -33,5 +37,6 @@ export function useRedirects() {
         toCreateAuthor,
         toCreateGenre,
         toGenreList,
+        toHome,
     }
 }

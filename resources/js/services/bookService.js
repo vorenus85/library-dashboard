@@ -50,6 +50,10 @@ export const fetchTopGenres = () => {
     return axios.get('/topGenres')
 }
 
+export const fetchTopGenreWithName = () => {
+    return axios.get('/topGenreWithName')
+}
+
 export const fetchWishlistBooks = () => {
     return axios.get('/wishlist')
 }

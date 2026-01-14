@@ -17,6 +17,9 @@
             <template v-if="rate">
                 <Tag severity="success">{{ rate }} %</Tag>
             </template>
+            <template v-if="count">
+                <Tag severity="success">{{ count }}</Tag>
+            </template>
         </div>
     </div>
 </template>
@@ -37,6 +40,9 @@ defineProps({
         required: true,
     },
     rate: {
+        type: [String, Number],
+    },
+    count: {
         type: [String, Number],
     },
     color: {

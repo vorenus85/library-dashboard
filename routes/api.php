@@ -6,7 +6,6 @@ use App\Http\Controllers\BookExportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\UploadController;
-use App\Http\Controllers\WishlistController;
 
 
 
@@ -14,6 +13,7 @@ Route::get('/bookCount', [DashboardController::class, 'bookCount']);
 Route::get('/isReadRate', [DashboardController::class, 'isReadRate']);
 Route::get('/isWishlistCount', [DashboardController::class, 'isWishlistCount']);
 Route::get('/topGenres', [DashboardController::class, 'topGenres']);
+Route::get('/topGenreWithName', [DashboardController::class, 'topGenreWithName']);
 Route::get('/topAuthors', [DashboardController::class, 'topAuthors']);
 Route::get('/wishlist', [DashboardController::class, 'wishlist']);
 

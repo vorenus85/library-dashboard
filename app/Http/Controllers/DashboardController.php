@@ -24,6 +24,11 @@ class DashboardController extends Controller
 
     }
 
+    public function topGenreWithName() {
+        $result = Genre::select('id', 'name')->withCount("books")->whereHas('books')->orderBy("books_count", "desc")->first();
+        return response()->json(['topGenre' => $result]);
+    }
+
     public function isWishlistCount(){
         $countIsWishList = Book::where('is_wishlist', true)->count();
 

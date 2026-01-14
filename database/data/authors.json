@@ -1,130 +1,134 @@
 [
     {
         "name": "Simon Scarrow",
-        "description": "Simon Scarrow brit történelmi regényíró, aki főként a római kori hadseregről szóló sorozatairól ismert. Leghíresebb műve a 'Eagles of the Empire' sorozat, amely a Római Birodalom katonai életét mutatja be. Regényeiben gyakran ötvözi a történelmi pontosságot az izgalmas kalandokkal."
+        "description": "Simon Scarrow is a British historical novelist best known for his series about the Roman army. His most famous work is the 'Eagles of the Empire' series, which portrays military life in the Roman Empire. His novels skillfully combine historical accuracy with fast-paced adventure."
     },
     {
         "name": "John Scalzi",
-        "description": "John Scalzi amerikai sci-fi író, akinek művei a humor és a társadalmi kommentár ötvözéséről ismertek. Legismertebb regénye a 'Old Man's War', amely a katonai sci-fi műfajban lett klasszikus. Emellett aktív blogger és számos sci-fi magazinban publikált novellát."
+        "description": "John Scalzi is an American science fiction writer known for blending humor with social commentary. His most famous novel, 'Old Man's War', has become a modern classic of military science fiction. He is also an active blogger and has published numerous short stories in sci-fi magazines."
     },
     {
         "name": "Andy Weir",
-        "description": "Andy Weir amerikai író, leginkább a 'The Martian' című sci-fi regényéről ismert, amelyből sikeres film is készült. Mérnöki háttere miatt rendkívül részletesen ír a technológiáról és a tudományos hitelességről. Munkái gyakran kombinálják a humoros karaktereket a komoly tudományos problémákkal."
+        "description": "Andy Weir is an American author best known for the science fiction novel 'The Martian', which was adapted into a successful film. With an engineering background, he writes with a strong focus on technological detail and scientific accuracy. His works often combine humor with serious scientific challenges."
     },
     {
         "name": "George Simenon",
-        "description": "George Simenon belga író, a pszichológiai krimik mestere, legismertebb a Maigret felügyelő sorozatáról. Több mint 400 regényt és rövid történetet írt élete során. Stílusa egyszerű, de rendkívül atmoszférikus, a karakterek és a helyszínek részletes ábrázolására fókuszál."
+        "description": "George Simenon was a Belgian writer and master of psychological crime fiction, best known for the Inspector Maigret series. He wrote over 400 novels and short stories during his lifetime. His style is simple yet highly atmospheric, focusing on character psychology and setting."
     },
     {
         "name": "Isaac Asimov",
-        "description": "Isaac Asimov amerikai sci-fi és tudományos író, a 'Foundation' és 'Robot' sorozatok alkotója. Rendkívül termékeny író volt, több mint 500 könyvet publikált különböző tudományos és szépirodalmi témákban. Munkái meghatározóak a modern sci-fi műfajban, különösen a robotika és az űroperák terén."
+        "description": "Isaac Asimov was an American science fiction and science writer, creator of the 'Foundation' and 'Robot' series. He was extraordinarily prolific, publishing more than 500 books across science and fiction. His work played a major role in shaping modern science fiction, especially in robotics and space opera."
     },
     {
         "name": "Brandon Hackett",
-        "description": "Brandon Hackett magyar sci-fi író, legismertebb a 'Metahuman' és 'Redemption' sorozatairól. Regényeiben a technológia és a társadalmi kérdések izgalmas kombinációját mutatja be. Aktívan jelen van a hazai sci-fi közösségben, workshopokat és előadásokat is tart."
+        "description": "Brandon Hackett is a Hungarian science fiction author best known for the 'Metahuman' and 'Redemption' series. His novels explore the intersection of advanced technology and social issues. He is an active figure in the Hungarian sci-fi community, frequently holding workshops and lectures."
     },
     {
         "name": "Andrzej Sapkowski",
-        "description": "Andrzej Sapkowski lengyel fantasy író, a 'The Witcher' sorozat szerzője, amelyből nemzetközileg is sikeres videojáték és sorozat készült. Regényei gazdag világépítéssel és komplex karakterekkel rendelkeznek. Sapkowski művei gyakran a politikai intrikát és a morális dilemmákat is feldolgozzák."
+        "description": "Andrzej Sapkowski is a Polish fantasy writer and the author of 'The Witcher' series, which inspired internationally successful video games and a television series. His novels feature rich world-building and complex characters. His works often explore political intrigue and moral ambiguity."
     },
     {
         "name": "Jack McDevitt",
-        "description": "Jack McDevitt amerikai sci-fi író, főként az archeológiai sci-fi és az űropera műfajában ismert. Művei gyakran foglalkoznak az emberiség múltjával és a csillagközi felfedezésekkel. Több regényét jelölték Hugo- és Nebula-díjra, stílusa részletgazdag és izgalmas."
+        "description": "Jack McDevitt is an American science fiction author known for archaeological science fiction and space opera. His works often explore humanity’s past and interstellar discovery. Several of his novels have been nominated for Hugo and Nebula Awards."
     },
     {
         "name": "Dan Simmons",
-        "description": "Dan Simmons amerikai író, aki horror, sci-fi és történelmi regényeket is ír. Leghíresebb művei közé tartozik az 'Hyperion' ciklus, amely a modern űropera egyik kiemelkedő példája. Stílusa komplex, karakterközpontú és filozófiai mélységekkel teli."
+        "description": "Dan Simmons is an American author who writes across horror, science fiction, and historical fiction. His most famous work is the 'Hyperion Cantos', considered a landmark of modern space opera. His writing is complex, character-driven, and philosophically rich."
     },
     {
         "name": "Jussi Adler-Olsen",
-        "description": "Jussi Adler-Olsen dán krimiíró, legismertebb a 'Department Q' sorozatáról, amely nyomozói krimikből áll. Regényei izgalmasak, karakterorientáltak és gyakran szatirikus társadalmi elemeket tartalmaznak. Az író rendkívül népszerű Skandináviában és nemzetközileg is."
+        "description": "Jussi Adler-Olsen is a Danish crime writer best known for the 'Department Q' series of detective novels. His books are suspenseful, character-focused, and often contain satirical social commentary. He is one of the most popular Scandinavian crime authors internationally."
     },
     {
         "name": "Bernard Cornwell",
-        "description": "Bernard Cornwell brit történelmi regényíró, legismertebb az 'The Last Kingdom' sorozatról, amelyet televíziós adaptáció is követett. Munkái a történelmi hitelességet ötvözik a feszes cselekménnyel és erős karakterdrámával. Írásai nagy hatással voltak a modern történelmi fikcióra."
-    },
-    {
-        "name": "Bíró Szabolcs",
-        "description": "Bíró Szabolcs magyar történelmi regényíró, legismertebb az 'Anjouk' sorozatról, amely a középkori Magyar Királyság történetét dolgozza fel. Regényei alapos kutatómunkára épülnek és erős karakterábrázolással rendelkeznek. Aktív szereplője a hazai történelmi irodalmi életnek."
+        "description": "Bernard Cornwell is a British historical novelist best known for 'The Last Kingdom' series, later adapted for television. His novels combine historical authenticity with intense action and strong character drama. He has had a major influence on modern historical fiction."
     },
     {
         "name": "Christopher Paolini",
-        "description": "Christopher Paolini amerikai fantasy író, az 'Eragon' című regénnyel vált világhírűvé, amelyet tinédzserként írt. Az 'Örökség ciklus' nagy sikerű fantasy sorozattá nőtte ki magát. Paolini később sci-fi műfajban is alkotott, újfajta világépítési megközelítéssel."
+        "description": "Christopher Paolini is an American fantasy writer who gained fame with 'Eragon', written during his teenage years. The 'Inheritance Cycle' became a highly successful fantasy series. He later expanded into science fiction with a fresh approach to world-building."
     },
     {
         "name": "Cixin Liu",
-        "description": "Cixin Liu kínai sci-fi író, világhírnévre a 'Háromtest-probléma' trilógiával tett szert, amely új dimenziókat nyitott a hard sci-fi műfajában. Művei nagyléptékű technológiai és filozófiai kérdéseket vizsgálnak. Írásai erősen hatottak a modern sci-fi gondolkodásra globálisan."
+        "description": "Cixin Liu is a Chinese science fiction writer best known for 'The Three-Body Problem' trilogy, which brought global attention to hard science fiction. His works explore large-scale technological and philosophical questions. He has had a strong international influence on modern sci-fi."
     },
     {
         "name": "Colin Renfrew",
-        "description": "Colin Renfrew brit régész és tudományos író, aki az európai őstörténet kutatásának meghatározó alakja. Munkái a nyelvészetet és a régészetet kombinálják. Számos könyvet publikált a civilizációk kialakulásáról és a kulturális fejlődés korai szakaszairól."
+        "description": "Colin Renfrew is a British archaeologist and academic writer, known for his influential research into European prehistory. His work combines archaeology and linguistics. He has published extensively on the origins of civilization and early cultural development."
     },
     {
         "name": "Dmitry Glukhovsky",
-        "description": "Dmitry Glukhovsky orosz sci-fi író, legismertebb a 'Metro 2033' posztapokaliptikus regénysorozatról. Írásait erős társadalmi és politikai kommentár jellemzi. Műveiből videojáték-adaptációk is készültek, amelyek tovább növelték népszerűségét."
+        "description": "Dmitry Glukhovsky is a Russian science fiction writer best known for the post-apocalyptic 'Metro 2033' series. His writing features strong social and political commentary. The series was adapted into successful video games."
     },
     {
         "name": "George R. R. Martin",
-        "description": "George R. R. Martin amerikai fantasy író, a 'A Song of Ice and Fire' sorozat alkotója, amelyből a 'Trónok harca' című világsikerű sorozat készült. Regényei komplex karakterekkel és kiszámíthatatlan történetvezetéssel tűnnek ki. Művei a modern fantasy új mércéjét állították fel."
+        "description": "George R. R. Martin is an American fantasy author and creator of 'A Song of Ice and Fire', adapted into the globally successful 'Game of Thrones' series. His novels are known for complex characters and unpredictable storytelling. His work redefined modern epic fantasy."
     },
     {
         "name": "James S. A. Corey",
-        "description": "James S. A. Corey a Daniel Abraham és Ty Franck írói álnéven alkotó szerzőpárost jelöli, akik az 'The Expanse' sci-fi sorozatot írták. Műveik a kemény sci-fi és a karakterközpontú dráma elegyítése révén váltak népszerűvé. A sorozatból nagyszabású televíziós adaptáció is készült."
+        "description": "James S. A. Corey is the joint pen name of authors Daniel Abraham and Ty Franck, creators of 'The Expanse' series. Their work blends hard science fiction with character-driven drama. The series was adapted into a large-scale television production."
     },
     {
         "name": "John le Carré",
-        "description": "John le Carré brit író, a kémregény műfajának mestere. Művei, mint a 'The Spy Who Came in from the Cold', a hidegháború árnyoldalait mutatják be realista és feszült atmoszférával. Stílusa kifinomult és intelligens, nagy hatással volt a modern thrillerre."
+        "description": "John le Carré was a British author and master of the spy novel. Works such as 'The Spy Who Came in from the Cold' portray the moral complexity of the Cold War era. His refined, realistic style greatly influenced the modern thriller genre."
     },
     {
         "name": "Kathy Reichs",
-        "description": "Kathy Reichs amerikai krimiíró és igazságügyi antropológus, akinek szakértelme alapot ad regényei hitelességéhez. Legismertebb a Temperance Brennan-sorozat, amely a 'Bones' című sorozatot inspirálta. Műveiben tudományos pontosság és feszült bűnügyi cselekmény elegyedik."
+        "description": "Kathy Reichs is an American crime writer and forensic anthropologist whose expertise lends realism to her novels. She is best known for the Temperance Brennan series, which inspired the TV show 'Bones'. Her books combine scientific accuracy with tense criminal investigations."
     },
     {
         "name": "Kim Stanley Robinson",
-        "description": "Kim Stanley Robinson amerikai sci-fi író, legismertebb a 'Mars-trilógia' szerzőjeként. Művei gyakran vizsgálják az ökológiai és társadalmi kérdéseket jövőbeli kontextusban. Regényei részletes világépítéssel és tudományos alapossággal tűnnek ki a műfajban."
+        "description": "Kim Stanley Robinson is an American science fiction writer best known for the 'Mars Trilogy'. His novels explore ecological, political, and social issues in future settings. He is renowned for detailed world-building and scientific rigor."
     },
     {
         "name": "Michael J. Sullivan",
-        "description": "Michael J. Sullivan amerikai fantasy író, legismertebb a 'Riyria Revelations' és 'Riyria Chronicles' sorozatokról. Művei könnyen olvashatóak, karakterközpontúak és gazdag világépítést tartalmaznak. Írásmódja a klasszikus kalandfantasy hangulatát idézi."
+        "description": "Michael J. Sullivan is an American fantasy author best known for the 'Riyria Revelations' and 'Riyria Chronicles' series. His writing is accessible, character-focused, and rich in world-building. His style evokes classic adventure fantasy."
     },
     {
         "name": "Michael Reaves",
-        "description": "Michael Reaves amerikai író és forgatókönyvíró, aki számos sci-fi és fantasy műhöz járult hozzá. Több 'Star Wars' regény és animációs sorozat írója volt, valamint Emmy-díjat is nyert. Munkái gyakran sötétebb hangvételűek és karaktervezéreltek."
+        "description": "Michael Reaves was an American novelist and screenwriter who contributed to numerous science fiction and fantasy projects. He wrote several 'Star Wars' novels and worked on animated series, earning an Emmy Award. His stories are often darker and character-driven."
     },
     {
         "name": "Michio Kaku",
-        "description": "Michio Kaku amerikai elméleti fizikus és tudományos ismeretterjesztő, aki közérthetően magyarázza a modern fizika bonyolult fogalmait. Könyvei a jövő technológiáját, az űrutazást és a kvantumfizikát mutatják be a nagyközönség számára. Gyakran szerepel dokumentumfilmekben és ismeretterjesztő műsorokban."
+        "description": "Michio Kaku is an American theoretical physicist and popular science writer known for explaining complex physics in an accessible way. His books explore future technology, space travel, and quantum physics. He frequently appears in documentaries and science programs."
     },
     {
         "name": "Peter F. Hamilton",
-        "description": "Peter F. Hamilton brit sci-fi író, a nagyléptékű, részletgazdag űroperák mestere. Legismertebb művei a 'Night's Dawn' trilógia és a 'Commonwealth Saga'. Regényei bonyolult világokat és összetett cselekményszálakat vonultatnak fel."
-    },
-    {
-        "name": "Pogátsa Zoltán",
-        "description": "Pogátsa Zoltán magyar közgazdász, társadalomtudós és egyetemi oktató. Munkássága a gazdaságpolitika, az európai integráció és a társadalmi egyenlőtlenségek témáira fókuszál. Számos ismeretterjesztő könyvet és tanulmányt publikált közérthető stílusban."
+        "description": "Peter F. Hamilton is a British science fiction writer and a master of large-scale space opera. His best-known works include the 'Night's Dawn Trilogy' and the 'Commonwealth Saga'. His novels feature complex worlds and intricate plotlines."
     },
     {
         "name": "Richard Rudgley",
-        "description": "Richard Rudgley brit antropológus, író és műsorvezető, aki az őstörténet és a korai civilizációk kutatására specializálódott. Könyvei gyakran alternatív nézőpontokból vizsgálják az emberi fejlődést. Dokumentumfilmekben is szerepel, ahol régészeti és kulturális témákat mutat be."
+        "description": "Richard Rudgley is a British anthropologist, author, and television presenter specializing in prehistory and early civilizations. His books often examine human development from alternative perspectives. He has appeared in documentaries on archaeological and cultural topics."
     },
     {
         "name": "Sir Arthur Conan Doyle",
-        "description": "Sir Arthur Conan Doyle skót író, Sherlock Holmes megalkotója és a detektívirodalom egyik legmeghatározóbb alakja. Művei között történelmi regények és sci-fi történetek is megtalálhatók. Stílusa precíz, feszült és rendkívül karakterközpontú."
+        "description": "Sir Arthur Conan Doyle was a Scottish writer and the creator of Sherlock Holmes, one of the most iconic figures in detective fiction. He also wrote historical novels and early science fiction. His precise, character-driven style shaped modern crime literature."
     },
     {
         "name": "Timothy Zahn",
-        "description": "Timothy Zahn amerikai sci-fi író, legismertebb a 'Star Wars' univerzumhoz írt regényeiről, különösen Thrawn admirális karakterének megalkotásáról. Munkái intelligens cselekményvezetést és stratégiai gondolkodást helyeznek előtérbe. Többször nyert Hugo-díjat novelláival."
+        "description": "Timothy Zahn is an American science fiction author best known for his 'Star Wars' novels, particularly for creating the character of Grand Admiral Thrawn. His work emphasizes intelligent plotting and strategic thinking. He has won multiple Hugo Awards for short fiction."
     },
     {
         "name": "Robert Galbraith",
-        "description": "Robert Galbraith J. K. Rowling krimiírói álneve, aki a 'Cormoran Strike' sorozattal vált ismertté ebben a műfajban. A regények sötétebb, realista hangulatot képviselnek, és összetett bűnügyi történeteket mesélnek el. A sorozatból televíziós adaptáció is készült."
+        "description": "Robert Galbraith is the crime fiction pen name of J. K. Rowling, best known for the 'Cormoran Strike' series. The novels feature dark, realistic tones and complex criminal investigations. The series has been adapted for television."
     },
     {
         "name": "Jo Nesbø",
-        "description": "Jo Nesbø norvég krimiíró, legismertebb a Harry Hole nyomozóról szóló sorozatról. Könyvei kemény, feszültséggel teli noir hangulatot árasztanak, miközben komplex karaktereket mutatnak be. Európa-szerte az egyik legnépszerűbb skandináv krimiszerző."
+        "description": "Jo Nesbø is a Norwegian crime writer best known for the Harry Hole detective series. His novels feature gritty noir atmospheres and psychologically complex characters. He is one of the most widely read Scandinavian crime authors in Europe."
     },
     {
         "name": "Yrsa Sigurðardóttir",
-        "description": "Yrsa Sigurðardóttir izlandi krimi- és thrilleríró, aki gyakran ötvözi műveiben a hideg, misztikus izlandi hangulatot a modern bűnügyi történetekkel. Nemzetközi sikert a Thóra Gudmundsdóttir nyomozónőről szóló sorozattal ért el. Írásai sötétek, feszült ritmusúak és karakterközpontúak."
+        "description": "Yrsa Sigurðardóttir is an Icelandic crime and thriller writer who blends modern crime stories with Iceland’s cold, mysterious atmosphere. She gained international recognition with the Thóra Gudmundsdóttir series. Her writing is dark, tense, and character-focused."
+    },
+    {
+        "name": "Adrian Tchaikovsky",
+        "description": "Adrian Tchaikovsky is a British science fiction and fantasy author best known for 'Children of Time'. His work explores evolution, artificial intelligence, and alien societies. He is praised for originality and scientific imagination."
+    },
+    {
+        "name": "Dan Jones",
+        "description": "Dan Jones is a British historian, journalist, and author specializing in medieval history. He is known for making complex historical topics accessible to a wide audience. His books often focus on power, politics, and conflict in the Middle Ages."
+    },
+    {
+        "name": "Octavia E. Butler",
+        "description": "Octavia E. Butler was an American science fiction author known for exploring race, gender, and power through speculative fiction. Her works, such as the 'Patternist' and 'Xenogenesis' series, are considered foundational to modern sci-fi. She was a multiple Hugo and Nebula Award winner."
     }
 ]

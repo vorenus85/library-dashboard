@@ -1,50 +1,157 @@
 [
     {
-        "name": "Science Fiction",
-        "description": "A műfaj tudományos elméletekre épít, futurisztikus technológiákat és alternatív világokat mutat be. Gyakran foglalkozik társadalmi, filozófiai vagy tudományos kérdésekkel."
+        "name": "Detective",
+        "description": "Novels centered around detectives solving crimes, often featuring clever mysteries and deductive reasoning.",
+        "authors": ["Sir Arthur Conan Doyle", "Agatha Christie", "Dorothy L. Sayers"]
     },
     {
-        "name": "Hard Science Fiction",
-        "description": "A sci-fi azon ága, amely szigorúan követi a fizika és természettudományok valós szabályait. A technológiák, űrutazások és tudományos részletek hitelessége kiemelt szerepet kap."
+        "name": "Robotics",
+        "description": "Science fiction focusing on robots, artificial intelligence, and their interaction with humans and society.",
+        "authors": ["Isaac Asimov", "Philip K. Dick"]
     },
     {
-        "name": "Space Opera",
-        "description": "Monumentális, űrben játszódó történetek, nagy léptékű konfliktusokkal, galaktikus birodalmakkal és epikus kalandokkal. A cselekmény dinamikus, sokszor akcióközpontú."
+        "name": "Short Stories",
+        "description": "Collections of brief, self-contained stories, often exploring imaginative concepts or focused themes.",
+        "authors": ["Neil Gaiman", "George R. R. Martin"]
     },
     {
-        "name": "Fantasy",
-        "description": "A műfaj mágikus világokat, mitológiai lényeket és természetfeletti erőket vonultat fel. Középpontjában gyakran hősök, küldetések és epikus történetívek állnak."
+        "name": "Young Adult",
+        "description": "Books targeting teenage readers, often featuring coming-of-age themes, fantasy, and adventure.",
+        "authors": ["J.K. Rowling", "Christopher Paolini", "Suzanne Collins"]
     },
     {
-        "name": "Urban Fantasy",
-        "description": "A fantasy modern környezetben játszódó változata, ahol a természetfeletti világ szorosan összefonódik a mindennapokkal. Gyakran sötétebb, misztikus hangulatú."
+        "name": "Epic Fantasy",
+        "description": "Fantasy stories with expansive world-building, large casts, complex plots, and epic conflicts.",
+        "authors": ["George R. R. Martin", "Brandon Sanderson", "Robert Jordan"]
     },
     {
-        "name": "Detective / Mystery",
-        "description": "Bűntények felderítése, nyomozások és rejtélyek megoldása áll a középpontban. A történetek logikus következtetésekre és karaktervezérelt nyomozásra épülnek."
+        "name": "Adventure",
+        "description": "Action-driven stories featuring exploration, quests, and exciting challenges in various settings.",
+        "authors": ["Jules Verne", "Michael Crichton", "Rick Riordan"]
     },
     {
-        "name": "Crime Thriller",
-        "description": "Feszültséggel teli, gyors tempójú történetek bűncselekmények, üldözések és veszélyhelyzetek köré épülve. A hangsúly a drámai fordulatokon és a suspense-en van."
+        "name": "Dystopian",
+        "description": "Fiction set in oppressive, controlled, or post-apocalyptic societies exploring societal issues and human survival.",
+        "authors": ["George Orwell", "Suzanne Collins", "Dmitry Glukhovsky"]
+    },
+    {
+        "name": "Alien Contact",
+        "description": "Science fiction focusing on encounters with extraterrestrial life, first contact scenarios, and interstellar diplomacy.",
+        "authors": ["Cixin Liu", "Arthur C. Clarke", "Ted Chiang"]
+    },
+    {
+        "name": "Speculative Fiction",
+        "description": "A broad category exploring 'what if' scenarios, often including science fiction, fantasy, and alternate histories.",
+        "authors": ["Margaret Atwood", "Ursula K. Le Guin", "Philip K. Dick"]
+    },
+    {
+        "name": "Time Travel",
+        "description": "Stories involving movement through time, exploring paradoxes, alternate histories, and the consequences of altering the past.",
+        "authors": ["H.G. Wells", "Audrey Niffenegger", "Connie Willis"]
+    },
+    {
+        "name": "Social Commentary",
+        "description": "Books that critique societal structures, politics, or culture, often through allegory or speculative settings.",
+        "authors": ["George Orwell", "Aldous Huxley", "Ursula K. Le Guin"]
+    },
+    {
+        "name": "Star Wars",
+        "description": "Science fiction stories set in the Star Wars universe, featuring space opera adventures, iconic characters, and intergalactic conflicts.",
+        "authors": ["George Lucas", "Timothy Zahn", "Michael Stackpole"]
+    },
+    {
+        "name": "Horror",
+        "description": "Stories intended to frighten, unsettle, or disturb, often featuring supernatural elements or psychological terror.",
+        "authors": ["Stephen King", "Clive Barker", "H.P. Lovecraft"]
+    },
+    {
+        "name": "Military",
+        "description": "Fiction focusing on warfare, military strategy, and soldier experiences, often set in historical or speculative settings.",
+        "authors": ["Bernard Cornwell", "Simon Scarrow", "Tom Clancy"]
+    },
+    {
+        "name": "Biography",
+        "description": "Non-fiction accounts of an individual's life, exploring personal achievements, challenges, and historical context.",
+        "authors": ["Walter Isaacson", "Robert Caro", "David McCullough"]
+    },
+    {
+        "name": "Political History",
+        "description": "Non-fiction works analyzing political events, governance, policies, and influential figures across history.",
+        "authors": ["Simon Schama", "Dan Jones", "Andrew Roberts"]
+    },
+    {
+        "name": "Law",
+        "description": "Books exploring legal systems, judicial cases, or the history and philosophy of law.",
+        "authors": ["Laurence Tribe", "Bryan A. Garner"]
+    },
+    {
+        "name": "Medieval History",
+        "description": "Historical accounts and analyses focusing on the Middle Ages, including politics, culture, and society.",
+        "authors": ["Dan Jones", "Barbara Tuchman", "Marc Morris"]
+    },
+    {
+        "name": "Classic",
+        "description": "Timeless literature recognized for its artistic, cultural, or historical significance.",
+        "authors": ["Sir Arthur Conan Doyle", "Charles Dickens", "Jane Austen"]
     },
     {
         "name": "Nordic Noir",
-        "description": "Sötét hangulatú, gyakran társadalomkritikus krimik, skandináv környezetben. A pszichológiai mélység és valósághű bűntényábrázolás jellemzi."
+        "description": "Crime fiction from Nordic countries characterized by dark themes, moral complexity, and bleak settings.",
+        "authors": ["Jo Nesbø", "Yrsa Sigurðardóttir", "Jussi Adler-Olsen"]
     },
     {
-        "name": "Historical Fiction",
-        "description": "Valós történelmi korszakokba helyezett regények, amelyek beleolvasztják a fikció elemeit. Gyakran hiteles leírásokkal mutatják be a múlt társadalmait és eseményeit."
+        "name": "Contemporary",
+        "description": "Fiction set in modern times, reflecting current society, culture, and everyday life.",
+        "authors": ["Gillian Flynn", "Harlan Coben", "Tana French"]
     },
     {
-        "name": "Science / Popular Science",
-        "description": "Valós tudományos témák közérthető bemutatása. A műfaj célja a tudomány népszerűsítése és könnyen emészthető formában való átadása."
+        "name": "Thriller",
+        "description": "Fast-paced stories with tension, danger, and suspenseful plots, often overlapping with crime fiction.",
+        "authors": ["Dan Simmons", "John le Carré", "Yrsa Sigurðardóttir"]
     },
     {
-        "name": "Economics / Politics",
-        "description": "Közgazdasági és társadalmi elemzéseket bemutató művek. A műfaj gyakran foglalkozik államok, rendszerek és gazdasági folyamatok működésével."
+        "name": "Spy",
+        "description": "Narratives centered around espionage, intelligence operations, and secret agents, often with international intrigue.",
+        "authors": ["John le Carré", "Ian Fleming", "Daniel Silva"]
     },
     {
-        "name": "Mythology / Ancient History",
-        "description": "Ősi civilizációk történelmét, mitológiáját és kultúráját bemutató művek. A műfaj gyakran ötvözi a történeti kutatást narratív vagy elemző megközelítésekkel."
+        "name": "Mystery",
+        "description": "Fiction centered around solving a puzzle, crime, or unexplained event, often emphasizing deduction and suspense.",
+        "authors": ["Agatha Christie", "Arthur Conan Doyle", "Dorothy L. Sayers"]
+    },
+    {
+        "name": "Science Fiction",
+        "description": "Speculative fiction exploring futuristic technology, scientific concepts, space travel, and societal impact of science.",
+        "authors": ["Isaac Asimov", "Arthur C. Clarke", "John Scalzi", "Cixin Liu"]
+    },
+    {
+        "name": "Hard Sci-Fi",
+        "description": "Science fiction with rigorous attention to scientific accuracy, technical detail, and plausibility in futuristic scenarios.",
+        "authors": ["Isaac Asimov", "Andy Weir", "Kim Stanley Robinson"]
+    },
+    {
+        "name": "Space Opera",
+        "description": "A subgenre of science fiction emphasizing epic interstellar adventures, space battles, and grand-scale civilizations.",
+        "authors": ["James S. A. Corey", "Peter F. Hamilton", "Jack McDevitt"]
+    },
+    {
+        "name": "Space Exploration",
+        "description": "Stories focusing on humanity's exploration of space, including interplanetary travel, colonization, and scientific discovery.",
+        "authors": ["Michio Kaku", "Arthur C. Clarke", "Andy Weir"]
+    },
+    {
+        "name": "Post-Apocalyptic",
+        "description": "Fiction set after a societal collapse, exploring survival, dystopian worlds, and human resilience in harsh environments.",
+        "authors": ["Cormac McCarthy", "Dmitry Glukhovsky", "Emily St. John Mandel"]
+    },
+    {
+        "name": "Fantasy",
+        "description": "Stories set in imagined worlds, often featuring magic, mythical creatures, epic quests, and complex world-building.",
+        "authors": [
+            "George R. R. Martin",
+            "Andrzej Sapkowski",
+            "Christopher Paolini",
+            "Brandon Sanderson"
+        ]
     }
 ]

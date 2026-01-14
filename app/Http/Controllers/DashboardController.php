@@ -41,7 +41,7 @@ class DashboardController extends Controller
     }
 
     public function topAuthors(){
-        $result = Author::select('id', 'name')->withCount("books")->having('books_count', '>', 1)->orderBy("books_count", "desc")->get();
+        $result = Author::select('id', 'name')->withCount("books")->having('books_count', '>', 5)->orderBy("books_count", "desc")->get();
         return response()->json(["topAuthors" => $result], 200);
     }
 

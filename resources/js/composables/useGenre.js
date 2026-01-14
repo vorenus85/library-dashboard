@@ -21,6 +21,26 @@ export const useGenre = () => {
         description: '',
     })
 
+    const genreValidator = ({ values }) => {
+        const errors = {}
+
+        if (!values.name) {
+            errors.name = [{ message: 'Genre name is required.' }]
+        }
+
+        if (Object.keys(errors).length) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            })
+        }
+
+        return {
+            values,
+            errors,
+        }
+    }
+
     const getGenresMinimal = async () => {
         loading.value = true
 
@@ -97,5 +117,6 @@ export const useGenre = () => {
         loading,
         genreId,
         formKey,
+        genreValidator,
     }
 }

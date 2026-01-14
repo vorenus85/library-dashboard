@@ -14,7 +14,7 @@
             <Form
                 v-slot="$form"
                 :initialValues
-                :resolver
+                :resolver="authorValidator"
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
                 :validateOnValueUpdate="true"
@@ -70,21 +70,9 @@ import { useRedirects } from '@/composables/useRedirects.js'
 import { useAuthor } from '@/composables/useAuthor'
 import { createAuthor } from '@/services/authorService'
 
-const { initialValues } = useAuthor()
+const { initialValues, authorValidator } = useAuthor()
 const { toAuthorList } = useRedirects()
 const toast = useToast()
-const resolver = ({ values }) => {
-    const errors = {}
-
-    if (!values.name) {
-        errors.name = [{ message: 'Author name is required.' }]
-    }
-
-    return {
-        values,
-        errors,
-    }
-}
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

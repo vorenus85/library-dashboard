@@ -10,7 +10,7 @@
                 :key="formKey"
                 v-slot="$form"
                 :initialValues="initialValues"
-                :resolver
+                :resolver="genreValidator"
                 @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
                 :validateOnValueUpdate="true"
@@ -62,21 +62,8 @@ import { useGenre } from '@/composables/useGenre'
 import { updateGenreById } from '@/services/genreService'
 
 const { toGenreList } = useRedirects()
-const { initialValues, formKey, genreId, getGenre } = useGenre()
+const { initialValues, formKey, genreId, getGenre, genreValidator } = useGenre()
 const toast = useToast()
-
-const resolver = ({ values }) => {
-    const errors = {}
-
-    if (!values.name) {
-        errors.name = [{ message: 'Genre name is required.' }]
-    }
-
-    return {
-        values,
-        errors,
-    }
-}
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

@@ -2,7 +2,7 @@
     <header class="bg-white shadow layout-topbar">
         <div class="layout-topbar-logo-container">
             <button
-                @click="toggleSiderbar"
+                @click="toggleDrawer"
                 type="button"
                 class="layout-menu-button layout-topbar-action"
             >
@@ -21,9 +21,12 @@
 </template>
 <script setup>
 import UiIcon from '@/components/UiIcon.vue'
+import { useLibraryStore } from '@/stores/library'
 
-const toggleSiderbar = () => {
-    alert('Todo toggle sidebar logic')
+const libraryStore = useLibraryStore()
+
+const toggleDrawer = () => {
+    libraryStore.toggleDrawer()
 }
 
 const toggleDarkMode = () => {

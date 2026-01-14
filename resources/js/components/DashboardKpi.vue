@@ -31,14 +31,8 @@ defineProps({
         type: String,
         required: true,
     },
-    kpiValue: {
-        type: [String, Number],
-        required: true,
-    },
-    icon: {
-        type: String,
-        required: true,
-    },
+    kpiValue: {},
+    icon: {},
     rate: {
         type: [String, Number],
     },

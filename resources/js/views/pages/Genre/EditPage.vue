@@ -59,6 +59,7 @@ import { useToast } from 'primevue/usetoast'
 import { onMounted } from 'vue'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
+import { updateGenreById } from '@/services/genreService'
 
 const { toGenreList } = useRedirects()
 const { initialValues, formKey, genreId, getGenre } = useGenre()
@@ -80,13 +81,17 @@ const resolver = ({ values }) => {
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            await axios.put(`/genres/${genreId}`, values)
+            await updateGenreById(genreId, values)
 
             toast.add({
                 severity: 'success',
                 summary: 'Genre updated successfully!',
                 life: 3000,
             })
+
+            setTimeout(() => {
+                toGenreList()
+            }, 300)
         } catch (error) {
             toast.add({
                 severity: 'error',

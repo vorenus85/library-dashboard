@@ -56,6 +56,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 import { useToast } from 'primevue/usetoast'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
+import { createGenre } from '@/services/genreService'
 
 const toast = useToast()
 const { toGenreList } = useRedirects()
@@ -77,7 +78,7 @@ const resolver = ({ values }) => {
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
-            await axios.post('/genres', values)
+            await createGenre(values)
 
             toast.add({
                 severity: 'success',

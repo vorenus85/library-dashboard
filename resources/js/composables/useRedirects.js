@@ -1,6 +1,6 @@
 import { useRouter } from 'vue-router'
 
-export function useRedirects() {
+export const useRedirects = () => {
     const router = useRouter()
 
     const toCreateBook = () => {

@@ -90,14 +90,14 @@
                         </Button>
                     </template>
                 </Column>
-                <Column field="is_read" header="Is read" style="width: 10%">
+                <Column sortable field="is_read" header="Is read" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_read)"
                             @change="toggleRead(slotProps.data.id)"
                         /> </template
                 ></Column>
-                <Column field="is_wishlist" header="Is wishlist" style="width: 10%">
+                <Column sortable field="is_wishlist" header="Is wishlist" style="width: 10%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_wishlist)"
@@ -157,6 +157,12 @@ import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useBooksExport } from '@/composables/useBooksExport'
 import { useCustomConfirm } from '@/composables/useCustomConfirm'
+import {
+    fetchBooks,
+    toggleBookReadStatus,
+    toggleBookWishlistStatus,
+    deleteBookById,
+} from '@/services/bookService'
 
 const { confirmAction } = useCustomConfirm()
 const { exportBooksCsv, exportBooksExcel } = useBooksExport()
@@ -218,7 +224,7 @@ const deleteConfirm = id => {
 
 const toggleRead = async id => {
     try {
-        await axios.patch(`/books/${id}/toggle-read`)
+        await toggleBookReadStatus(id)
 
         books.value = books.value.map(book =>
             book.id === id ? { ...book, is_read: !book.is_read } : book
@@ -230,7 +236,7 @@ const toggleRead = async id => {
 
 const toggleWishlist = async id => {
     try {
-        await axios.patch(`/books/${id}/toggle-wishlist`)
+        await toggleBookWishlistStatus(id)
 
         books.value = books.value.map(book =>
             book.id === id ? { ...book, is_wishlist: !book.is_wishlist } : book
@@ -244,7 +250,7 @@ const getBooks = async () => {
     loading.value = true
 
     try {
-        const { data } = await axios.get('/books')
+        const { data } = await fetchBooks()
 
         allBooks.value = data
         books.value = data
@@ -260,7 +266,7 @@ const deleteBook = async id => {
     loading.value = true
 
     try {
-        await axios.delete(`/books/${id}`)
+        await deleteBookById(id)
 
         const indexId = books.value.findIndex(el => {
             return el.id === id

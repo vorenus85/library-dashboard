@@ -1,4 +1,4 @@
-export function useDate() {
+export const useDate = () => {
     const getTimestampString = () => {
         const now = new Date()
         const timestamp =

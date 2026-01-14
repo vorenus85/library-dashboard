@@ -73,6 +73,7 @@ import { Button, Chip, Column, DataTable, IconField, Image, InputIcon, InputText
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { onMounted, ref } from 'vue'
 import WidgetTitle from '@/components/WidgetTitle.vue'
+import { fetchWishlistBooks } from '@/services/bookService'
 
 const wishListedBooks = ref([])
 const filters = ref()
@@ -105,7 +106,7 @@ const clearFilter = () => {
 const getWishlistedBooks = async () => {
     loading.value = true
     try {
-        const response = await axios.get('/wishlist')
+        const response = await fetchWishlistBooks()
 
         wishListedBooks.value = response.data
         loading.value = false

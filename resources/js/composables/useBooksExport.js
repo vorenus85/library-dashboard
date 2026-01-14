@@ -1,12 +1,12 @@
 import { useDate } from '@/composables/useDate'
+import { exportBooksByType } from '@/services/bookService'
+
 const { getTimestampString } = useDate()
 
-export function useBooksExport() {
+export const useBooksExport = () => {
     const exportBooksCsv = async () => {
         try {
-            const response = await axios.get('/books/export?format=csv', {
-                responseType: 'blob',
-            })
+            const response = await exportBooksByType('csv')
 
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
@@ -22,9 +22,7 @@ export function useBooksExport() {
 
     const exportBooksExcel = async () => {
         try {
-            const response = await axios.get('/books/export?format=excel', {
-                responseType: 'blob',
-            })
+            const response = await exportBooksByType('excel')
 
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')

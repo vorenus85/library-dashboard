@@ -1,8 +1,14 @@
 import { reactive, ref } from 'vue'
 import { useToast } from 'primevue'
 import { useRoute } from 'vue-router'
+import {
+    fetchAuthors,
+    fetchMinimalAuthors,
+    fetchAuthor,
+    deleteAuthorById,
+} from '@/services/authorService'
 
-export function useAuthor() {
+export const useAuthor = () => {
     const loading = ref(false)
     const authors = ref([])
     const toast = useToast()
@@ -19,7 +25,7 @@ export function useAuthor() {
         loading.value = true
 
         try {
-            const { data } = await axios.get('/authors/?minimal=1')
+            const { data } = await fetchMinimalAuthors()
             authors.value = data
             loading.value = false
         } catch (e) {
@@ -32,7 +38,7 @@ export function useAuthor() {
         loading.value = true
 
         try {
-            const { data } = await axios.get('/authors')
+            const { data } = await fetchAuthors()
             authors.value = data
             loading.value = false
         } catch (e) {
@@ -45,7 +51,7 @@ export function useAuthor() {
         loading.value = true
 
         try {
-            const { data } = await axios.get(`/authors/${authorId}`)
+            const { data } = await fetchAuthor(authorId)
             initialValues.name = data.name
             initialValues.description = data.description
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
@@ -60,7 +66,7 @@ export function useAuthor() {
         loading.value = true
 
         try {
-            await axios.delete(`/authors/${id}`)
+            await deleteAuthorById(id)
             const idIndex = authors.value.findIndex(el => {
                 return el.id === id
             })

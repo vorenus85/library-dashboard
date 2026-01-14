@@ -146,7 +146,6 @@ import {
     Select,
     SplitButton,
     ToggleSwitch,
-    useToast,
     useConfirm,
 } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
@@ -157,24 +156,16 @@ import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useBooksExport } from '@/composables/useBooksExport'
 import { useCustomConfirm } from '@/composables/useCustomConfirm'
-import {
-    fetchBooks,
-    toggleBookReadStatus,
-    toggleBookWishlistStatus,
-    deleteBookById,
-} from '@/services/bookService'
+import { useBook } from '@/composables/useBook'
 
 const { confirmAction } = useCustomConfirm()
 const { exportBooksCsv, exportBooksExcel } = useBooksExport()
 const confirm = useConfirm()
-const toast = useToast()
 const { genres, getGenresMinimal } = useGenre()
 const { toCreateBook } = useRedirects()
+const { loading, allBooks, books, deleteBook, getBooks, toggleRead, toggleWishlist } = useBook()
 
 const filters = ref()
-const allBooks = ref([])
-const books = ref([])
-const loading = ref(false)
 const selectedGenre = ref(null)
 const genreSelectKey = ref(1)
 
@@ -220,71 +211,6 @@ const deleteConfirm = id => {
         },
         acceptLabel: 'Delete',
     })
-}
-
-const toggleRead = async id => {
-    try {
-        await toggleBookReadStatus(id)
-
-        books.value = books.value.map(book =>
-            book.id === id ? { ...book, is_read: !book.is_read } : book
-        )
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const toggleWishlist = async id => {
-    try {
-        await toggleBookWishlistStatus(id)
-
-        books.value = books.value.map(book =>
-            book.id === id ? { ...book, is_wishlist: !book.is_wishlist } : book
-        )
-    } catch (e) {
-        console.error(e)
-    }
-}
-
-const getBooks = async () => {
-    loading.value = true
-
-    try {
-        const { data } = await fetchBooks()
-
-        allBooks.value = data
-        books.value = data
-
-        loading.value = false
-    } catch (e) {
-        console.error(e)
-        loading.value = false
-    }
-}
-
-const deleteBook = async id => {
-    loading.value = true
-
-    try {
-        await deleteBookById(id)
-
-        const indexId = books.value.findIndex(el => {
-            return el.id === id
-        })
-
-        books.value.splice(indexId, 1)
-
-        toast.add({
-            severity: 'success',
-            summary: 'Book deleted successfully',
-            life: 3000,
-        })
-
-        loading.value = false
-    } catch (e) {
-        console.error(e)
-        loading.value = false
-    }
 }
 
 const clearFilter = () => {

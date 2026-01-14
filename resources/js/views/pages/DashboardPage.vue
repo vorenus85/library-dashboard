@@ -2,7 +2,7 @@
     <AppLayout>
         <PageTitle title="Dashboard"> </PageTitle>
         <div class="dashboard grid grid-cols-12 gap-8">
-            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Total Books"
                     :kpiValue="bookCount"
@@ -10,7 +10,7 @@
                     color="blue"
                 ></DashboardKpi>
             </div>
-            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Wishlist Books"
                     :kpiValue="countIsWishList"
@@ -18,13 +18,23 @@
                     color="orange"
                 ></DashboardKpi>
             </div>
-            <div class="col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 dashboard-kpi">
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Books Read"
                     :kpiValue="countIsRead"
                     :rate="countIsReadRate"
-                    icon="book"
+                    icon="check-circle"
                     color="purple"
+                ></DashboardKpi>
+            </div>
+
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
+                <DashboardKpi
+                    title="Top Genre"
+                    :kpiValue="topGenre"
+                    :count="topGenreCount"
+                    icon="star"
+                    color="cyan"
                 ></DashboardKpi>
             </div>
 
@@ -51,12 +61,19 @@ import DashboardKpi from '@/components/DashboardKpi.vue'
 import TopGenresWidget from '@/components/TopGenresWidget.vue'
 import TopAuthorsWidget from '@/components/TopAuthorsWidget.vue'
 import WishlistWidget from '@/components/WishlistWidget.vue'
-import { fetchBookCount, fetchIsReadRate, fetchIsWishlistCount } from '@/services/bookService'
+import {
+    fetchBookCount,
+    fetchIsReadRate,
+    fetchIsWishlistCount,
+    fetchTopGenreWithName,
+} from '@/services/bookService'
 
 const bookCount = ref(0)
 const countIsWishList = ref(0)
 const countIsRead = ref(0)
 const countIsReadRate = ref(0)
+const topGenre = ref(null)
+const topGenreCount = ref(null)
 
 const getBookCount = async () => {
     const { data } = await fetchBookCount()
@@ -74,9 +91,16 @@ const getIsWishlistCount = async () => {
     countIsWishList.value = data.countIsWishList
 }
 
+const getTopGenreWithName = async () => {
+    const { data } = await fetchTopGenreWithName()
+    topGenre.value = data.topGenre.name
+    topGenreCount.value = data.topGenre.books_count
+}
+
 onMounted(() => {
     getBookCount()
     getIsReadRate()
     getIsWishlistCount()
+    getTopGenreWithName()
 })
 </script>

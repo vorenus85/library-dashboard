@@ -41,7 +41,8 @@
                             "
                             :alt="slotProps.data?.title"
                             preview
-                            width="45"
+                            class="book-image"
+                            width="90"
                         />
                         <Chip :label="slotProps.data?.title" />
                     </div>

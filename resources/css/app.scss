@@ -48,6 +48,10 @@ body {
     }
 }
 
+.p-datatable-column-title {
+    text-wrap-mode: nowrap;
+}
+
 .rounded-border {
     border-radius: var(--p-content-border-radius);
 }
@@ -55,6 +59,10 @@ body {
 .dashboard-kpi-icon {
     width: 2.5rem;
     height: 2.5rem;
+}
+
+.book-image {
+    min-width: 90px;
 }
 
 .bg-orange-100 {

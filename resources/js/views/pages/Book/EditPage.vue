@@ -143,17 +143,17 @@
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
                         id="bookPublisedYear"
-                        name="publised_year"
+                        name="published_year"
                         type="number"
                         placeholder="2000"
                         fluid
                     />
                     <Message
-                        v-if="$form.publised_year?.invalid"
+                        v-if="$form.published_year?.invalid"
                         severity="error"
                         size="small"
                         variant="simple"
-                        >{{ $form.publised_year.error?.message }}</Message
+                        >{{ $form.published_year.error?.message }}</Message
                     >
                 </div>
                 <div class="flex flex-col gap-1">
@@ -281,7 +281,7 @@ const getBook = async () => {
         initialValues.author = selectedAuthor.value
         initialValues.genres = selectedGenres.value
         initialValues.description = data.description
-        initialValues.publised_year = data.publised_year
+        initialValues.published_year = data.published_year
         initialValues.isbn = data.isbn
         initialValues.image = data.image
         uploadedImage.value = initialValues.image

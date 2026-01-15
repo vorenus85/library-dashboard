@@ -85,6 +85,47 @@
         "authors": ["Laurence Tribe", "Bryan A. Garner"]
     },
     {
+        "name": "Historical Fiction",
+        "description": "Fiction set in real historical periods, blending accurate historical detail with fictional characters and narratives to bring the past vividly to life.",
+        "authors": [
+            "Simon Scarrow",
+            "Bernard Cornwell",
+            "Ken Follett",
+            "Hilary Mantel",
+            "Dan Jones"
+        ]
+    },
+    {
+        "name": "History",
+        "description": "Non-fiction works examining past events, societies, and historical processes based on research and documented sources.",
+        "authors": ["Dan Jones", "Simon Schama", "Mary Beard", "Eric Hobsbawm"]
+    },
+    {
+        "name": "Popular Science",
+        "description": "Books that explain scientific concepts, discoveries, and phenomena for a general audience, often using engaging narratives and accessible language.",
+        "authors": ["Michio Kaku", "Carl Sagan", "Stephen Hawking"]
+    },
+    {
+        "name": "Physics",
+        "description": "Works exploring the fundamental principles of matter, energy, and the universe, from classical mechanics to quantum physics.",
+        "authors": ["Michio Kaku", "Richard Feynman", "Stephen Hawking"]
+    },
+    {
+        "name": "Futurism",
+        "description": "Books examining possible futures, technological trends, societal evolution, and speculative scenarios about humanity and the world.",
+        "authors": ["Michio Kaku", "Ray Kurzweil", "Peter Diamandis"]
+    },
+    {
+        "name": "Linguistics",
+        "description": "Books exploring the structure, history, and evolution of language, including linguistics theory and language development.",
+        "authors": ["Noam Chomsky", "Steven Pinker", "David Crystal"]
+    },
+    {
+        "name": "Prehistory",
+        "description": "Non-fiction works focusing on human societies before written records, covering early cultures, archaeology, and human evolution.",
+        "authors": ["Yuval Noah Harari", "Richard Rudgley", "Colin Renfrew"]
+    },
+    {
         "name": "Medieval History",
         "description": "Historical accounts and analyses focusing on the Middle Ages, including politics, culture, and society.",
         "authors": ["Dan Jones", "Barbara Tuchman", "Marc Morris"]

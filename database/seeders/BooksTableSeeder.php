@@ -18,10 +18,11 @@ class BooksTableSeeder extends Seeder
         $books = json_decode($json, true);
 
         foreach ($books as $book) {
-            Book::create([
+            try {
+                Book::create([
                 "title" => $book['title'],
                 "author_id" => $book['author_id'],
-                "publised_year" => $book['publised_year'],
+                "published_year" => $book['published_year'],
                 "isbn" => $book['isbn'],
                 "image" => $book['image'],
                 "pages" => $book['pages'],
@@ -29,6 +30,10 @@ class BooksTableSeeder extends Seeder
                 "is_wishlist" => $book['is_wishlist'],
                 "description" => $book['description'],
             ]);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+
         }
 
         $this->command->info('Books data seeded successfully!');

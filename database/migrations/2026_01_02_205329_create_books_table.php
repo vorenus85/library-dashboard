@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
             $table->unsignedBigInteger('author_id');
-            $table->integer('publised_year')->nullable();
+            $table->integer('published_year')->nullable();
             $table->string('isbn')->nullable();
             $table->string('image')->nullable();
             $table->integer('pages')->nullable();

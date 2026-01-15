@@ -121,17 +121,17 @@
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
                         id="bookPublisedYear"
-                        name="publised_year"
+                        name="published_year"
                         type="number"
                         placeholder="2000"
                         fluid
                     />
                     <Message
-                        v-if="$form.publised_year?.invalid"
+                        v-if="$form.published_year?.invalid"
                         severity="error"
                         size="small"
                         variant="simple"
-                        >{{ $form.publised_year.error?.message }}</Message
+                        >{{ $form.published_year.error?.message }}</Message
                     >
                 </div>
                 <div class="flex flex-col gap-1">

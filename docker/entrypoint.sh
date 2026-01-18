@@ -8,10 +8,14 @@ mkdir -p storage/framework/views storage/framework/cache storage/framework/sessi
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Create the public/storage symlink (if it doesn't exist)
-if [ ! -L public/storage ]; then
+# Laravel storage link létrehozása (csak ha még nem létezik)
+if [ ! -L /var/www/html/public/storage ]; then
     php artisan storage:link
 fi
+
+# Laravel cache, config, route cache (opcionális)
+php artisan config:cache
+php artisan route:cache
 
 # Copy default images (only if not already present)
 if [ -d /var/www/docker/default-images ]; then

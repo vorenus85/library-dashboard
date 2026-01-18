@@ -21,9 +21,16 @@ body {
 
 .card {
     background: var(--surface-card);
-    padding: 2rem;
+    padding: 1rem;
     margin-bottom: 2rem;
     border-radius: var(--content-border-radius);
+}
+
+@media (min-width: 992px) {
+    .card {
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .card:last-child {
@@ -67,6 +74,31 @@ body {
 
 .bg-cyan-100 {
     background-color: rgb(207 250 254);
+}
+
+.p-datatable .p-datatable-header {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.p-image-original {
+    padding: 1rem;
+}
+
+.p-image {
+    width: 45px;
+    min-width: 45px;
+}
+
+.p-datatable-sortable-column {
+    white-space: nowrap;
+}
+
+@media (min-width: 992px) {
+    .p-image {
+        width: 90px;
+        min-width: 90px;
+    }
 }
 
 @keyframes fadein {

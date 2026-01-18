@@ -11,7 +11,7 @@
                 :initialValues
                 :resolver="bookValidator"
                 @submit="onFormSubmit"
-                class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
+                class="flex flex-col gap-4 w-full lg:w-1/2"
                 :validateOnValueUpdate="true"
                 :validateOnBlur="true"
             >
@@ -117,7 +117,7 @@
                     >
                 </div>
 
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 w-full lg:w-1/2">
                     <label for="bookPublisedYear">Publised year</label>
                     <InputText
                         id="bookPublisedYear"
@@ -134,7 +134,7 @@
                         >{{ $form.published_year.error?.message }}</Message
                     >
                 </div>
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 w-full lg:w-1/2">
                     <label for="bookIsbn">ISBN</label>
                     <InputText
                         id="bookIsbn"
@@ -151,7 +151,7 @@
                         >{{ $form.isbn.error?.message }}</Message
                     >
                 </div>
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 w-full lg:w-1/2">
                     <label for="bookPages">Pages no.</label>
                     <InputText id="bookPages" name="pages" type="number" placeholder="430" fluid />
                     <Message
@@ -170,7 +170,16 @@
                     <label for="bookPages">Is wishlist</label>
                     <ToggleSwitch name="is_wishlist" />
                 </div>
-                <Button type="submit" severity="primary" label="Save" />
+                <div class="flex flex-col">
+                    <Button
+                        type="submit"
+                        severity="primary"
+                        label="Save"
+                        class="ml-auto"
+                        size="large"
+                        style="width: 150px"
+                    />
+                </div>
             </Form>
         </div>
     </AppLayout>

@@ -12,7 +12,7 @@
                 :initialValues="initialValues"
                 :resolver="genreValidator"
                 @submit="onFormSubmit"
-                class="flex flex-col gap-4 w-full md:w-112 sm:w-56"
+                class="flex flex-col gap-4 w-full lg:w-1/2"
                 :validateOnValueUpdate="true"
                 :validateOnBlur="true"
                 :validateOnMount="true"
@@ -45,7 +45,16 @@
                         >{{ $form.description.error?.message }}</Message
                     >
                 </div>
-                <Button type="submit" severity="primary" label="Save" />
+                <div class="flex flex-col">
+                    <Button
+                        type="submit"
+                        severity="primary"
+                        label="Save"
+                        class="ml-auto"
+                        size="large"
+                        style="width: 150px"
+                    />
+                </div>
             </Form>
         </div>
     </AppLayout>

@@ -41,28 +41,23 @@
                             "
                             :alt="slotProps.data?.title"
                             preview
-                            width="45"
                         />
-                        <Chip :label="slotProps.data?.title" />
+                        <Button asChild v-slot="buttonProps" severity="secondary">
+                            <RouterLink
+                                :to="{
+                                    name: 'books.show',
+                                    params: {
+                                        bookId: slotProps.data?.id,
+                                    },
+                                }"
+                                :class="buttonProps.class"
+                                >{{ slotProps.data?.title }}</RouterLink
+                            >
+                        </Button>
                     </div>
                 </template>
             </Column>
-            <Column sortable field="author.name" header="Author" style="width: 15%">
-                <template #body="slotProps">
-                    <Button asChild variant="link" v-slot="buttonProps">
-                        <RouterLink
-                            :to="{
-                                name: 'authors.show',
-                                params: {
-                                    authorId: slotProps.data?.author?.id,
-                                },
-                            }"
-                            :class="buttonProps.class + ' px-0'"
-                            >{{ slotProps.data?.author?.name }}</RouterLink
-                        >
-                    </Button>
-                </template>
-            </Column>
+            <Column sortable field="author.name" header="Author" style="width: 10%"> </Column>
             <Column field="description" header="Description" style="width: 25%"></Column>
             <Column field="pages" header="Pages no." style="width: 25%"></Column>
         </DataTable>

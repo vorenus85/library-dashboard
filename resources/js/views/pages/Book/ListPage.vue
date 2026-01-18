@@ -32,6 +32,7 @@
                             variant="outlined"
                             @click="clearFilter()"
                             class="mr-auto"
+                            width="80px"
                         />
                         <IconField>
                             <InputIcon>
@@ -42,18 +43,19 @@
                                 placeholder="Keyword Search"
                             />
                         </IconField>
-                        <Select
-                            filter
-                            :options="genres"
-                            :value="selectedGenre"
-                            optionLabel="name"
-                            placeholder="Select a Genre"
-                            class="w-full md:w-56"
-                            @change="changeGenreFilter"
-                            showClear
-                            :key="genreSelectKey"
-                        >
-                        </Select>
+                        <div class="max-sm:hidden">
+                            <Select
+                                filter
+                                :options="genres"
+                                :value="selectedGenre"
+                                optionLabel="name"
+                                placeholder="Select a Genre"
+                                @change="changeGenreFilter"
+                                showClear
+                                :key="genreSelectKey"
+                            >
+                            </Select>
+                        </div>
                     </div>
                 </template>
                 <template #empty> No results found. </template>
@@ -68,36 +70,31 @@
                                 "
                                 :alt="slotProps.data?.title"
                                 preview
-                                width="45"
                             />
-                            <Chip :label="slotProps.data?.title" />
+                            <Button asChild v-slot="buttonProps" severity="secondary">
+                                <RouterLink
+                                    :to="{
+                                        name: 'books.show',
+                                        params: {
+                                            bookId: slotProps.data?.id,
+                                        },
+                                    }"
+                                    :class="buttonProps.class"
+                                    >{{ slotProps.data?.title }}</RouterLink
+                                >
+                            </Button>
                         </div>
                     </template>
                 </Column>
-                <Column sortable field="author.name" header="Author" style="width: 15%">
-                    <template #body="slotProps">
-                        <Button asChild variant="link" v-slot="buttonProps">
-                            <RouterLink
-                                :to="{
-                                    name: 'authors.show',
-                                    params: {
-                                        authorId: slotProps.data?.author?.id,
-                                    },
-                                }"
-                                :class="buttonProps.class + ' px-0'"
-                                >{{ slotProps.data?.author?.name }}</RouterLink
-                            >
-                        </Button>
-                    </template>
-                </Column>
-                <Column sortable field="is_read" header="Is read" style="width: 10%">
+                <Column sortable field="author.name" header="Author" style="width: 10%"> </Column>
+                <Column sortable field="is_read" header="Is read" style="width: 5%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_read)"
                             @change="toggleRead(slotProps.data.id)"
                         /> </template
                 ></Column>
-                <Column sortable field="is_wishlist" header="Is wishlist" style="width: 10%">
+                <Column sortable field="is_wishlist" header="Is wishlist" style="width: 5%">
                     <template #body="slotProps">
                         <ToggleSwitch
                             :model-value="Boolean(slotProps.data.is_wishlist)"

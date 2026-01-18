@@ -37,7 +37,6 @@
                     color="cyan"
                 ></DashboardKpi>
             </div>
-
             <div class="col-span-12 widget-wishlist">
                 <WishlistWidget></WishlistWidget>
             </div>

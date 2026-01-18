@@ -9,7 +9,9 @@
                 <UiIcon icon="bars"></UiIcon>
             </button>
             <div class="app-name">
-                <router-link to="/">Library</router-link>
+                <router-link to="/">
+                    <div class="flex gap-3"><LogoIcon></LogoIcon> Library</div>
+                </router-link>
             </div>
         </div>
         <div class="layout-topbar-actions">
@@ -21,6 +23,7 @@
 </template>
 <script setup>
 import UiIcon from '@/components/UiIcon.vue'
+import LogoIcon from '@/components/LogoIcon.vue'
 import { useLibraryStore } from '@/stores/library'
 
 const libraryStore = useLibraryStore()

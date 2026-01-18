@@ -64,7 +64,7 @@
     </div>
 </template>
 <script setup>
-import { Button, Chip, Column, DataTable, IconField, Image, InputIcon, InputText } from 'primevue'
+import { Button, Column, DataTable, IconField, Image, InputIcon, InputText } from 'primevue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { onMounted, ref } from 'vue'
 import WidgetTitle from '@/components/WidgetTitle.vue'

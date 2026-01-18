@@ -133,7 +133,6 @@
 <script setup>
 import {
     Button,
-    Chip,
     Column,
     DataTable,
     IconField,

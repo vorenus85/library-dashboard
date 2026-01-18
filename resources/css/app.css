@@ -10,4 +10,4 @@
     --font-sans: 'Lato', sans-serif;
 }
 
-@import './app.scss'; /* ide kerül minden saját SCSS kód */
+@import './app.scss';

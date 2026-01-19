@@ -14,8 +14,8 @@ if [ ! -L /var/www/html/public/storage ]; then
 fi
 
 # Laravel cache, config, route cache (opcionális)
-php artisan config:cache
-php artisan route:cache
+php artisan config:clear
+php artisan route:clear
 
 # Copy default images (only if not already present)
 if [ -d /var/www/docker/default-images ]; then

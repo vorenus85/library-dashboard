@@ -12,6 +12,7 @@
 - **Node.js >= 22 & npm**
 - **MySQL / PostgreSQL / SQLite**
 - **Git**
+- **Docker**
 - _(Optional)_ WAMP / XAMPP for local hosting
 
 ---
@@ -138,6 +139,8 @@ docker compose version
 From the project root directory:
 
 ```bash
+docker compose build
+
 docker compose up -d
 ```
 

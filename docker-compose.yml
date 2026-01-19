@@ -24,8 +24,10 @@ services:
     db:
         image: mysql:8.0
         environment:
-            MYSQL_DATABASE: library_dashboard
+            MYSQL_DATABASE: laravel_vue_starter
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: secret
         ports:
             - '3306:3306'
 

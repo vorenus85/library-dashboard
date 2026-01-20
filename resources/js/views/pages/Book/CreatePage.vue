@@ -65,7 +65,7 @@
                         filter
                         placeholder="Select Genres"
                         :max-selected-labels="3"
-                        class="w-full md:w-80"
+                        class="w-full"
                         display="chip"
                     />
                     <Message

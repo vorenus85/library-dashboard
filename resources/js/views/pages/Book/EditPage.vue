@@ -67,7 +67,7 @@
                         filter
                         placeholder="Select Genres"
                         :max-selected-labels="3"
-                        class="w-full md:w-80"
+                        class="w-full"
                         display="chip"
                     />
                     <Message
@@ -105,14 +105,14 @@
                         <div class="file-upload-clean">
                             <FileUpload
                                 name="file"
-                                customUpload
-                                @uploader="onImageUpload"
-                                :multiple="false"
+                                custom-upload
+                                :max-file-size="1000000"
                                 accept="image/*"
-                                :maxFileSize="1000000"
+                                :multiple="false"
+                                :disabled="isUploading || !!uploadedImage"
+                                @uploader="onImageUpload"
                                 @remove="onRemoveBookImage"
                                 @clear="onClearUploaderStatus"
-                                :disabled="isUploading || !!uploadedImage"
                             />
                         </div>
 

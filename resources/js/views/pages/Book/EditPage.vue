@@ -1,21 +1,21 @@
 <template>
     <AppLayout>
         <PageTitle title="Edit book">
-            <template v-slot:actions>
+            <template #actions>
                 <Button icon="pi pi-angle-left" label="Back to list" primary @click="toBookList" />
             </template>
         </PageTitle>
-        <div class="card" v-if="formKey">
+        <div v-if="formKey" class="card">
             <Form
                 :key="formKey"
                 v-slot="$form"
-                :initialValues
+                :initial-values
                 :resolver="bookValidator"
-                @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full lg:w-1/2"
-                :validateOnValueUpdate="true"
-                :validateOnBlur="true"
-                :validateOnMount="true"
+                :validate-on-value-update="true"
+                :validate-on-blur="true"
+                :validate-on-mount="true"
+                @submit="onFormSubmit"
             >
                 <div class="flex flex-col gap-1">
                     <label for="bookTitle">Book title</label>
@@ -37,15 +37,15 @@
                 <div class="flex flex-col gap-1">
                     <label for="author">Book author</label>
                     <Select
-                        filter
+                        id="author"
                         v-model="selectedAuthor"
+                        filter
                         :options="authors"
-                        optionLabel="name"
+                        option-label="name"
                         placeholder="Select author"
                         checkmark
-                        id="author"
                         name="author"
-                        :highlightOnSelect="false"
+                        :highlight-on-select="false"
                         class="w-full md:w-56"
                     />
                     <Message
@@ -63,10 +63,10 @@
                         v-model="selectedGenres"
                         :options="genres"
                         name="genres[]"
-                        optionLabel="name"
+                        option-label="name"
                         filter
                         placeholder="Select Genres"
-                        :maxSelectedLabels="3"
+                        :max-selected-labels="3"
                         class="w-full md:w-80"
                         display="chip"
                     />

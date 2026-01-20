@@ -11,7 +11,7 @@
                         <p class="text-xl font-semibold text-muted-color">
                             Sorry, the resource you are looking for could not be found.
                         </p>
-                        <Button @click="toHome" label="Back to homepage" severity="secondary">
+                        <Button label="Back to homepage" severity="secondary" @click="toHome">
                             <template #icon>
                                 <UiIcon icon="arrow-left" />
                             </template>

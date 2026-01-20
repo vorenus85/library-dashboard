@@ -1,21 +1,21 @@
 <template>
     <AppLayout>
         <PageTitle title="Edit genre">
-            <template v-slot:actions>
+            <template #actions>
                 <Button icon="pi pi-angle-left" label="Back to list" primary @click="toGenreList" />
             </template>
         </PageTitle>
-        <div class="card" v-if="formKey">
+        <div v-if="formKey" class="card">
             <Form
                 :key="formKey"
                 v-slot="$form"
-                :initialValues="initialValues"
+                :initial-values="initialValues"
                 :resolver="genreValidator"
-                @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full lg:w-1/2"
-                :validateOnValueUpdate="true"
-                :validateOnBlur="true"
-                :validateOnMount="true"
+                :validate-on-value-update="true"
+                :validate-on-blur="true"
+                :validate-on-mount="true"
+                @submit="onFormSubmit"
             >
                 <div class="flex flex-col gap-1">
                     <label for="genreName">Genre name</label>

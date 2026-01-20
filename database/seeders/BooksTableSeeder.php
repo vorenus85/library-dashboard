@@ -28,6 +28,7 @@ class BooksTableSeeder extends Seeder
                 "pages" => $book['pages'],
                 "is_read" => $book['is_read'],
                 "is_wishlist" => $book['is_wishlist'],
+                "wishlisted_at" => $book['is_wishlist'] ? now() : null,
                 "description" => $book['description'],
             ]);
             } catch (\Throwable $th) {

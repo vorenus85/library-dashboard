@@ -1,19 +1,19 @@
 <template>
     <AppLayout>
         <PageTitle title="Add new genre">
-            <template v-slot:actions>
+            <template #actions>
                 <Button icon="pi pi-angle-left" label="Back to list" primary @click="toGenreList" />
             </template>
         </PageTitle>
         <div class="card">
             <Form
                 v-slot="$form"
-                :initialValues
+                :initial-values
                 :resolver="genreValidator"
-                @submit="onFormSubmit"
                 class="flex flex-col gap-4 w-full lg:w-1/2"
-                :validateOnValueUpdate="true"
-                :validateOnBlur="true"
+                :validate-on-value-update="true"
+                :validate-on-blur="true"
+                @submit="onFormSubmit"
             >
                 <div class="flex flex-col gap-1">
                     <label for="genreName">Genre name</label>

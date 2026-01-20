@@ -5,7 +5,7 @@
             <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Total Books"
-                    :kpiValue="bookCount"
+                    :kpi-value="bookCount"
                     icon="book"
                     color="blue"
                 ></DashboardKpi>
@@ -13,7 +13,7 @@
             <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Wishlist Books"
-                    :kpiValue="countIsWishList"
+                    :kpi-value="countIsWishList"
                     icon="bookmark"
                     color="orange"
                 ></DashboardKpi>
@@ -21,7 +21,7 @@
             <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Books Read"
-                    :kpiValue="countIsRead"
+                    :kpi-value="countIsRead"
                     :rate="countIsReadRate"
                     icon="check-circle"
                     color="purple"

@@ -10,6 +10,7 @@
     transition: left var(--layout-section-transition-duration);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .layout-topbar-action,
@@ -24,6 +25,7 @@
     transition: background-color var(--element-transition-duration);
     cursor: pointer;
     margin-right: 1rem;
+
     i {
         font-size: 1.5rem;
     }
@@ -32,12 +34,6 @@
         background: var(--surface-hover);
         transition: var(--element-transition-duration);
     }
-}
-
-.layout-topbar-logo-container,
-.layout-topbar {
-    display: flex;
-    justify-content: space-between;
 }
 
 .app-name {

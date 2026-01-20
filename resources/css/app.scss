@@ -1,118 +1,17 @@
-@import './_variables.scss';
-@import './_topbar.scss';
-@import './_sidebar.scss';
-@import './_main.scss';
+/* === Base === */
+@import './base/_variables.scss';
+@import './base/_typography.scss';
+@import './base/_utilities.scss';
+@import './base/_animations.scss';
 
-html {
-    font-size: 14px;
-    color: var(--text-color);
-}
+/* === Layout === */
+@import './layout/_layout.scss';
+@import './layout/_topbar.scss';
+@import './layout/_sidebar.scss';
+@import './layout/_responsive.scss';
 
-body {
-    font-family: Lato, sans-serif;
-    color: var(--text-color);
-    background-color: var(--surface-ground);
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.card {
-    background: var(--surface-card);
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border-radius: var(--content-border-radius);
-}
-
-@media (min-width: 992px) {
-    .card {
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-}
-
-.card:last-child {
-    margin-bottom: 0;
-}
-
-.px-0 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.text-muted-color {
-    color: var(--p-text-muted-color);
-}
-
-.file-upload-clean {
-    .p-progressbar,
-    .p-fileupload-file-info,
-    .p-fileupload-file-badge,
-    .p-fileupload-status {
-        display: none;
-    }
-}
-
-.rounded-border {
-    border-radius: var(--p-content-border-radius);
-}
-
-.dashboard-kpi-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-}
-
-.bg-orange-100 {
-    background-color: rgb(255 237 213);
-}
-
-.bg-purple-100 {
-    background-color: #f3e8ff;
-}
-
-.bg-cyan-100 {
-    background-color: rgb(207 250 254);
-}
-
-.p-datatable .p-datatable-header {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.p-image-original {
-    padding: 1rem;
-}
-
-.p-image {
-    width: 45px;
-    min-width: 45px;
-}
-
-.text-nowrap,
-.p-datatable-column-title,
-.p-datatable-sortable-column {
-    white-space: nowrap;
-}
-
-@media (min-width: 992px) {
-    .p-image {
-        width: 90px;
-        min-width: 90px;
-    }
-}
-
-@keyframes fadein {
-    0% {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.animate-fadein {
-    animation: fadein 0.15s linear;
-}
+/* === Components === */
+@import './components/_card.scss';
+@import './components/_datatable.scss';
+@import './components/_image.scss';
+@import './components/_file-upload.scss';

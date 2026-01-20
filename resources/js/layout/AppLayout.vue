@@ -17,10 +17,10 @@
 import AppTopBar from '@/layout/AppTopBar.vue'
 import AppSideBar from '@/layout/AppSideBar.vue'
 import { useLibraryStore } from '@/stores/library'
-import { useDrawer } from '@/composables/useDrawer'
+import { useLayout } from '@/composables/useLayout'
 import { onBeforeRouteLeave } from 'vue-router'
 
-const { isMobile } = useDrawer()
+const { isMobile } = useLayout()
 const libraryStore = useLibraryStore()
 
 onBeforeRouteLeave((to, from, next) => {

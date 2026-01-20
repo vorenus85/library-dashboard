@@ -1,10 +1,10 @@
 <template>
     <header class="bg-white shadow layout-topbar">
-        <div class="layout-topbar-logo-container">
+        <div class="layout-topbar-logo-container flex">
             <button
-                @click="toggleDrawer"
                 type="button"
                 class="layout-menu-button layout-topbar-action"
+                @click="toggleDrawer"
             >
                 <UiIcon icon="bars"></UiIcon>
             </button>
@@ -14,11 +14,7 @@
                 </router-link>
             </div>
         </div>
-        <div class="layout-topbar-actions">
-            <button @click="toggleDarkMode" type="button" class="layout-topbar-action">
-                <UiIcon icon="sun"></UiIcon>
-            </button>
-        </div>
+        <div class="layout-topbar-actions"></div>
     </header>
 </template>
 <script setup>
@@ -30,9 +26,5 @@ const libraryStore = useLibraryStore()
 
 const toggleDrawer = () => {
     libraryStore.toggleDrawer()
-}
-
-const toggleDarkMode = () => {
-    alert('Todo toggle dark mode logic')
 }
 </script>

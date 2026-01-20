@@ -57,6 +57,7 @@ class BookController extends Controller
                 'description' => $validated['description'] ?? "",
                 'is_read' => $validated['is_read'] ?? false,
                 'is_wishlist' => $validated['is_wishlist'] ?? false,
+                'wishlisted_at' => $validated['is_wishlist'] ? now() : null,
             ]);
 
             // save to pivot
@@ -105,6 +106,7 @@ class BookController extends Controller
     public function toggleWishlist(Book $book) {
         try {
             $book->is_wishlist = !$book->is_wishlist;
+            $book->wishlisted_at = $book->is_wishlist ? now() : null;
             $book->save();
             return response()->json(["status" => "ok"], 200);
         } catch (\Throwable $th) {
@@ -136,6 +138,7 @@ class BookController extends Controller
         ]);
 
         $validated["author_id"] = $validated["author"]["id"];
+        $validated["wishlisted_at"] = $book->wishlisted_at === null && $validated['is_wishlist'] ? now() : null;
 
         try {
             $book->update($validated);

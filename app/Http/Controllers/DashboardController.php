@@ -46,7 +46,7 @@ class DashboardController extends Controller
     }
 
     public function wishlist(){
-        $wishlistedBooks = Book::with(['author:id,name'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->where('is_wishlist', true)->orderBy('title', 'asc')->get();
+        $wishlistedBooks = Book::with(['author:id,name'])->select('id', 'title', 'image', 'description', 'pages', 'author_id', 'wishlisted_at')->where('is_wishlist', true)->orderBy('wishlisted_at', 'desc')->orderBy('title', 'asc')->limit(5)->get();
         return response()->json($wishlistedBooks, 200);
     }
 

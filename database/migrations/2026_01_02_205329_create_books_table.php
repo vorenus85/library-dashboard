@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('pages')->nullable();
             $table->boolean('is_read')->default(false);
             $table->boolean('is_wishlist')->default(false);
+            $table->timestamp('wishlisted_at')->nullable();
             $table->text('description')->nullable();
 
             $table->foreign('author_id')->references('id')->on('authors');

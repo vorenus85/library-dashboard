@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <PageTitle title="Authors">
-            <template v-slot:actions>
+            <template #actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateAuthor" />
             </template>
         </PageTitle>
@@ -11,11 +11,11 @@
                 :value="authors"
                 paginator
                 :rows="10"
-                :rowsPerPageOptions="[5, 10, 20, 50]"
-                tableStyle="min-width: 50rem"
+                :rows-per-page-options="[5, 10, 20, 50]"
+                table-style="min-width: 50rem"
                 :loading="loading"
-                :globalFilterFields="['name', 'description']"
-                dataKey="id"
+                :global-filter-fields="['name', 'description']"
+                data-key="id"
             >
                 <template #header>
                     <div class="flex justify-between">

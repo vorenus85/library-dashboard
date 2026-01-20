@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <PageTitle title="Books">
-            <template v-slot:actions>
+            <template #actions>
                 <Button icon="pi pi-plus" label="New" primary @click="toCreateBook" />
                 <SplitButton
                     icon="pi pi-export"
@@ -17,22 +17,22 @@
                 :value="books"
                 paginator
                 :rows="10"
-                :rowsPerPageOptions="[5, 10, 20, 50]"
-                tableStyle="min-width: 50rem"
+                :rows-per-page-options="[5, 10, 20, 50]"
+                table-style="min-width: 50rem"
                 :loading="loading"
-                :globalFilterFields="['title', 'description', 'author.name']"
-                dataKey="id"
+                :global-filter-fields="['title', 'description', 'author.name']"
+                data-key="id"
             >
                 <template #header>
                     <div class="flex justify-start gap-5">
                         <Button
+                            class="mr-auto"
+                            width="80px"
                             type="button"
                             icon="pi pi-filter-slash"
                             label="Clear"
                             variant="outlined"
                             @click="clearFilter()"
-                            class="mr-auto"
-                            width="80px"
                         />
                         <IconField>
                             <InputIcon>
@@ -45,14 +45,14 @@
                         </IconField>
                         <div class="max-sm:hidden">
                             <Select
+                                :key="genreSelectKey"
                                 filter
                                 :options="genres"
                                 :value="selectedGenre"
-                                optionLabel="name"
+                                option-label="name"
                                 placeholder="Select a Genre"
+                                show-clear
                                 @change="changeGenreFilter"
-                                showClear
-                                :key="genreSelectKey"
                             >
                             </Select>
                         </div>
@@ -71,7 +71,7 @@
                                 :alt="slotProps.data?.title"
                                 preview
                             />
-                            <Button asChild v-slot="buttonProps" severity="secondary">
+                            <Button v-slot="buttonProps" as-child severity="secondary">
                                 <RouterLink
                                     :to="{
                                         name: 'books.show',
@@ -106,7 +106,7 @@
                 <Column header="Actions" style="width: 10%">
                     <template #body="slotProps">
                         <div class="flex items-center justify-start gap-3">
-                            <Button severity="info" asChild v-slot="buttonProps">
+                            <Button v-slot="buttonProps" severity="info" as-child>
                                 <RouterLink
                                     :to="{
                                         name: 'books.show',

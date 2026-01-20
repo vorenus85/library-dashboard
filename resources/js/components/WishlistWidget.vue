@@ -1,16 +1,13 @@
 <template>
     <div class="card">
-        <WidgetTitle title="Wishlist Books" />
+        <WidgetTitle title="Recently Wishlisted Books" />
         <DataTable
             v-model:filters="filters"
             :value="wishListedBooks"
-            paginator
-            :rows="5"
-            :rowsPerPageOptions="[5, 10, 20, 50]"
-            tableStyle="min-width: 50rem"
+            table-style="min-width: 50rem"
             :loading="loading"
-            :globalFilterFields="['title', 'description', 'author.name']"
-            dataKey="id"
+            :global-filter-fields="['title', 'description', 'author.name']"
+            data-key="id"
         >
             <template #header>
                 <div class="flex justify-between">
@@ -42,7 +39,7 @@
                             :alt="slotProps.data?.title"
                             preview
                         />
-                        <Button asChild v-slot="buttonProps" severity="secondary">
+                        <Button v-slot="buttonProps" as-child severity="secondary">
                             <RouterLink
                                 :to="{
                                     name: 'books.show',
@@ -51,20 +48,29 @@
                                     },
                                 }"
                                 :class="buttonProps.class"
-                                >{{ slotProps.data?.title }}</RouterLink
+                            >
+                                {{ slotProps.data?.title }}</RouterLink
                             >
                         </Button>
                     </div>
                 </template>
             </Column>
             <Column sortable field="author.name" header="Author" style="width: 10%"> </Column>
-            <Column field="description" header="Description" style="width: 25%"></Column>
-            <Column field="pages" header="Pages no." style="width: 25%"></Column>
+            <Column field="description" header="Description" style="width: 25%; min-width: 250px">
+            </Column>
+            <Column field="pages" header="Pages no." style="width: 10%"></Column>
+            <Column field="wishlisted_at" header="Wishlisted at" style="width: 10%">
+                <template #body="slotProps">
+                    <Chip>
+                        <span class="text-nowrap">{{ slotProps.data.wishlisted_at }}</span></Chip
+                    >
+                </template></Column
+            >
         </DataTable>
     </div>
 </template>
 <script setup>
-import { Button, Column, DataTable, IconField, Image, InputIcon, InputText } from 'primevue'
+import { Button, Chip, Column, DataTable, IconField, Image, InputIcon, InputText } from 'primevue'
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api'
 import { onMounted, ref } from 'vue'
 import WidgetTitle from '@/components/WidgetTitle.vue'

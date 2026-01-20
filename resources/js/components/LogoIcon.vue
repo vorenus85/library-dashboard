@@ -1,8 +1,8 @@
 <template>
     <svg
+        id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        id="Layer_1"
         height="35px"
         width="35px"
         version="1.1"

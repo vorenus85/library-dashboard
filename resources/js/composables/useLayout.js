@@ -33,5 +33,7 @@ export const useLayout = () => {
 
     return {
         isMobile,
+        toggleDarkMode,
+        darkTheme,
     }
 }

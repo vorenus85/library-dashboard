@@ -219,7 +219,7 @@ const changeGenreFilter = event => {
     selectedGenre.value = event.value
 }
 
-watch(selectedGenre, async (newGenre, oldGenre) => {
+watch(selectedGenre, async newGenre => {
     if (!newGenre?.id) {
         books.value = allBooks.value
         return

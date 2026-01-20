@@ -31,7 +31,7 @@
             <div class="col-span-12 lg:col-span-6 xl:col-span-3 dashboard-kpi">
                 <DashboardKpi
                     title="Top Genre"
-                    :kpiValue="topGenre"
+                    :kpi-value="topGenre"
                     :count="topGenreCount"
                     icon="star"
                     color="cyan"

@@ -31,16 +31,25 @@ defineProps({
         type: String,
         required: true,
     },
-    kpiValue: {},
-    icon: {},
+    kpiValue: {
+        type: String,
+        default: 'Kpi',
+    },
+    icon: {
+        type: String,
+        default: '',
+    },
     rate: {
         type: [String, Number],
+        default: 0,
     },
     count: {
         type: [String, Number],
+        default: 0,
     },
     color: {
         type: String,
+        default: '',
     },
 })
 </script>

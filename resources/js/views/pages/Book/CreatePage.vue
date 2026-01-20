@@ -84,14 +84,14 @@
                     <div class="file-upload-clean">
                         <FileUpload
                             name="file"
-                            customUpload
-                            @uploader="onImageUpload"
+                            custom-upload
                             :multiple="false"
                             accept="image/*"
-                            :maxFileSize="1000000"
+                            :max-file-size="1000000"
+                            :disabled="isUploading || !!uploadedImage"
+                            @uploader="onImageUpload"
                             @remove="onRemoveBookImage"
                             @clear="onClearUploaderStatus"
-                            :disabled="isUploading || !!uploadedImage"
                         />
                     </div>
 

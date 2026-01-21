@@ -11,7 +11,7 @@
                         <p class="text-xl font-semibold text-muted-color">
                             Sorry, the resource you are looking for could not be found.
                         </p>
-                        <Button label="Back to homepage" severity="secondary" @click="toHome">
+                        <Button label="Back to homepage" severity="secondary" @click="toDashboard">
                             <template #icon>
                                 <UiIcon icon="arrow-left" />
                             </template>
@@ -27,5 +27,5 @@ import { Button, Card } from 'primevue'
 import UiIcon from '@/components/UiIcon.vue'
 import { useRedirects } from '@/composables/useRedirects'
 
-const { toHome } = useRedirects()
+const { toDashboard } = useRedirects()
 </script>

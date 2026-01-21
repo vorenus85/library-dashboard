@@ -92,8 +92,8 @@ const getIsWishlistCount = async () => {
 
 const getTopGenreWithName = async () => {
     const { data } = await fetchTopGenreWithName()
-    topGenre.value = data.topGenre.name
-    topGenreCount.value = data.topGenre.books_count
+    topGenre.value = data.topGenre?.name
+    topGenreCount.value = data.topGenre?.books_count
 }
 
 onMounted(() => {

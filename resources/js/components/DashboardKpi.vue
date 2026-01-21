@@ -33,18 +33,18 @@ defineProps({
     },
     kpiValue: {
         type: String,
-        default: 'Kpi',
+        default: '',
     },
     icon: {
         type: String,
         default: '',
     },
     rate: {
-        type: [String, Number],
+        type: Number,
         default: 0,
     },
     count: {
-        type: [String, Number],
+        type: Number,
         default: 0,
     },
     color: {

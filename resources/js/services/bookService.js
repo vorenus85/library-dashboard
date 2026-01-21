@@ -1,36 +1,36 @@
 export const fetchBooks = () => {
-    return axios.get('/books')
+    return axios.get('/api/admin/books')
 }
 
 export const fetchBook = id => {
-    return axios.get(`/books/${id}`)
+    return axios.get(`/api/admin/books/${id}`)
 }
 
 export const deleteBookById = id => {
-    return axios.delete(`/books/${id}`)
+    return axios.delete(`/api/admin/books/${id}`)
 }
 
 export const createBook = values => {
-    return axios.post('/books', values)
+    return axios.post('/api/admin/books', values)
 }
 
 export const updateBookById = (id, values) => {
-    return axios.put(`/books/${id}`, values)
+    return axios.put(`/api/admin/books/${id}`, values)
 }
 
 export const toggleBookReadStatus = id => {
-    return axios.patch(`/books/${id}/toggle-read`)
+    return axios.patch(`/api/admin/books/${id}/toggle-read`)
 }
 
 export const toggleBookWishlistStatus = id => {
-    return axios.patch(`/books/${id}/toggle-wishlist`)
+    return axios.patch(`/api/admin/books/${id}/toggle-wishlist`)
 }
 
 export const uploadBookImage = (file, onProgress) => {
     const formData = new FormData()
     formData.append('file', file)
 
-    return axios.post('/books/image/upload', formData, {
+    return axios.post('/api/admin/books/image/upload', formData, {
         onUploadProgress: event => {
             if (!event.total || !onProgress) return
             onProgress(Math.round((event.loaded * 100) / event.total))
@@ -39,39 +39,39 @@ export const uploadBookImage = (file, onProgress) => {
 }
 
 export const deleteBookImage = id => {
-    return axios.delete(`/books/image/delete/${id}`)
+    return axios.delete(`/api/admin/books/image/delete/${id}`)
 }
 
 export const fetchTopAuthors = () => {
-    return axios.get('/topAuthors')
+    return axios.get('/api/admin/topAuthors')
 }
 
 export const fetchTopGenres = () => {
-    return axios.get('/topGenres')
+    return axios.get('/api/admin/topGenres')
 }
 
 export const fetchTopGenreWithName = () => {
-    return axios.get('/topGenreWithName')
+    return axios.get('/api/admin/topGenreWithName')
 }
 
 export const fetchWishlistBooks = () => {
-    return axios.get('/wishlist')
+    return axios.get('/api/admin/wishlist')
 }
 
 export const fetchBookCount = () => {
-    return axios.get('/bookCount')
+    return axios.get('/api/admin/bookCount')
 }
 
 export const fetchIsReadRate = () => {
-    return axios.get('/isReadRate')
+    return axios.get('/api/admin/isReadRate')
 }
 
 export const fetchIsWishlistCount = () => {
-    return axios.get('/isWishlistCount')
+    return axios.get('/api/admin/isWishlistCount')
 }
 
 export const exportBooksByType = type => {
-    return axios.get(`/books/export?format=${type}`, {
+    return axios.get(`/api/admin/books/export?format=${type}`, {
         responseType: 'blob',
     })
 }

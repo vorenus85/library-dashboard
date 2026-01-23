@@ -67,33 +67,33 @@ import {
     fetchTopGenreWithName,
 } from '@/services/bookService'
 
-const bookCount = ref(0)
-const countIsWishList = ref(0)
-const countIsRead = ref(0)
+const bookCount = ref('0')
+const countIsWishList = ref('0')
+const countIsRead = ref('0')
 const countIsReadRate = ref(0)
-const topGenre = ref(null)
-const topGenreCount = ref(null)
+const topGenre = ref('')
+const topGenreCount = ref(0)
 
 const getBookCount = async () => {
     const { data } = await fetchBookCount()
-    bookCount.value = data.bookCount
+    bookCount.value = data.bookCount.toString()
 }
 
 const getIsReadRate = async () => {
     const { data } = await fetchIsReadRate()
-    countIsRead.value = data.countIsRead
+    countIsRead.value = data.countIsRead.toString()
     countIsReadRate.value = data.countIsReadRate
 }
 
 const getIsWishlistCount = async () => {
     const { data } = await fetchIsWishlistCount()
-    countIsWishList.value = data.countIsWishList
+    countIsWishList.value = data.countIsWishList.toString()
 }
 
 const getTopGenreWithName = async () => {
     const { data } = await fetchTopGenreWithName()
-    topGenre.value = data.topGenre.name
-    topGenreCount.value = data.topGenre.books_count
+    topGenre.value = data.topGenre?.name.toString()
+    topGenreCount.value = data.topGenre?.books_count
 }
 
 onMounted(() => {

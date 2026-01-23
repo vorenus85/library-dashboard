@@ -13,23 +13,28 @@ import SidebarMenuitem from '@/components/SidebarMenuitem.vue'
 const menus = [
     {
         icon: 'home',
-        path: '/',
+        path: 'dashboard',
         title: 'Dashboard',
     },
     {
         icon: 'book',
-        path: '/books',
+        path: 'books',
         title: 'Books',
     },
     {
         icon: 'user',
-        path: '/authors',
+        path: 'authors',
         title: 'Authors',
     },
     {
         icon: 'tags',
-        path: '/genres',
+        path: 'genres',
         title: 'Genres',
+    },
+    {
+        icon: 'sign-out',
+        path: 'logout',
+        title: 'Logout',
     },
 ]
 </script>

@@ -1,3 +1,7 @@
+<script setup>
+import { ConfirmDialog, Toast } from 'primevue'
+</script>
+
 <template>
     <RouterView />
     <div>
@@ -6,7 +10,3 @@
         <slot />
     </div>
 </template>
-
-<script setup>
-import { ConfirmDialog, Toast } from 'primevue'
-</script>

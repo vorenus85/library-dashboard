@@ -26,8 +26,8 @@ export const useRedirects = () => {
         router.push({ name: 'genres' })
     }
 
-    const toHome = () => {
-        router.push({ name: 'home' })
+    const toDashboard = () => {
+        router.push({ name: 'dashboard' })
     }
 
     return {
@@ -37,6 +37,6 @@ export const useRedirects = () => {
         toCreateAuthor,
         toCreateGenre,
         toGenreList,
-        toHome,
+        toDashboard,
     }
 }

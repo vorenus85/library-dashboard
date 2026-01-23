@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getCsrfCookie, fetchUser, doLogout, doLogin } from '@/services/authService'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -8,8 +9,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async fetchUser() {
             try {
-                // @TODO move axios to service
-                const res = await axios.get('/auth/me', { withCredentials: true })
+                const res = await fetchUser()
                 this.user = res?.data
                 this.loaded = true
             } catch {
@@ -18,21 +18,14 @@ export const useAuthStore = defineStore('auth', {
             }
         },
         async login(email, password) {
-            await axios.get('/sanctum/csrf-cookie', { withCredentials: true })
-
-            const res = await axios.post(
-                '/auth/login',
-                { email, password },
-                { withCredentials: true }
-            )
+            await getCsrfCookie()
+            const res = await doLogin(email, password)
 
             this.user = res.data.user
         },
         async logout() {
-            // @TODO move axios to service
-            await axios.post('/auth/logout', null, { withCredentials: true })
+            await doLogout()
             this.user = null
-            console.log('logout')
         },
     },
 })

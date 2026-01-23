@@ -37,9 +37,17 @@ RUN composer install \
 # Copy app
 COPY . .
 
+# Node + npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# NPM install + Vite prod build
+RUN npm install && npm run build
+
 # Permissions
-RUN chown -R www-data:www-data \
-    storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Entrypoint
 COPY scripts/00-laravel-deploy.sh /start.sh

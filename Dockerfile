@@ -39,6 +39,9 @@ RUN chown -R www-data:www-data \
 COPY scripts/00-laravel-deploy.sh /start.sh
 RUN chmod +x /start.sh
 
+# Expose HTTP port
+EXPOSE 80
+
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 

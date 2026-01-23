@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NotFoundPage from '@/views/pages/NotFoundPage.vue'
 import DashboardPage from '@/views/pages/DashboardPage.vue'
 import LoginPage from '@/views/pages/LoginPage.vue'
-import LandingPage from '@/views/pages/LandingPage.vue'
 
 import AuthorListPage from '@/views/pages/Author/ListPage.vue'
 import AuthorCreatePage from '@/views/pages/Author/CreatePage.vue'
@@ -22,7 +21,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/:pathMatch(.*)*', name: 'notFound', component: NotFoundPage },
-        { path: '/', name: 'landing', component: LandingPage },
         {
             path: '/dashboard',
             name: 'dashboard',
@@ -31,7 +29,7 @@ const router = createRouter({
                 requiresAuth: true,
             },
         },
-        { path: '/login', name: 'login', component: LoginPage },
+        { path: '/', name: 'login', component: LoginPage },
 
         {
             path: '/books',
@@ -124,8 +122,12 @@ router.beforeEach(async to => {
         }
 
         if (!auth.user?.id) {
-            return '/login'
+            return { name: 'login' }
         }
+    }
+
+    if (to.name === 'login' && auth.user?.id) {
+        return { name: 'dashboard' }
     }
 
     if (to.name === 'logout') {

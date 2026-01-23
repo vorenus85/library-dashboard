@@ -7,16 +7,27 @@
                     <div
                         class="flex flex-col gap-6 md:gap-8 items-center justify-center text-center"
                     >
-                        <div class="text-xl"><strong>Log in to Library</strong></div>
+                        <div class="text-xl"><strong>Log in to Library Dashboard</strong></div>
                         <div class="text-center">Enter your email and password below to log in</div>
 
                         <div>
                             <strong>Demo Dashboard Access</strong><br />
                             Use the credentials below to log in:
                             <br />
-                            <Tag severity="info" class="mb-2 mt-3">{{ demoEmail }}</Tag
+                            <Tag
+                                v-tooltip.top="'Copy to clipboard'"
+                                class="mb-2 mt-3 cursor-pointer"
+                                severity="info"
+                                @click="setClipboard(demoEmail)"
+                                >{{ demoEmail }} <UiIcon icon="clipboard"></UiIcon></Tag
                             ><br />
-                            <Tag severity="info">{{ demoPassword }}</Tag>
+                            <Tag
+                                v-tooltip.top="'Copy to clipboard'"
+                                class="cursor-pointer"
+                                severity="info"
+                                @click="setClipboard(demoPassword)"
+                                >{{ demoPassword }} <UiIcon icon="clipboard"></UiIcon
+                            ></Tag>
                         </div>
 
                         <Form
@@ -61,17 +72,8 @@
                                         >{{ $field.error?.message }}</Message
                                     >
                                 </FormField>
-                                <div class="text-right mt-1 mb-1">
-                                    <RouterLink to="forgot-password" primary
-                                        >Forgot password?</RouterLink
-                                    >
-                                </div>
                             </div>
                             <Button type="submit" label="Log in" />
-                            <div class="text-center mt-3">
-                                <span class="text-muted-color mr-3">Don't have an account?</span>
-                                <RouterLink to="register"><strong>Sign up</strong></RouterLink>
-                            </div>
                         </Form>
                     </div>
                 </template>
@@ -80,6 +82,7 @@
     </main>
 </template>
 <script setup lang="ts">
+import UiIcon from '@/components/UiIcon.vue'
 import LogoIcon from '@/components/LogoIcon.vue'
 import { Form, FormField } from '@primevue/forms'
 import { Button, Card, InputText, Message, Password, Tag } from 'primevue'
@@ -95,6 +98,15 @@ const { toDashboard } = useRedirects()
 
 const demoEmail = import.meta.env.VITE_DEMO_EMAIL
 const demoPassword = import.meta.env.VITE_DEMO_PASSWORD
+
+const setClipboard = async text => {
+    const type = 'text/plain'
+    const clipboardItemData = {
+        [type]: text,
+    }
+    const clipboardItem = new ClipboardItem(clipboardItemData)
+    await navigator.clipboard.write([clipboardItem])
+}
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {

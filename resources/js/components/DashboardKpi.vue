@@ -33,7 +33,7 @@ defineProps({
     },
     kpiValue: {
         type: String,
-        default: '',
+        default: '0',
     },
     icon: {
         type: String,

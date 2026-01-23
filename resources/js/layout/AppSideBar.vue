@@ -32,7 +32,7 @@ const menus = [
         title: 'Genres',
     },
     {
-        icon: 'logout',
+        icon: 'sign-out',
         path: 'logout',
         title: 'Logout',
     },

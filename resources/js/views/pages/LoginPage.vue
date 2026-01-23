@@ -9,6 +9,16 @@
                     >
                         <div class="text-xl"><strong>Log in to Library</strong></div>
                         <div class="text-center">Enter your email and password below to log in</div>
+
+                        <div>
+                            <strong>Demo Dashboard Access</strong><br />
+                            Use the credentials below to log in:
+                            <br />
+                            <Tag severity="info" class="mb-2 mt-3">{{ demoEmail }}</Tag
+                            ><br />
+                            <Tag severity="info">{{ demoPassword }}</Tag>
+                        </div>
+
                         <Form
                             v-slot="$form"
                             class="flex flex-col gap-4 w-full"
@@ -72,7 +82,7 @@
 <script setup lang="ts">
 import LogoIcon from '@/components/LogoIcon.vue'
 import { Form, FormField } from '@primevue/forms'
-import { Button, Card, InputText, Message, Password } from 'primevue'
+import { Button, Card, InputText, Message, Password, Tag } from 'primevue'
 import { useAuthStore } from '@/stores/auth'
 import { useAuth } from '@/composables/useAuth'
 import { useToast } from 'primevue/usetoast'
@@ -83,15 +93,19 @@ const { login } = useAuthStore()
 const { loginValidator } = useAuth()
 const { toDashboard } = useRedirects()
 
+const demoEmail = import.meta.env.VITE_DEMO_EMAIL
+const demoPassword = import.meta.env.VITE_DEMO_PASSWORD
+
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
             await login(values.email, values.password)
             toDashboard()
         } catch (err) {
+            console.log(err)
             toast.add({
                 severity: 'error',
-                summary: err.response?.data?.message || 'Wrong email or password!',
+                summary: 'Wrong email or password!',
                 life: 3000,
             })
         }

@@ -13,5 +13,6 @@ php artisan config:cache
 php artisan route:clear
 php artisan route:cache
 
-echo "Starting PHP-FPM..."
-exec php-fpm
+echo "Starting Nginx + PHP-FPM..."
+service nginx start
+php-fpm

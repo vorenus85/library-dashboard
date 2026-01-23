@@ -1,7 +1,7 @@
 FROM php:8.3-fpm
 
 # System deps
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y nginx \
     git unzip curl \
     libzip-dev libpng-dev libjpeg-dev libfreetype6-dev \
     libpq-dev \
@@ -13,6 +13,12 @@ RUN apt-get update && apt-get install -y \
         zip \
         gd \
     && rm -rf /var/lib/apt/lists/*
+
+# Copy Nginx config
+COPY conf/nginx-site.conf /etc/nginx/sites-available/default
+
+# Expose HTTP port
+EXPOSE 80
 
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -38,9 +44,6 @@ RUN chown -R www-data:www-data \
 # Entrypoint
 COPY scripts/00-laravel-deploy.sh /start.sh
 RUN chmod +x /start.sh
-
-# Expose HTTP port
-EXPOSE 80
 
 ENV APP_ENV=production
 ENV APP_DEBUG=false

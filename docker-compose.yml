@@ -3,6 +3,7 @@ services:
         build:
             context: .
             dockerfile: docker/php/Dockerfile
+        env_file: .env
         volumes:
             - .:/var/www
             - ./storage:/var/www/storage
@@ -21,6 +22,7 @@ services:
 
     db:
         image: mysql:8.0
+        container_name: library-dashboard-db
         environment:
             MYSQL_DATABASE: library_dashboard
             MYSQL_ROOT_PASSWORD: root
@@ -30,6 +32,7 @@ services:
             - '3306:3306'
         volumes:
             - mysql_data:/var/lib/mysql
+            - ./docker/mysql/init:/docker-entrypoint-initdb.d
 
     node:
         image: node:20-alpine

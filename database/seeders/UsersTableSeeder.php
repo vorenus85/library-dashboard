@@ -14,17 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $json = File::get(database_path('data/users.json'));
-        $users = json_decode($json, true);
 
-        // Adatok feltöltése
-        foreach ($users as $user) {
-            User::create([
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => Hash::make($user['password']), // kötelező hash!
-            ]);
-        }
+        User::factory()->create([
+            'name' => 'Admin user',
+            'email' => env('ADMIN_USER_EMAIL'),
+            'password' => Hash::make(env('ADMIN_USER_PWD')),
+        ]);
 
         $this->command->info('Users data seeded successfully!');
     }

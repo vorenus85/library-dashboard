@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+echo "Running package discovery..."
+php artisan package:discover --ansi
+
 echo "Running migrations..."
 php artisan migrate --force
 

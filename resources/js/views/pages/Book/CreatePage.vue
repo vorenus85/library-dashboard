@@ -243,11 +243,11 @@ const onFormSubmit = async ({ valid, values }) => {
             setTimeout(() => {
                 toBookList()
             }, 300)
-        } catch (error) {
-            console.log(error)
+        } catch (e) {
+            // console.log(error)
             toast.add({
                 severity: 'error',
-                summary: error.response.data.message,
+                summary: 'Error during book create!',
                 life: 3000,
             })
         }

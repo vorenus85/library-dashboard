@@ -2,7 +2,7 @@
 set -e
 
 # Ensure storage & cache
-mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/app/public/uploads
+mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/app/public
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
@@ -17,7 +17,7 @@ php artisan route:clear
 
 # Copy default images (only if not present)
 if [ -d /var/www/docker/default-images ]; then
-    cp -n /var/www/docker/default-images/* storage/app/public/uploads
+    cp -n /var/www/docker/default-images/* storage/app/public
 fi
 
 # Wait for DB

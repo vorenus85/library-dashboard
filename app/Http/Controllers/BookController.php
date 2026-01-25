@@ -85,7 +85,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load(['author:id,name'])->load(['genres:id,name']);
-        $book['image_url'] = Storage::url($book->image);
+        $book['image_url'] = $book->image ? Storage::url($book->image) : "";
         return response()->json($book);
     }
 

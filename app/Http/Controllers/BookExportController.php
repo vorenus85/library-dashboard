@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 use App\Exports\BooksExport;
 
 class BookExportController extends Controller
@@ -54,6 +55,12 @@ class BookExportController extends Controller
             return response()->stream($callback, 200, $headers);
 
         } catch (\Throwable $th) {
+            Log::error('Book export failed', [
+                'user_id' => auth()->id(),
+                'error' => $th->getMessage(),
+                'trace' => $th->getTraceAsString(),
+            ]);
+
             return response()->json([
                 'status' => 'error',
                 'message' => 'Error during book export',

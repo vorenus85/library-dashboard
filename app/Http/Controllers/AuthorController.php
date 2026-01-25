@@ -77,16 +77,8 @@ class AuthorController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
 
-        try {
-            $author->update($validated);
-            return response()->json($author, 200);
-
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during update' ], 500);
-        }
-
-
+        $author->update($validated);
+        return response()->json($author, 200);
     }
 
     /**
@@ -94,12 +86,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        try {
-            $author->delete();
-            return response()->json([ 'status' => 'ok' ], 200);
-        } catch (\Throwable $th) {
-            // todo log error
-            return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
-        }
+        $author->delete();
+        return response()->json([ 'status' => 'ok' ], 200);
     }
 }

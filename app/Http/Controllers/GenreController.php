@@ -77,14 +77,8 @@ class GenreController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
 
-        try {
-            $genre->update($validated);
-            return response()->json($genre, 200);
-
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during update' ], 500);
-        }
+        $genre->update($validated);
+        return response()->json($genre, 200);
     }
 
     /**
@@ -92,12 +86,7 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        try {
-            $genre->delete();
-            return response()->json([ 'status' => 'ok' ], 200);
-        } catch (\Throwable $th) {
-            // todo log error
-            return response()->json([ 'status' => 'ok', 'message' => 'Error during delete' ], 500);
-        }
+        $genre->delete();
+        return response()->json([ 'status' => 'ok' ], 200);
     }
 }

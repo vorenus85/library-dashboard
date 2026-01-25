@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
+
 
 class BookController extends Controller
 {
@@ -14,8 +14,17 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with(['author:id,name'])->with(['genres:id'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->orderBy('title', 'asc')->get();
-        return response()->json($books, 200);
+        try {
+            $books = Book::with(['author:id,name'])->with(['genres:id'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->orderBy('title', 'asc')->get();
+            return response()->json($books, 200);
+        } catch (\Throwable $th) {
+            Log::error('Book list failed', [
+                'user_id' => auth()->id(),
+                'payload' => request()->all(),
+            ]);
+
+            throw $th;
+        }
     }
 
     /**
@@ -31,52 +40,40 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        try {
-            $validated = $request->validate([
-                'title' => 'required|unique:books,title|max:255',
-                'author' => 'required|array',
-                'genres' => 'required|array',
-                'genres.*' => 'exists:genres,id',
-                'author.id' => 'required|numeric',
-                'published_year' => 'nullable|numeric',
-                'pages' => 'nullable|numeric',
-                'isbn' => 'nullable|string',
-                'description' => 'nullable|string|max:500',
-                'is_read' => 'nullable|boolean',
-                'is_wishlist' => 'nullable|boolean',
-                'image' => 'nullable|string',
-            ]);
+        $validated = $request->validate([
+            'title' => 'required|unique:books,title|max:255',
+            'author' => 'required|array',
+            'genres' => 'required|array',
+            'genres.*' => 'exists:genres,id',
+            'author.id' => 'required|numeric',
+            'published_year' => 'nullable|numeric',
+            'pages' => 'nullable|numeric',
+            'isbn' => 'nullable|string',
+            'description' => 'nullable|string|max:500',
+            'is_read' => 'nullable|boolean',
+            'is_wishlist' => 'nullable|boolean',
+            'image' => 'nullable|string',
+        ]);
 
-            $book = Book::create([
-                'title' => $validated['title'],
-                "author_id" => $validated['author']["id"],
-                'published_year' => $validated['published_year'] ?? null,
-                'pages' => $validated['pages'] ?? null,
-                'isbn' => $validated['isbn'] ?? "",
-                'image' => $validated['image'] ?? "",
-                'description' => $validated['description'] ?? "",
-                'is_read' => $validated['is_read'] ?? false,
-                'is_wishlist' => $validated['is_wishlist'] ?? false,
-                'wishlisted_at' => $validated['is_wishlist'] ? now() : null,
-            ]);
+        $book = Book::create([
+            'title' => $validated['title'],
+            "author_id" => $validated['author']["id"],
+            'published_year' => $validated['published_year'] ?? null,
+            'pages' => $validated['pages'] ?? null,
+            'isbn' => $validated['isbn'] ?? "",
+            'image' => $validated['image'] ?? "",
+            'description' => $validated['description'] ?? "",
+            'is_read' => $validated['is_read'] ?? false,
+            'is_wishlist' => $validated['is_wishlist'] ?? false,
+            'wishlisted_at' => $validated['is_wishlist'] ? now() : null,
+        ]);
 
-            // save to pivot
-             if (!empty($validated['genres'])) {
-                $book->genres()->sync($validated['genres']);
-            }
-
-            return response()->json($book, 201);
-        } catch (\Throwable $th) {
-            Log::error('Book create failed', [
-                'user_id' => auth()->id(),
-                'payload' => request()->all(),
-            ]);
-
-            throw $th;
+        // save to pivot
+            if (!empty($validated['genres'])) {
+            $book->genres()->sync($validated['genres']);
         }
 
-
+        return response()->json($book, 201);
     }
 
     /**
@@ -98,26 +95,16 @@ class BookController extends Controller
 
     public function toggleRead(Book $book) {
 
-        try {
-            $book->is_read = !$book->is_read;
-            $book->save();
-            return response()->json(["status" => "ok"], 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during toggleRead' ], 500);
-        }
+        $book->is_read = !$book->is_read;
+        $book->save();
+        return response()->json(["status" => "ok"], 200);
     }
 
     public function toggleWishlist(Book $book) {
-        try {
-            $book->is_wishlist = !$book->is_wishlist;
-            $book->wishlisted_at = $book->is_wishlist ? now() : null;
-            $book->save();
-            return response()->json(["status" => "ok"], 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during toggleWishlist' ], 500);
-        }
+        $book->is_wishlist = !$book->is_wishlist;
+        $book->wishlisted_at = $book->is_wishlist ? now() : null;
+        $book->save();
+        return response()->json(["status" => "ok"], 200);
     }
 
     /**
@@ -145,18 +132,12 @@ class BookController extends Controller
         $validated["author_id"] = $validated["author"]["id"];
         $validated["wishlisted_at"] = $book->wishlisted_at === null && $validated['is_wishlist'] ? now() : null;
 
-        try {
-            $book->update($validated);
-            // save to pivot
-             if (!empty($validated['genres'])) {
-                $book->genres()->sync($validated['genres']);
-            }
-            return response()->json($book, 200);
-
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during book update' ], 500);
+        $book->update($validated);
+        // save to pivot
+            if (!empty($validated['genres'])) {
+            $book->genres()->sync($validated['genres']);
         }
+        return response()->json($book, 200);
     }
 
     /**
@@ -164,17 +145,10 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
-        try {
-            $image = $book->image;
-            File::delete("storage/uploads/{$image}");
+        $image = $book->image;
+        File::delete("storage/uploads/{$image}");
 
-            $book->delete();
-            return response()->json(['status' => "ok"], 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            // todo log error
-            return response()->json([ 'status' => 'error', 'message' => 'Error during delete' ], 500);
-        }
+        $book->delete();
+        return response()->json(['status' => "ok"], 200);
     }
 }

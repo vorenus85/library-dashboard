@@ -87,10 +87,14 @@
                     <template v-if="initialValues.image">
                         <div class="flex items-center gap-5">
                             <Image
-                                :src="`/storage/uploads/${initialValues.image}`"
-                                :alt="`${initialValues.title}`"
-                                preview
+                                :src="
+                                    initialValues?.image
+                                        ? `${initialValues.image_url}`
+                                        : '/no-image.jpg'
+                                "
+                                :alt="initialValues?.title"
                                 width="90"
+                                preview
                             />
                             <Button
                                 icon="pi pi-trash"
@@ -293,6 +297,7 @@ const getBook = async () => {
         initialValues.published_year = data.published_year
         initialValues.isbn = data.isbn
         initialValues.image = data.image
+        initialValues.image_url = data.image_url
         uploadedImage.value = initialValues.image
         initialValues.pages = data.pages
         initialValues.is_read = data.is_read

@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Resources\BookResource;
 
 class DashboardController extends Controller
 {
@@ -47,7 +48,7 @@ class DashboardController extends Controller
 
     public function wishlist(){
         $wishlistedBooks = Book::with(['author:id,name'])->select('id', 'title', 'image', 'description', 'pages', 'author_id', 'wishlisted_at')->where('is_wishlist', true)->orderBy('wishlisted_at', 'desc')->orderBy('title', 'asc')->limit(5)->get();
-        return response()->json($wishlistedBooks, 200);
+        return response()->json(BookResource::collection($wishlistedBooks), 200);
     }
 
     protected function getBookCount(){

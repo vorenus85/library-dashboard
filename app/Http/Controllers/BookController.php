@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -16,7 +19,7 @@ class BookController extends Controller
     {
         try {
             $books = Book::with(['author:id,name'])->with(['genres:id'])->select('id', 'title', 'image', 'description', 'pages', 'is_read', 'is_wishlist', 'author_id')->orderBy('title', 'asc')->get();
-            return response()->json($books, 200);
+            return response()->json(BookResource::collection($books), 200);
         } catch (\Throwable $th) {
             Log::error('Book list failed', [
                 'user_id' => auth()->id(),
@@ -65,7 +68,7 @@ class BookController extends Controller
             'description' => $validated['description'] ?? "",
             'is_read' => $validated['is_read'] ?? false,
             'is_wishlist' => $validated['is_wishlist'] ?? false,
-            'wishlisted_at' => $validated['is_wishlist'] ? now() : null,
+            'wishlisted_at' => isset($validated['is_wishlist']) ? now() : null,
         ]);
 
         // save to pivot
@@ -82,6 +85,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load(['author:id,name'])->load(['genres:id,name']);
+        $book['image_url'] = Storage::url($book->image);
         return response()->json($book);
     }
 
@@ -145,10 +149,12 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        $image = $book->image;
-        File::delete("storage/uploads/{$image}");
+        if ($book->image && Storage::exists($book->image)) {
+            Storage::delete($book->image);
+        }
 
         $book->delete();
-        return response()->json(['status' => "ok"], 200);
+
+        return response()->json(['status' => 'ok'], 200);
     }
 }

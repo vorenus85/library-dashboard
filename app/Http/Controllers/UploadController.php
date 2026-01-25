@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -22,12 +23,13 @@ class UploadController extends Controller
 
             $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 
-            $path = $file->storeAs('uploads', $filename, 'public');
+            $disk = config('filesystems.default'); // local or s3
+            $path = $file->storeAs('', $filename, $disk);
 
             return response()->json([
                 'path' => $path,
                 'filename' => $filename,
-                'url' => asset('storage/' . $path),
+                'url' => Storage::disk($disk)->url($path),
             ]);
         } catch (\Throwable $th) {
 
@@ -46,8 +48,9 @@ class UploadController extends Controller
             $image = $book->image;
             $book->update(["image" => ""]);
 
-            File::delete("storage/uploads/{$image}");
-
+            if ($book->image && Storage::exists($book->image)) {
+                Storage::delete($book->image);
+            }
             return response()->json(["status" => 'ok']);
 
         } catch (\Throwable $th) {

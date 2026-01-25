@@ -65,7 +65,7 @@
                             <Image
                                 :src="
                                     slotProps.data?.image
-                                        ? `/storage/uploads/${slotProps.data.image}`
+                                        ? `${slotProps.data.image_url}`
                                         : '/no-image.jpg'
                                 "
                                 :alt="slotProps.data?.title"

@@ -151,6 +151,7 @@ export const useBook = () => {
         try {
             await deleteBookImage(bookId.value)
             initialValues.image = ''
+            uploadedImage.value = ''
         } catch (e) {
             console.log(e)
         }

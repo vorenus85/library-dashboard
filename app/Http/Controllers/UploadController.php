@@ -24,7 +24,7 @@ class UploadController extends Controller
             $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 
             $disk = config('filesystems.default'); // local or s3
-            $path = $file->storeAs('', $filename, $disk);
+            $path = $file->storeAs('uploads', $filename, $disk);
 
             return response()->json([
                 'path' => $path,

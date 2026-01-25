@@ -46,12 +46,15 @@ class UploadController extends Controller
     public function delete(Book $book){
         try {
             $image = $book->image;
-            $book->update(["image" => ""]);
 
-            if ($book->image && Storage::exists($book->image)) {
-                Storage::delete($book->image);
+
+            if ($book->image && Storage::exists('/uploads/'.$book->image)) {
+                Storage::delete('/uploads/'.$book->image);
+                $book->update(["image" => ""]);
+                return response()->json(["status" => 'ok']);
             }
-            return response()->json(["status" => 'ok']);
+
+            return abort();
 
         } catch (\Throwable $th) {
 

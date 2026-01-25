@@ -25,7 +25,7 @@ class BookResource extends JsonResource
             'wishlisted_at' =>$this->wishlisted_at,
             'image' => $this->image,
             'image_url' => $this->image
-                ? Storage::url($this->image)
+                ? Storage::url('/uploads/'.$this->image)
                 : null,
 
             'author' => $this->author,

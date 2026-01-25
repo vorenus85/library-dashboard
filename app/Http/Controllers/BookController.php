@@ -85,7 +85,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load(['author:id,name'])->load(['genres:id,name']);
-        $book['image_url'] = $book->image ? Storage::url($book->image) : "";
+        $book['image_url'] = $book->image ? Storage::url('/uploads/'.$book->image) : "";
         return response()->json($book);
     }
 
@@ -149,12 +149,12 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        if ($book->image && Storage::exists($book->image)) {
-            Storage::delete($book->image);
+        if ($book->image && Storage::exists('/uploads/'.$book->image)) {
+            Storage::delete('/uploads/'.$book->image);
+            $book->delete();
+            return response()->json(['status' => 'ok'], 200);
         }
 
-        $book->delete();
-
-        return response()->json(['status' => 'ok'], 200);
+        return abort();
     }
 }

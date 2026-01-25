@@ -73,7 +73,7 @@ class BookController extends Controller
                 'payload' => request()->all(),
             ]);
 
-            throw $e;
+            throw $th;
         }
 
 

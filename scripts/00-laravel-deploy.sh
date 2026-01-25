@@ -7,6 +7,11 @@ php artisan package:discover --ansi
 echo "Running migrations..."
 php artisan migrate --force
 
+# Storage link
+if [ ! -L public/storage ]; then
+    php artisan storage:link
+fi
+
 echo "Optimizing application..."
 php artisan config:clear
 php artisan config:cache

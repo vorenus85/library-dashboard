@@ -67,8 +67,12 @@ class BookController extends Controller
 
             return response()->json($book, 201);
         } catch (\Throwable $th) {
-            // throw $th;
-            return response()->json([ 'status' => 'error', 'message' => 'Error during create' ], 500);
+            Log::error('Book create failed', [
+                'user_id' => auth()->id(),
+                'payload' => request()->all(),
+            ]);
+
+            throw $e;
         }
 
 

@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue'
-import { useToast } from 'primevue'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRoute } from 'vue-router'
 import {
     fetchAuthors,
@@ -11,10 +11,11 @@ import {
 export const useAuthor = () => {
     const loading = ref(false)
     const authors = ref([])
-    const toast = useToast()
     const formKey = ref(0)
     const route = useRoute()
     const authorId = route.params.authorId
+
+    const { customToast } = useCustomToast()
 
     const initialValues = reactive({
         name: '',
@@ -49,8 +50,9 @@ export const useAuthor = () => {
             authors.value = data
             loading.value = false
         } catch (e) {
-            console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -62,8 +64,9 @@ export const useAuthor = () => {
             authors.value = data
             loading.value = false
         } catch (e) {
-            console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -77,8 +80,9 @@ export const useAuthor = () => {
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
             loading.value = false
         } catch (e) {
-            console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -92,16 +96,13 @@ export const useAuthor = () => {
             })
             authors.value.splice(idIndex, 1)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Author deleted successfully!',
-                life: 3000,
-            })
+            customToast.success('Author deleted successfully!')
 
             loading.value = false
         } catch (e) {
-            console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 

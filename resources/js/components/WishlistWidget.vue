@@ -112,8 +112,9 @@ const getWishlistedBooks = async () => {
         wishListedBooks.value = response.data
         loading.value = false
     } catch (error) {
-        console.log(error)
         loading.value = false
+        void error // to avoid unused variable lint error
+        // console.error(error) -- IGNORE --
     }
 }
 

@@ -1,4 +1,4 @@
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import {
@@ -14,7 +14,8 @@ export const useGenre = () => {
     const genres = ref([])
     const genreId = route.params.genreId
     const formKey = ref(0)
-    const toast = useToast()
+
+    const { customToast } = useCustomToast()
 
     const initialValues = reactive({
         name: '',
@@ -49,8 +50,9 @@ export const useGenre = () => {
             genres.value = data
             loading.value = false
         } catch (e) {
-            console.log(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -62,8 +64,9 @@ export const useGenre = () => {
             genres.value = data
             loading.value = false
         } catch (e) {
-            console.log(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -77,7 +80,8 @@ export const useGenre = () => {
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
             loading.value = false
         } catch (e) {
-            console.log(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
             loading.value = false
         }
     }
@@ -94,15 +98,12 @@ export const useGenre = () => {
 
             genres.value.splice(idIndex, 1)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Genre deleted successfully!',
-                life: 3000,
-            })
+            customToast.success('Genre deleted successfully!')
 
             loading.value = false
         } catch (e) {
-            console.log(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
             loading.value = false
         }
     }

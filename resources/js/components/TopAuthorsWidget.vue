@@ -45,7 +45,8 @@ const getTopAuthors = async () => {
 
         backgroundColors.value = allBackgroundColors.slice(0, topAuthors.length)
     } catch (error) {
-        console.log(error)
+        void error // to avoid unused variable lint error
+        // console.error(error) -- IGNORE --
     }
 }
 

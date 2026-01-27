@@ -228,7 +228,7 @@ import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { useAuthor } from '@/composables/useAuthor'
@@ -253,7 +253,7 @@ const {
 
 const formKey = ref(0)
 const route = useRoute()
-const toast = useToast()
+const { customToast } = useCustomToast()
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
 
@@ -268,17 +268,14 @@ const onFormSubmit = async ({ valid, values }) => {
 
             await updateBookById(bookId.value, values)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Book updated successfully!',
-                life: 3000,
-            })
+            customToast.success('Book updated successfully!')
 
             setTimeout(() => {
                 toBookList()
             }, 300)
         } catch (e) {
-            console.error(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 }
@@ -304,7 +301,8 @@ const getBook = async () => {
         initialValues.is_wishlist = data.is_wishlist
         formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
     } catch (e) {
-        console.log(e)
+        void e // to avoid unused variable lint error
+        // console.error(e) -- IGNORE --
     }
 }
 

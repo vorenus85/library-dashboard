@@ -16,7 +16,7 @@ class AuthController extends Controller
         ]);
 
         if (! Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json(['message' => 'Wrong email or password!'], 401);
         }
 
         $request->session()->regenerate();

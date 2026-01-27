@@ -2,7 +2,11 @@
     <div class="layout-sidebar shadow">
         <ul class="sidebar-menu">
             <template v-for="menu in menus" :key="menu.title">
-                <SidebarMenuitem :icon="menu.icon" :path="menu.path" :title="menu.title" />
+                <SidebarMenuitem
+                    :icon="menu.icon"
+                    :route-name="menu.routeName"
+                    :title="menu.title"
+                />
             </template>
         </ul>
     </div>
@@ -13,27 +17,27 @@ import SidebarMenuitem from '@/components/SidebarMenuitem.vue'
 const menus = [
     {
         icon: 'home',
-        path: 'dashboard',
+        routeName: 'dashboard',
         title: 'Dashboard',
     },
     {
         icon: 'book',
-        path: 'books',
+        routeName: 'books',
         title: 'Books',
     },
     {
         icon: 'user',
-        path: 'authors',
+        routeName: 'authors',
         title: 'Authors',
     },
     {
         icon: 'tags',
-        path: 'genres',
+        routeName: 'genres',
         title: 'Genres',
     },
     {
         icon: 'sign-out',
-        path: 'logout',
+        routeName: 'logout',
         title: 'Logout',
     },
 ]

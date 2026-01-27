@@ -88,10 +88,10 @@ import { Form, FormField } from '@primevue/forms'
 import { Button, Card, InputText, Message, Password, Tag } from 'primevue'
 import { useAuthStore } from '@/stores/auth'
 import { useAuth } from '@/composables/useAuth'
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRedirects } from '@/composables/useRedirects'
 
-const toast = useToast()
+const { customToast } = useCustomToast()
 const { login } = useAuthStore()
 const { loginValidator } = useAuth()
 const { toDashboard } = useRedirects()
@@ -113,13 +113,9 @@ const onFormSubmit = async ({ valid, values }) => {
         try {
             await login(values.email, values.password)
             toDashboard()
-        } catch (err) {
-            console.log(err)
-            toast.add({
-                severity: 'error',
-                summary: 'Wrong email or password!',
-                life: 3000,
-            })
+        } catch (error) {
+            const msg = error?.response?.data?.message
+            customToast.error(msg || 'Please try again.')
         }
     }
 }

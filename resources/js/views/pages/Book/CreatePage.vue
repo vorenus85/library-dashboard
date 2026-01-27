@@ -200,7 +200,7 @@ import {
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import { onMounted, ref } from 'vue'
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useGenre } from '@/composables/useGenre'
 import { useAuthor } from '@/composables/useAuthor'
@@ -220,7 +220,7 @@ const {
     uploadedImage,
 } = useBook()
 const { toBookList } = useRedirects()
-const toast = useToast()
+const { customToast } = useCustomToast()
 
 const selectedAuthor = ref({})
 const selectedGenres = ref([])
@@ -234,22 +234,14 @@ const onFormSubmit = async ({ valid, values }) => {
             })
             await createBook(values)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Book created successfully!',
-                life: 3000,
-            })
+            customToast.success('Book created successfully!')
 
             setTimeout(() => {
                 toBookList()
             }, 300)
         } catch (e) {
-            // console.log(error)
-            toast.add({
-                severity: 'error',
-                summary: 'Error during book create!',
-                life: 3000,
-            })
+            const msg = e?.response?.data?.message
+            customToast.error(msg || 'Please try again.')
         }
     }
 }

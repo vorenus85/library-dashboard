@@ -74,36 +74,28 @@ import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRedirects } from '@/composables/useRedirects.js'
 import { useAuthor } from '@/composables/useAuthor'
 import { createAuthor } from '@/services/authorService'
 
 const { initialValues, authorValidator } = useAuthor()
 const { toAuthorList } = useRedirects()
-const toast = useToast()
+const { customToast } = useCustomToast()
 
 const onFormSubmit = async ({ valid, values }) => {
     if (valid) {
         try {
             await createAuthor(values)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Author created successfully!',
-                life: 3000,
-            })
+            customToast.success('Author created successfully!')
 
             setTimeout(() => {
                 toAuthorList()
             }, 300)
         } catch (error) {
-            console.log(error)
-            toast.add({
-                severity: 'error',
-                summary: error.response.data.message,
-                life: 3000,
-            })
+            const msg = error?.response?.data?.message
+            customToast.error(msg || 'Please try again.')
         }
     }
 }

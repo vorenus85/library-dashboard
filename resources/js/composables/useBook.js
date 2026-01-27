@@ -1,4 +1,4 @@
-import { useToast } from 'primevue'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { reactive, ref } from 'vue'
 import {
     fetchBooks,
@@ -10,7 +10,7 @@ import {
 } from '@/services/bookService'
 
 export const useBook = () => {
-    const toast = useToast()
+    const { customToast } = useCustomToast()
 
     const isUploading = ref(false)
     const uploadProgress = ref(0)
@@ -78,7 +78,7 @@ export const useBook = () => {
             uploadedImage.value = data.filename
         } catch (e) {
             isUploading.value = false
-            console.error(e)
+            // console.error(e)
         }
     }
 
@@ -93,16 +93,11 @@ export const useBook = () => {
             })
 
             books.value.splice(indexId, 1)
-
-            toast.add({
-                severity: 'success',
-                summary: 'Book deleted successfully',
-                life: 3000,
-            })
+            customToast.success('Book deleted successfully!')
 
             loading.value = false
         } catch (e) {
-            console.error(e)
+            // console.error(e)
             loading.value = false
         }
     }
@@ -118,7 +113,7 @@ export const useBook = () => {
 
             loading.value = false
         } catch (e) {
-            console.error(e)
+            // console.error(e)
             loading.value = false
         }
     }

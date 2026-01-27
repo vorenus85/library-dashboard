@@ -62,12 +62,12 @@ import { Form } from '@primevue/forms'
 import { Button, InputText, Message, Textarea } from 'primevue'
 import PageTitle from '@/components/PageTitle.vue'
 import AppLayout from '@/layout/AppLayout.vue'
-import { useToast } from 'primevue/usetoast'
+import { useCustomToast } from '@/composables/useCustomToast'
 import { useRedirects } from '@/composables/useRedirects'
 import { useGenre } from '@/composables/useGenre'
 import { createGenre } from '@/services/genreService'
 
-const toast = useToast()
+const { customToast } = useCustomToast()
 const { toGenreList } = useRedirects()
 const { initialValues, genreValidator } = useGenre()
 
@@ -76,21 +76,14 @@ const onFormSubmit = async ({ valid, values }) => {
         try {
             await createGenre(values)
 
-            toast.add({
-                severity: 'success',
-                summary: 'Genre created successfully!',
-                life: 3000,
-            })
+            customToast.success('Genre created successfully!')
 
             setTimeout(() => {
                 toGenreList()
             }, 300)
         } catch (error) {
-            toast.add({
-                severity: 'error',
-                summary: error.response.data.message,
-                life: 3000,
-            })
+            const msg = error?.response?.data?.message
+            customToast.error(msg || 'Please try again.')
         }
     }
 }

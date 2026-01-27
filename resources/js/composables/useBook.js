@@ -78,7 +78,8 @@ export const useBook = () => {
             uploadedImage.value = data.filename
         } catch (e) {
             isUploading.value = false
-            // console.error(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -97,8 +98,9 @@ export const useBook = () => {
 
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -113,8 +115,9 @@ export const useBook = () => {
 
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -126,7 +129,8 @@ export const useBook = () => {
                 book.id === id ? { ...book, is_read: !book.is_read } : book
             )
         } catch (error) {
-            console.error(error)
+            void error // to avoid unused variable lint error
+            // console.error(error) -- IGNORE --
         }
     }
 
@@ -138,7 +142,8 @@ export const useBook = () => {
                 book.id === id ? { ...book, is_wishlist: !book.is_wishlist } : book
             )
         } catch (e) {
-            console.error(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -148,7 +153,8 @@ export const useBook = () => {
             initialValues.image = ''
             uploadedImage.value = ''
         } catch (e) {
-            console.log(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 

@@ -274,7 +274,8 @@ const onFormSubmit = async ({ valid, values }) => {
                 toBookList()
             }, 300)
         } catch (e) {
-            // console.error(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 }
@@ -300,7 +301,8 @@ const getBook = async () => {
         initialValues.is_wishlist = data.is_wishlist
         formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
     } catch (e) {
-        // console.log(e)
+        void e // to avoid unused variable lint error
+        // console.error(e) -- IGNORE --
     }
 }
 

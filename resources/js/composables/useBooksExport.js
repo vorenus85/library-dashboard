@@ -1,9 +1,11 @@
 import { useDate } from '@/composables/useDate'
 import { exportBooksByType } from '@/services/bookService'
+import { useCustomToast } from '@/composables/useCustomToast'
 
 const { getTimestampString } = useDate()
 
 export const useBooksExport = () => {
+    const { customToast } = useCustomToast()
     const exportBooksCsv = async () => {
         try {
             const response = await exportBooksByType('csv')
@@ -16,7 +18,8 @@ export const useBooksExport = () => {
             link.click()
             link.remove()
         } catch (error) {
-            console.error('Csv export error', error)
+            void error // to avoid unused variable lint error
+            customToast.error('Failed to export books as CSV.')
         }
     }
 
@@ -32,7 +35,8 @@ export const useBooksExport = () => {
             link.click()
             link.remove()
         } catch (error) {
-            console.error('Excel export error', error)
+            void error // to avoid unused variable lint error
+            customToast.error('Failed to export books as EXCEL.')
         }
     }
 

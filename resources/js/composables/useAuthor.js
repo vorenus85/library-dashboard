@@ -50,8 +50,9 @@ export const useAuthor = () => {
             authors.value = data
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -63,8 +64,9 @@ export const useAuthor = () => {
             authors.value = data
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -78,8 +80,9 @@ export const useAuthor = () => {
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -97,8 +100,9 @@ export const useAuthor = () => {
 
             loading.value = false
         } catch (e) {
-            // console.error(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 

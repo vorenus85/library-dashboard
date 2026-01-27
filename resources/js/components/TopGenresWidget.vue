@@ -54,7 +54,8 @@ const getTopGenres = async () => {
         backgroundColors.value = allBackgroundColors.slice(0, topGenres.length)
         hoverBackgroundColors.value = allHoverBackgroundColors.slice(0, topGenres.length)
     } catch (error) {
-        console.log(error)
+        void error // to avoid unused variable lint error
+        // console.error(error) -- IGNORE --
     }
 }
 

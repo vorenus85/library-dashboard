@@ -50,8 +50,9 @@ export const useGenre = () => {
             genres.value = data
             loading.value = false
         } catch (e) {
-            console.log(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -63,8 +64,9 @@ export const useGenre = () => {
             genres.value = data
             loading.value = false
         } catch (e) {
-            console.log(e)
             loading.value = false
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
         }
     }
 
@@ -78,7 +80,8 @@ export const useGenre = () => {
             formKey.value++ // to remount primevue/form to trigger form resolver/validation https://github.com/primefaces/primevue/issues/7792
             loading.value = false
         } catch (e) {
-            // console.log(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
             loading.value = false
         }
     }
@@ -99,7 +102,8 @@ export const useGenre = () => {
 
             loading.value = false
         } catch (e) {
-            console.log(e)
+            void e // to avoid unused variable lint error
+            // console.error(e) -- IGNORE --
             loading.value = false
         }
     }

@@ -1,4 +1,6 @@
-# Laravel + PrimeVue Starter Kit Rest api based
+# Personal Library Dashboard
+
+**Personal Library Dashboard** is a Vue 3 (Composition API) and Laravel–based admin application for managing a personal book collection. It demonstrates clean component architecture, reusable composables, RESTful CRUD operations, filtering, and structured state management.
 
 ## 💡 Two ways to run this project
 

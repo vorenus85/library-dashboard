@@ -7,7 +7,9 @@
                     <div
                         class="flex flex-col gap-6 md:gap-8 items-center justify-center text-center"
                     >
-                        <div class="text-xl"><strong>Log in to Library Dashboard</strong></div>
+                        <div class="text-xl">
+                            <strong>Log in to Personal Library Dashboard</strong>
+                        </div>
                         <div class="text-center">Enter your email and password below to log in</div>
 
                         <div>

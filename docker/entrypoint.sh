@@ -22,14 +22,16 @@ fi
 
 # Wait for DB
 echo "Waiting for database..."
+
 until php -r "
 try {
   new PDO(
-    'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_DATABASE'),
+    'mysql:host=' . getenv('DB_HOST') . ';port=3306',
     getenv('DB_USERNAME'),
-    getenv('DB_PASSWORD')
+    getenv('DB_PASSWORD'),
+    [PDO::ATTR_TIMEOUT => 2]
   );
-  echo 'DB ready\n';
+  exit(0);
 } catch (Exception \$e) {
   exit(1);
 }

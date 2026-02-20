@@ -8,7 +8,8 @@ services:
             - .:/var/www
             - ./storage:/var/www/storage
         depends_on:
-            - db
+            db:
+                condition: service_healthy
 
     nginx:
         image: nginx:alpine
@@ -33,6 +34,11 @@ services:
         volumes:
             - mysql_data:/var/lib/mysql
             - ./docker/mysql/init:/docker-entrypoint-initdb.d
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-proot']
+            interval: 5s
+            timeout: 3s
+            retries: 10
 
     node:
         image: node:20-alpine

@@ -155,6 +155,6 @@ class BookController extends Controller
             return response()->json(['status' => 'ok'], 200);
         }
 
-        return abort();
+        return false;
     }
 }

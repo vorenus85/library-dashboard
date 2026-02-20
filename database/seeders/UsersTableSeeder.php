@@ -17,7 +17,9 @@ class UsersTableSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Admin user',
+            // @phpstan-ignore larastan.noEnvCallsOutsideOfConfig
             'email' => env('ADMIN_USER_EMAIL'),
+            // @phpstan-ignore larastan.noEnvCallsOutsideOfConfig
             'password' => Hash::make(env('ADMIN_USER_PWD')),
         ]);
 

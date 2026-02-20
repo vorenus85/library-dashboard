@@ -54,7 +54,7 @@ class UploadController extends Controller
                 return response()->json(["status" => 'ok']);
             }
 
-            return abort();
+            return false;
 
         } catch (\Throwable $th) {
 

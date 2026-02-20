@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
+        // @phpstan-ignore larastan.noEnvCallsOutsideOfConfig
         if (env('APP_ENV') == 'production') {
             $url->forceScheme('https');
         }

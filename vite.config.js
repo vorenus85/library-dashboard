@@ -13,15 +13,13 @@ export default defineConfig({
         vue(),
         tailwind(),
     ],
-    /*
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `@import "resources/css/_variables.scss";`,
-            },
+    test: {
+        environment: 'jsdom',
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'html'],
         },
     },
-    */
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),

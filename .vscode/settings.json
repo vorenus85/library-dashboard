@@ -17,7 +17,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[php]": {
-        "editor.defaultFormatter": "junstyle.php-cs-fixer",
         "editor.formatOnSave": true
     }
 }

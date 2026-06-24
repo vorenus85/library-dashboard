@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory()->create([
+        User::create([
             'name' => 'Admin user',
             // @phpstan-ignore larastan.noEnvCallsOutsideOfConfig
             'email' => env('ADMIN_USER_EMAIL'),
